@@ -4,7 +4,7 @@ Roles
 @endsection
 
 @section("scripts")
-<script src="{{asset("assets/pages/scripts/admin/rol/index.js")}}" type="text/javascript"></script>
+<script src="{{asset("assets/pages/scripts/admin/alert/alert.js")}}" type="text/javascript"></script>
 @endsection
 
 @section('contenido')
@@ -13,7 +13,7 @@ Roles
         @include('includes.mensaje')
         <div class="box">
             <div style="text-align: center;" class="box-header with-border">
-                <h3 class="box-title">Lista de Roles</h3>
+                <h3 class="box-title"><b>Lista de Roles</b></h3>
                 <div class="box-tools pull-right">
                     <a href="{{route('crear_rol')}}" class="btn btn-block btn-success btn-sm">
                         <i class="fa fa-fw fa-plus-circle"></i> Crear nuevo rol
@@ -36,7 +36,7 @@ Roles
                                 <a href="{{route('editar_rol', ['id' => $data->id])}}" class="btn-accion-tabla tooltipsC" title="Editar este registro">
                                     <i class="fa fa-fw fa-pencil"></i>
                                 </a>
-                                <form action="{{route('eliminar_rol', ['id' => $data->id])}}" class="d-inline form-eliminar" method="POST">
+                                <form action="{{route('eliminar_rol', ['id' => $data->id])}}" class="d-inline form-eliminar" method="POST" id="form-eliminar">
                                     @csrf @method("delete")
                                     <button type="submit" class="btn-accion-tabla eliminar tooltipsC" title="Eliminar este registro">
                                         <i class="fa fa-fw fa-trash text-danger"></i>

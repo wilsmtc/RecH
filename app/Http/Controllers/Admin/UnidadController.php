@@ -86,9 +86,16 @@ class UnidadController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        $unid=Unidad::destroy($id);
-        return redirect('admin/unidad')->with('mensaje', 'Unidad eliminada correctamente');
+        if ($request->ajax()) {
+            if (Unidad::destroy($id)) {
+                return response()->json(['mensaje' => 'ok']);
+            } else {
+                return response()->json(['mensaje' => 'ng']);
+            }
+        } else {
+             abort(404);
+        }
     }
 }

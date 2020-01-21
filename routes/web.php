@@ -18,7 +18,7 @@ Route::get('seguridad/logout', 'Seguridad\LoginController@logout')->name('logout
 Route ::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware'=> 'auth'], function(){
 	Route::get('', 'AdminController@index');
 	Route::get('usuario', 'UsuarioController@index') ->name('usuario');
-	Route::get('usuario/crear', 'UsuarioController@create') ->name('usuario');
+	Route::get('usuario/crear', 'UsuarioController@create') ->name('crear_usuario');
 	//rutas del menu
 	Route::get('menu/crear', 'MenuController@create') ->name('crear_menu');
 	Route::get('menu', 'MenuController@index') ->name('menu');

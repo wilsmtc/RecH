@@ -86,7 +86,6 @@ class RolController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        /*
         if ($request->ajax()) {
             if (Rol::destroy($id)) {
                 return response()->json(['mensaje' => 'ok']);
@@ -96,8 +95,5 @@ class RolController extends Controller
         } else {
              abort(404);
         }
-        */
-        $data=Rol::destroy($id);
-        return redirect('admin/rol')->with('mensaje', 'Rol eliminado correctamente');
     }
 }

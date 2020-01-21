@@ -40,7 +40,7 @@ var RRHH = function(){
             toastr.options = {
                 closeButton: true,
                 newestOnTop: true,
-                positionClass: 'toast-top-right',
+                positionClass: 'toast-top-center',
                 preventDuplicates: true,
                 timeOut: '5000'
             };

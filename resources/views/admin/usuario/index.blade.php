@@ -4,11 +4,16 @@
 	Usuario
 @endsection
 @section('contenido')
-	<div style="text-align: center;" class="row">
+	<div  class="row">
 		<div class="col-lg-12">
 			<div class="box box-primary">
-				<div class="box-header whit.border">
+				<div style="text-align: center;" class="box-header whit.border">
 					<h3 class="box-title"><b>Lista de Usuarios</b></h3>
+					<div class="box-tools pull-right">
+						<a href="{{route('crear_usuario')}}" class="btn btn-block btn-success btn-sm">
+							<i class="fa fa-fw fa-plus-circle"></i> Crear Usuario
+						</a>
+					</div>
 				</div>
 				<div class="box-body table-responsive no.padding">
 					<table class="table table-bordered table-hover table-striped">

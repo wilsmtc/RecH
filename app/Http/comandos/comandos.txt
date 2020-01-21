@@ -4,3 +4,5 @@ php artisan migrate:refresh
 php artisan db:seed --class=UsuarioAdministradorSeeder
 php artisan make:model Models/Admin/Usuario
 php artisan make:request ValidacionMenu
+
+

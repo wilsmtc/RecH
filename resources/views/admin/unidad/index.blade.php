@@ -2,6 +2,9 @@
 @section('titulo')
 	Unidades
 @endsection
+@section("scripts")
+<script src="{{asset("assets/pages/scripts/admin/alert/alert.js")}}" type="text/javascript"></script>
+@endsection
 @section('contenido')
 	<div  class="row">
 		<div class="col-lg-12">
@@ -16,7 +19,7 @@
 					</div>
 				</div>
 				<div class="box-body table-responsive no.padding">
-					<table class="table table-bordered table-hover table-striped">
+					<table class="table table-bordered table-hover table-striped" id="tabla-data">
 						<thead>
 							<tr>
 								<th class="col-lg-1" style="text-align: center;">ID</th>

@@ -1,9 +1,9 @@
 $(document).ready(function () {
-    $("#tabla-data").on('submit', 'form-eliminar', function () {
+    $("#tabla-data").on('submit', '.form-eliminar', function () {
         event.preventDefault();
         const form = $(this);
         swal({
-            title: '¿ Está seguro que desea eliminar el registro?',
+            title: '¿ Está seguro de eliminar el registro?',
             text: "Esta acción no se puede deshacer!",
             icon: 'warning',
             buttons: {
@@ -16,7 +16,6 @@ $(document).ready(function () {
             }
         });
     });
-
     function ajaxRequest(form) {
         $.ajax({
             url: form.attr('action'),
@@ -31,7 +30,6 @@ $(document).ready(function () {
                 }
             },
             error: function () {
-
             }
         });
     }
