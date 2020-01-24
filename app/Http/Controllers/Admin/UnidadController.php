@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ValidacionUnidad;
+use App\Http\Requests\ValidacionUnidadEditar;
 use App\Models\Admin\Unidad;
 
 class UnidadController extends Controller
@@ -74,7 +75,7 @@ class UnidadController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ValidacionUnidad $request, $id)
+    public function update(ValidacionUnidadEditar $request, $id)
     {
         Unidad::findOrFail($id)->update($request->all());
         return redirect('admin/unidad')->with('mensaje', 'Datos actualizados con exito');

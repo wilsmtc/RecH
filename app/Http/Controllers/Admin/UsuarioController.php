@@ -4,7 +4,8 @@ namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Admin\Usuario;
+use App\Models\seguridad\Usuario;
+use App\Models\Admin\Rol;
 
 class UsuarioController extends Controller
 {
@@ -15,8 +16,7 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        //dd('estas en el index del usuario');
-        $usuarios = Usuario::orderBy('id')->get();
+        $usuarios = Usuario::with('roles:id,tipo')->orderBy('id')->get();
         return view('admin.usuario.index', compact('usuarios'));
     }
 
@@ -28,7 +28,9 @@ class UsuarioController extends Controller
     public function create()
     {
         //dd('estas en crear usuario');
-        return view('admin.usuario.crear');
+        $rols = Rol::orderBy('id')->pluck('tipo', 'id')->toArray();
+        //dd($rols);
+        return view('admin.usuario.crear', compact('rols'));
     }
 
     /**
@@ -39,7 +41,8 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Usuario::create($request->all());
+        return redirect('admin/usuario')->with('mensaje','usuario creado con exito');
     }
 
     /**
@@ -61,7 +64,9 @@ class UsuarioController extends Controller
      */
     public function edit($id)
     {
-        //
+        $rols = Rol::orderBy('id')->pluck('tipo', 'id')->toArray();
+        $usuarios = Usuario::with('roles')->findOrFail($id);
+        return view('admin.usuario.editar', compact('usuarios', 'rols'));
     }
 
     /**

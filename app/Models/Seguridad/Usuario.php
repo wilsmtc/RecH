@@ -11,7 +11,6 @@ class Usuario extends Authenticatable
     protected $remember_token = false;
     protected $table = 'usuarios';
     protected $fillable = ['usuario', 'nombre', 'apellido', 'password'];
-    protected $guarded = ['id'];
 
     public function roles()
     {

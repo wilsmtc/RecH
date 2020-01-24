@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ValidacionMenu extends FormRequest
+class ValidacionRolEditar extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class ValidacionMenu extends FormRequest
      */
     public function authorize()
     {
-        return true; 
+        return true;
     }
 
     /**
@@ -24,10 +24,7 @@ class ValidacionMenu extends FormRequest
     public function rules()
     {
         return [
-             'nombre' => 'required|max:50|unique:menu,nombre',
-             'url' => 'required|max:100|unique:menu,url',   //crear
-             'icono' => 'nullable|max:50'
-
+            'tipo' => 'required|max:50|unique:roles,tipo,'. $this->route('id'),// es para actualizar
         ];
     }
 }

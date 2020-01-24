@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ValidacionRol;
+use App\Http\Requests\ValidacionRolEditar;
 use App\Models\Admin\Rol;
 
 class RolController extends Controller
@@ -72,7 +73,7 @@ class RolController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ValidacionRol $request, $id)
+    public function update(ValidacionRolEditar $request, $id)
     {
         Rol::findOrFail($id)->update($request->all());
         return redirect('admin/rol')->with('mensaje', 'Rol actualizado con exito');

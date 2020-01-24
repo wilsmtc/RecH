@@ -35,7 +35,7 @@
                                     @break
                                 @endif
                                 @include("admin.menu.menu-item", ["item" =>$item])
-                            @endforeach
+							@endforeach
                         </ol>    
 				    </div>
 			    </div>

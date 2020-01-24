@@ -24,8 +24,8 @@ class ValidacionUnidad extends FormRequest
     public function rules()
     {
         return [
-            'nombre' => 'required|max:50|unique:unidades,nombre,'. $this->route('id'),
-            'sigla' => 'required|max:10|unique:unidades,sigla,'. $this->route('id'),
+            'nombre' => 'required|max:50|unique:unidades,nombre',
+            'sigla' => 'required|max:10|unique:unidades,sigla',
             'descripcion' => 'nullable|max:250'
         ];
     }

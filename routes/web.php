@@ -17,13 +17,21 @@ Route::post('seguridad/login', 'Seguridad\LoginController@login')->name('login_p
 Route::get('seguridad/logout', 'Seguridad\LoginController@logout')->name('logout');
 Route ::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware'=> 'auth'], function(){
 	Route::get('', 'AdminController@index');
+	//rutar del usuario
 	Route::get('usuario', 'UsuarioController@index') ->name('usuario');
 	Route::get('usuario/crear', 'UsuarioController@create') ->name('crear_usuario');
+	Route::post('usuario', 'UsuarioController@store')->name('guardar_usuario');
+	Route::get('usuario/{id}/editar', 'UsuarioController@edit') ->name('editar_usuario');
+	Route::put('usuario/{id}', 'UsuarioController@update') ->name('actualizar_usuario');
+	Route::delete('usuario/{id}', 'UsuarioController@destroy')->name('eliminar_usuario');
 	//rutas del menu
 	Route::get('menu/crear', 'MenuController@create') ->name('crear_menu');
 	Route::get('menu', 'MenuController@index') ->name('menu');
 	Route::post('menu', 'MenuController@store') ->name('guardar_menu');
 	Route::post('menu/guardar-orden', 'MenuController@guardarOrden')->name('guardar-orden');
+	Route::get('menu/{id}/editar', 'MenuController@edit') ->name('editar_menu');
+	Route::put('menu/{id}', 'MenuController@update') ->name('actualizar_menu');
+	Route::get('menu/{id}/eliminar', 'MenuController@destroy') ->name('eliminar_menu');
 	//rutas del rol
 	Route::get('rol', 'RolController@index') ->name('rol');
 	Route::get('rol/crear', 'RolController@create') ->name('crear_rol');

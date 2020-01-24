@@ -19,21 +19,33 @@
 					<table class="table table-bordered table-hover table-striped">
 						<thead>
 							<tr>
-								<th style="text-align: center;">ID</th>
-                    			<th style="text-align: center;">Usuario</th>
-                    			<th style="text-align: center;">Nombre</th>
-                   				<th style="text-align: center;">Aellido</th>
-                    			<th style="text-align: center;">Correo</th>
+                    			<th class="col-lg-2" style="text-align: center;">Usuario</th>
+                    			<th class="col-lg-2" style="text-align: center;">Nombre</th>
+								<th class="col-lg-3" style="text-align: center;">Aellido</th>
+								<th class="col-lg-1" style="text-align: center;">Rol</th>
+								<th class="col-lg-3" style="text-align: center;">Correo</th>
+								<th class="col-lg-1" style="text-align: center;">Opción</th>
 							</tr>
 						</thead>
 						<tbody>
-							@foreach($usuarios as $usuarios)
+							@foreach($usuarios as $usuario)
 								<tr>
-									<th style="text-align: center;">{{$usuarios->id}}</th>
-									<th style="text-align: center;">{{$usuarios->usuario}}</th>
-									<th style="text-align: center;">{{$usuarios->nombre}}</th>
-									<th style="text-align: center;">{{$usuarios->apellido}}</th>
-									<th style="text-align: center;">{{$usuarios->email}}</th>
+									<td style="text-align: center;">{{$usuario->usuario}}</td>
+									<td style="text-align: center;">{{$usuario->nombre}}</td>
+									<td style="text-align: center;">{{$usuario->apellido}}</td>
+									<td style="text-align: center;">{{$usuario->rol}}</td>
+									<td style="text-align: center;">{{$usuario->email}}</td>
+									<td>
+										<a href="{{route('editar_usuario', ['id' => $usuario->id])}}" class="btn-accion-tabla tooltipsC" title="Editar usuario">
+											<i class="fa fa-fw fa-pencil"></i>
+										</a>
+										<form action="{{route('eliminar_usuario', ['id' => $usuario->id])}}" class="d-inline form-eliminar" method="POST">
+											@csrf @method("delete")
+											<button type="submit" class="btn-accion-tabla eliminar tooltipsC" title="Eliminar usuario">
+												<i class="fa fa-fw fa-trash text-danger"></i>
+											</button>
+										</form>
+									</td>
 								</tr>
 							@endforeach
 						</tbody>

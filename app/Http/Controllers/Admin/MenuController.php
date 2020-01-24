@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Menu;
 use App\Http\Requests\ValidacionMenu;
+use App\Http\Requests\ValidacionMenuEditar;
 
 class MenuController extends Controller
 {
@@ -62,7 +63,8 @@ class MenuController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data=Menu::findOrFail($id);
+        return view('admin.menu.editar', compact('data'));
     }
 
     /**
@@ -72,9 +74,10 @@ class MenuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ValidacionMenuEditar $request, $id)
     {
-        //
+        Menu::findOrFail($id)->update($request->all());
+        return redirect('admin/menu')->with('mensaje', 'Menú actualizado con exito');
     }
 
     /**
@@ -85,7 +88,8 @@ class MenuController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Menu::destroy($id);
+        return redirect('admin/menu')->with('mensaje', 'Menú eliminado con exito');
     }
     //funcion para guardar los menus
     public function guardarOrden(Request $request)

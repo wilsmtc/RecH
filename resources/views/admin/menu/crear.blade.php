@@ -4,6 +4,7 @@
 @endsection
 @section('scripts')
 	<script src="{{asset("assets/pages/scripts/admin/unidad/crear.js")}}" type="text/javascript"></script>
+	<script src="{{asset("assets/pages/scripts/admin/crear.js")}}" type="text/javascript"></script>
 @endsection
 @section('contenido')
 	<div class="row">
