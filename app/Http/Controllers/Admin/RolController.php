@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ValidacionRol;
-use App\Http\Requests\ValidacionRolEditar;
 use App\Models\Admin\Rol;
+use App\Models\Seguridad\Usuario;
 
 class RolController extends Controller
 {
@@ -73,7 +73,7 @@ class RolController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ValidacionRolEditar $request, $id)
+    public function update(ValidacionRol $request, $id)
     {
         Rol::findOrFail($id)->update($request->all());
         return redirect('admin/rol')->with('mensaje', 'Rol actualizado con exito');
@@ -87,7 +87,7 @@ class RolController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        if ($request->ajax()) {
+        if ($request->ajax()) {           
             if (Rol::destroy($id)) {
                 return response()->json(['mensaje' => 'ok']);
             } else {

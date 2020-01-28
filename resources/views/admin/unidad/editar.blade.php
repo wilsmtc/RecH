@@ -11,7 +11,7 @@
         @include('includes.form-error')
         @include('includes.mensaje')
         <div class="box box-primary">
-            <div class="box-header whit.border">
+            <div style="text-align: center;" class="box-header whit.border">
                 <h3 class="box-title"><b>Editar Unidades</b></h3>
                 <div class="box-tools pull-right">
                     <a href="{{route('unidad')}}" class="btn btn-block btn-info btn-sm">

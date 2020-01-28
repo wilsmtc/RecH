@@ -19,7 +19,7 @@
 			@include('includes.mensaje')
 			<div class="box box-success">
 				<div class="box-header whit-border">
-					<h3 class="box-title">Lista de Menus</h3>
+					<h3 class="box-title"><b>Lista de Menús</b></h3>
 					<div class="box-tools pull-right">
 						<a href="{{route('crear_menu')}}" class="btn btn-block btn-success btn-sm">
 							<i class="fa fa-fw fa-plus-circle"></i> Crear nuevo Menu

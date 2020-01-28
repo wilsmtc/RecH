@@ -16,12 +16,16 @@ class UsuarioAdministradorSeeder extends Seeder
             'usuario'=>'bayern',
             'password'=>bcrypt('munich'),
             'nombre'=>'Wilson',
-            'apellido'=>'Uño'
+            'apellido'=>'Uño',
+            'email'=>'wils.mtm.cmb@gmail.com'
         ]);
 
         DB::table('roles')->insert([
-            'tipo'=>'administrador'
-   
+            'tipo'=>'Administrador'
+        ]);
+
+        DB::table('roles')->insert([
+            'tipo'=>'Usuario'
         ]);
 
         DB::table('usuario_rol')->insert([
@@ -34,10 +38,12 @@ class UsuarioAdministradorSeeder extends Seeder
             'usuario'=>'wil',
             'password'=>bcrypt('wil'),
             'nombre'=>'Arjen',
-            'apellido'=>'Robben'
+            'apellido'=>'Robben',
+            'email'=>'Bolivar.mtm.cmb@gmail.com'
+
         ]);
         DB::table('usuario_rol')->insert([
-            'rol_id'=>1,
+            'rol_id'=>2,
             'usuario_id'=>2,
             'estado'=>0 //0=inactivo    
         ]);

@@ -23,11 +23,22 @@ class ValidacionMenu extends FormRequest
      */
     public function rules()
     {
-        return [
-             'nombre' => 'required|max:50|unique:menu,nombre',
-             'url' => 'required|max:100|unique:menu,url',   //crear
-             'icono' => 'nullable|max:50'
-
-        ];
+        if($this->route('id')){
+            return [
+                //editar
+                'nombre' => 'required|max:50|unique:menu,nombre,'. $this->route('id'),
+                'url' => 'required|max:100|unique:menu,url,'. $this->route('id'),    
+                'icono' => 'nullable|max:50'
+            ];
+        }
+        else{ 
+            return [
+                //crear
+                'nombre' => 'required|max:50|unique:menu,nombre',
+                'url' => 'required|max:100|unique:menu,url',   
+                'icono' => 'nullable|max:50'
+            ];   
+        }
+        
     }
 }

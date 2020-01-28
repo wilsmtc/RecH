@@ -4,13 +4,14 @@ namespace App\Models\Seguridad;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Models\Admin\Rol;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
 class Usuario extends Authenticatable
 {
     protected $remember_token = false;
     protected $table = 'usuarios';
-    protected $fillable = ['usuario', 'nombre', 'apellido', 'password'];
+    protected $fillable = ['usuario', 'nombre', 'apellido', 'email', 'password'];
 
     public function roles()
     {
@@ -23,13 +24,18 @@ class Usuario extends Authenticatable
             Session::put(
             [
                 'rol_id' => $roles[0]['id'],
-                'rol_nombre' => $roles[0]['tipo'],
+                'rol_tipo' => $roles[0]['tipo'],
                 'usuario'=> $this->usuario,
                 'usuario_id' =>$this->id,
                 'nombre_usuario'=>$this->nombre,
-                'apellido_usuario'=>$this->apellido
+                'apellido_usuario'=>$this->apellido,
+                'email_usuario'=>$this->email
             ]
             );
         }
+    }
+    public function setPasswordAttribute($pass) //esta funcion es de laravel para encriptar password
+    {
+        $this->attributes['password']=Hash::make($pass);
     }
 }

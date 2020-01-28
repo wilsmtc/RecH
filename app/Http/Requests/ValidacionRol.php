@@ -21,10 +21,20 @@ class ValidacionRol extends FormRequest
      */
     public function rules()
     {
+        if($this->route('id')){
+            return [
+            //para editar
+            'tipo' => 'required|max:50|unique:roles,tipo,'. $this->route('id')
+            ];
+        }   
+        else{
+            
         return [
+            //para crear
             'tipo' => 'required|max:50|unique:roles,tipo'//. \Request::get('id'), //si funciona
            // 'tipo' => 'required|max:50|unique:roles,tipo,'. $this->route('id'),// es para actualizar
            // 'tipo' => 'required|max:50|unique:roles,tipo' . $this->route('id'), // es para crear
-        ];
+            ];
+        }
     }
 }
