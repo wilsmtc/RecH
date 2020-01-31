@@ -11,6 +11,7 @@ Roles
 <div class="row">
     <div class="col-lg-12">
         @include('includes.mensaje')
+        @include('includes.form-error')
         <div class="box">
             <div style="text-align: center;" class="box-header with-border">
                 <h3 class="box-title"><b>Lista de Roles</b></h3>
@@ -38,7 +39,7 @@ Roles
                                 </a>
                                 <form action="{{route('eliminar_rol', ['id' => $data->id])}}" class="d-inline form-eliminar" method="POST" id="form-eliminar">
                                     @csrf @method("delete")
-                                    <button type="submit" class="btn-accion-tabla eliminar tooltipsC" title="Eliminar este registro">
+                                    <button type="submit" class="btn-accion-tabla eliminar tooltipsC" title="Eliminar este rol">
                                         <i class="fa fa-fw fa-trash text-danger"></i>
                                     </button>
                                 </form>

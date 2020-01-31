@@ -22,6 +22,8 @@
 
     @yield("styles")
     <link rel="stylesheet" href="{{asset("assets/css/custom.css")}}"> 
+    <link rel="stylesheet" href="{{asset("assets/css/jquery.dataTables.min.css")}}"> 
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -73,6 +75,8 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
       <script src="{{asset("assets/js/scripts.js")}}"></script>
       <script src="{{asset("assets/js/funciones.js")}}"></script>
+      <script src="{{asset("assets/js/datatables/jquery.dataTables.min.js")}}" type="text/javascript"></script>
+
       @yield("scripts")
   </body>
 </html>  

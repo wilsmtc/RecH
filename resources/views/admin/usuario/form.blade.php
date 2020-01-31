@@ -15,12 +15,12 @@
 <div class="form-group">
 	<label for="apellido" class="col-lg-3 control-label requerido">Apellidos</label>
 	<div class="col-lg-5">
-		<input type="apellido" name="apellido" id="apellido" class="form-control" value="{{old('apellido', $usuario->apellido ?? '')}}" required placeholder="Apellidos"/>		
+		<input type="text" name="apellido" id="apellido" class="form-control" value="{{old('apellido', $usuario->apellido ?? '')}}" required placeholder="Apellidos"/>		
 	</div>
 </div>
 
 <div class="form-group">
-	<label for="email" class="col-lg-3 control-label requerido">Correo Electronico</label>
+	<label for="email" class="col-lg-3 control-label requerido">Correo Electrónico</label>
 	<div class="col-lg-5">
 		<input type="email" name="email" id="email" class="form-control" value="{{old('email', $usuario->email ?? '')}}" required placeholder="usuario@ejemplo.com"/>		
 	</div>

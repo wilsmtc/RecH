@@ -5,7 +5,8 @@
 @endsection
 @section("scripts")
 	<script src="{{asset("assets/pages/scripts/admin/alert/alert.js")}}" type="text/javascript"></script>
-@endsection
+	<script src="{{asset("assets/pages/scripts/admin/datatables/datatables.js")}}" type="text/javascript"></script>
+	@endsection
 @section('contenido')
 	<div  class="row">
 		<div class="col-lg-12">
@@ -25,7 +26,7 @@
 							<tr>
                     			<th class="col-lg-2" style="text-align: center;">Usuario</th>
                     			<th class="col-lg-2" style="text-align: center;">Nombre</th>
-								<th class="col-lg-3" style="text-align: center;">Aellidos</th>
+								<th class="col-lg-3" style="text-align: center;">Apellidos</th>
 								<th class="col-lg-1" style="text-align: center;">Rol</th>
 								<th class="col-lg-3" style="text-align: center;">Correo</th>
 								<th class="col-lg-1" style="text-align: center;">Opción</th>

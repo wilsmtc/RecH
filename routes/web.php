@@ -24,6 +24,9 @@ Route ::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware'=> 'auth
 	Route::get('usuario/{id}/editar', 'UsuarioController@edit') ->name('editar_usuario');
 	Route::put('usuario/{id}', 'UsuarioController@update') ->name('actualizar_usuario');
 	Route::delete('usuario/{id}', 'UsuarioController@destroy')->name('eliminar_usuario');
+	//rutas usuario-rol
+	Route::get('usuario-rol', 'UsuarioRolController@index') ->name('usuario_rol');
+	Route::post('usuario-rol', 'UsuarioRolController@store') ->name('guardar_usuario_rol');
 	//rutas del menu
 	Route::get('menu/crear', 'MenuController@create') ->name('crear_menu');
 	Route::get('menu', 'MenuController@index') ->name('menu');
@@ -49,8 +52,13 @@ Route ::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware'=> 'auth
 	Route::get('unidad/{id}/editar', 'UnidadController@edit') ->name('editar_unidad');
 	Route::put('unidad/{id}', 'UnidadController@update') ->name('actualizar_unidad');
 	Route::delete('unidad/{id}', 'UnidadController@destroy')->name('eliminar_unidad');
-
-
+	//rutas para el personal
+	Route::get('personal', 'PersonalController@index') ->name('personal');
+	Route::get('personal/crear', 'PersonalController@create')->name('crear_personal');
+	Route::post('personal', 'PersonalController@store')->name('guardar_personal');
+	Route::get('personal/{id}/editar', 'PersonalController@edit') ->name('editar_personal');
+	Route::put('personal/{id}', 'PersonalController@update') ->name('actualizar_personal');
+	Route::delete('personal/{id}', 'PersonalController@destroy')->name('eliminar_personal');
 
 });
 

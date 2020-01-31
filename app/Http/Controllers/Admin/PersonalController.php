@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ValidacionUsuario;
-use App\Models\seguridad\Usuario;
-use App\Models\Admin\Rol;
+use App\Http\Requests\ValidacionPersonal;
+use App\Models\Admin\Personal;
+use App\Models\Admin\Unidad;
 
-class UsuarioController extends Controller
+class PersonalController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +17,10 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        $usuarios = Usuario::with('roles:id,tipo')->orderBy('id')->get();
-        //roles es el nombre de la funcion q relaciona muchos a muchos a usuario con rol (models/seg/usuario)
-        return view('admin.usuario.index', compact('usuarios'));
+        
+        $personal = Personal::with('unidad:id,nombre')->orderBy('id')->get();
+        //dd($personal);
+        return view('admin.personal.index', compact('personal'));
     }
 
     /**
@@ -29,10 +30,8 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        //dd('estas en crear usuario');
-        $rols = Rol::orderBy('id')->pluck('tipo', 'id')->toArray();
-        //dd($rols);
-        return view('admin.usuario.crear', compact('rols'));
+        $unidad = Unidad::orderBy('id')->pluck('nombre', 'id')->toArray();
+        return view('admin.personal.crear', compact('unidad'));
     }
 
     /**
@@ -41,11 +40,10 @@ class UsuarioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ValidacionUsuario $request)
+    public function store(ValidacionPersonal $request)
     {
-       $usuario = Usuario::create($request->all());
-       $usuario->roles()->attach($request->rol_id);
-       return redirect('admin/usuario')->with('mensaje','usuario creado con exito');
+       $personal = Personal::create($request->all());
+       return redirect('admin/personal')->with('mensaje','Personal creado con exito');
     }
 
     /**
@@ -67,9 +65,9 @@ class UsuarioController extends Controller
      */
     public function edit($id)
     {
-        $rols = Rol::orderBy('id')->pluck('tipo', 'id')->toArray();
-        $usuario = Usuario::with('roles')->findOrFail($id);
-        return view('admin.usuario.editar', compact('usuario', 'rols'));
+        $unidad = Unidad::orderBy('id')->pluck('nombre', 'id')->toArray();
+        $personal = Personal::with('unidad')->findOrFail($id);        
+        return view('admin.personal.editar', compact('personal','unidad'));
     }
 
     /**
@@ -79,13 +77,10 @@ class UsuarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ValidacionUsuario $request, $id)
+    public function update(ValidacionPersonal $request, $id)
     {
-        $usuario=Usuario::findOrFail($id);
-        $usuario->update(array_filter($request->all()));
-        //array_filter($request->all())    array_fiter (elimina los atributos null del &request) 
-        $usuario->roles()->sync($request->rol_id);
-        return redirect('admin/usuario')->with('mensaje', 'Usuario actualizado con exito');
+        Personal::findOrFail($id)->update($request->all());
+        return redirect('admin/personal')->with('mensaje', 'Datos actualizados con exito');
     }
 
     /**
@@ -97,7 +92,7 @@ class UsuarioController extends Controller
     public function destroy(Request $request, $id)
     {
         if ($request->ajax()) {
-            if (Usuario::destroy($id)) {
+            if (Personal::destroy($id)) {
                 return response()->json(['mensaje' => 'ok']);
             } else {
                 return response()->json(['mensaje' => 'ng']);
