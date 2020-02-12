@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ValidacionPersonal;
 use App\Models\Admin\Personal;
 use App\Models\Admin\Unidad;
+use Illuminate\Support\Facades\Storage;
 
 class PersonalController extends Controller
 {
@@ -42,8 +43,10 @@ class PersonalController extends Controller
      */
     public function store(ValidacionPersonal $request)
     {
-       $personal = Personal::create($request->all());
-       return redirect('admin/personal')->with('mensaje','Personal creado con exito');
+        if($foto=Personal::setFoto($request->foto_up))
+            $request->request->add(['foto'=>$foto]);
+        Personal::create($request->all());
+        return redirect('admin/personal')->with('mensaje','Personal creado con exito');
     }
 
     /**
@@ -79,7 +82,10 @@ class PersonalController extends Controller
      */
     public function update(ValidacionPersonal $request, $id)
     {
-        Personal::findOrFail($id)->update($request->all());
+        $personal = Personal::findOrFail($id);
+        if ($foto = Personal::setFoto($request->foto_up, $personal->foto))
+            $request->request->add(['foto' => $foto]);
+        $personal->update($request->all());
         return redirect('admin/personal')->with('mensaje', 'Datos actualizados con exito');
     }
 
@@ -92,13 +98,20 @@ class PersonalController extends Controller
     public function destroy(Request $request, $id)
     {
         if ($request->ajax()) {
+            $personal = Personal::findOrFail($id);
             if (Personal::destroy($id)) {
+                Storage::disk('public')->delete("imagenes/fotos/$personal->foto");
                 return response()->json(['mensaje' => 'ok']);
             } else {
                 return response()->json(['mensaje' => 'ng']);
             }
         } else {
-             abort(404);
+            abort(404);
         }
+    }
+
+    public function ver(Personal $personal){ //personal agarra todos los atributos del modelo Personal
+        return view ('admin.personal.foto', compact('personal'));
+        //dd($personal);
     }
 }

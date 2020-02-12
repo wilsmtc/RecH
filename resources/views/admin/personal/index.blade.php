@@ -4,12 +4,13 @@
 	Personal
 @endsection
 @section("scripts")
-	<script src="{{asset("assets/pages/scripts/admin/alert/alert.js")}}" type="text/javascript"></script>
+	<script src="{{asset("assets/pages/scripts/admin/personal/index.js")}}" type="text/javascript"></script>
 	<script src="{{asset("assets/pages/scripts/admin/datatables/datatables.js")}}" type="text/javascript"></script>
 	@endsection
 @section('contenido')
 	<div  class="row">
 		<div class="col-lg-12">
+			@csrf
 			@include('includes.mensaje')
 			<div class="box box-primary">
 				<div style="text-align: center; background-color:lightblue;" class="box-header whit.border">
@@ -43,7 +44,12 @@
 								<td style="text-align: center;">{{$per->unidad->nombre}}
 								</td>
                                 <td style="text-align: center;">{{$per->cargo}}</td>
-                                <td style="text-align: center;">
+								<td style="text-align: center;">
+									
+									<a href="{{route('ver_personal', $per)}}" class="ver-personal" title="ver foto" id="ver-personal">
+                                        <i class="fa fa-fw fa-camera-retro"></i>
+                                    </a>
+
 									<a href="{{route('editar_personal', ['id' => $per->id])}}" class="btn-accion-tabla tooltipsC" title="Editar personal">
                                         <i class="fa fa-fw fa-pencil"></i>
                                     </a>
@@ -58,6 +64,22 @@
                             @endforeach
 						</tbody>
 					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="modal-ver-personal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">Personal</h4>
+				</div>
+				<div class="modal-body"></div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cerrar</button>
 				</div>
 			</div>
 		</div>

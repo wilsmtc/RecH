@@ -36,7 +36,7 @@
 <div class="form-group">
 	<label for="fecha_nac" class="col-lg-3 control-label requerido">Fecha de Nacimiento</label>
 	<div class="col-lg-5">
-		<input type="date" name="fecha_nac" id="fecha_nac" class="form-control" value="{{old('fecha_nac', $personal->fecha_nac ?? '')}}" required placeholder="Fecha de Nacimiento"/>		
+		<input type="date" min="1940-01-01" max="2005-01-01" name="fecha_nac" id="fecha_nac" class="form-control" value="{{old('fecha_nac', $personal->fecha_nac ?? '')}}" required placeholder="Fecha de Nacimiento"/>		
 	</div>
 </div>
 
@@ -51,6 +51,13 @@
                 </option>
             @endforeach
         </select>
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="foto" class="col-lg-3 control-label">Foto</label>
+    <div class="col-lg-4">
+        <input type="file" name="foto_up" id="foto" data-initial-preview="{{isset($personal->foto) ? Storage::url("imagenes/fotos/$personal->foto") : "http://www.placehold.it/250x250/EFEFEF/AAAAAA&text=foto+personal"}}" accept="image/*"/>
     </div>
 </div>
 

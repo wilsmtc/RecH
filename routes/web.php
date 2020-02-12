@@ -60,6 +60,8 @@ Route ::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware'=> 'auth
 	Route::put('personal/{id}', 'PersonalController@update') ->name('actualizar_personal');
 	Route::delete('personal/{id}', 'PersonalController@destroy')->name('eliminar_personal');
 
+	Route::post('personal/{personal}', 'PersonalController@ver')->name('ver_personal');
+
 });
 
 
