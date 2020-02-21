@@ -1,7 +1,7 @@
 <div class="form-group">
 	<label for="nombre" class="col-lg-3 control-label requerido">Nombre</label>
 	<div class="col-lg-5">
-		<input type="text" name="nombre" id="nombre" class="form-control" value="{{old('nombre', $personal->nombre ?? '')}}" required placeholder="Nombre"/>		
+		<input type="text" name="nombre" id="nombre" class="form-control" value="{{old('nombre', $personal->nombre ?? '')}}" required placeholder="Nombre" autocomplete="off"/>		
 	</div>
 </div>
 
@@ -29,7 +29,7 @@
 <div class="form-group">
 	<label for="cargo" class="col-lg-3 control-label requerido">Cargo</label>
 	<div class="col-lg-5">
-		<input type="text" name="cargo" id="cargo" class="form-control" value="{{old('cargo', $personal->cargo ?? '')}}" required placeholder="Cargo que ocupa"/>		
+		<input type="text" name="cargo" id="cargo" class="form-control" value="{{old('cargo', $personal->cargo ?? '')}}" required placeholder="Cargo que ocupa" autocomplete="off"/>		
 	</div>
 </div>
 
@@ -47,12 +47,34 @@
             <option value="">Seleccione la Unidad</option>
             @foreach($unidad as $id => $nombre)
                 <option
-                value="{{$id}}"{{old("unidad_id",$personal->unidad->id ?? "")==$id ? "selected":""}}>{{$nombre}}</option>
+                value="{{$id}}"{{old("unidad_id",$personal->unidad->id ?? "")==$id ? "selected":""}}>{{$nombre}}
                 </option>
             @endforeach
         </select>
     </div>
 </div>
+
+<div class="form-group">
+    <label for="genero" class="col-lg-3 control-label requerido">Genero</label>
+    <div class="col-lg-5">
+        <select name="genero" id="genero" class="form-control" required >
+            <option value="">Seleccione su Genero</option>
+			<option value="Hombre"{{old("genero",$personal->genero?? "")=="Hombre" ? "selected":""}}>Hombre</option>
+			<option value="Mujer"{{old("genero",$personal->genero?? "")=="Mujer" ? "selected":""}}>Mujer</option>
+        </select>
+    </div>
+</div>
+{{-- <div class="form-group">
+	<label for="sexo" class="col-lg-3 control-label requerido">Sexo</label>
+	<div class="col-lg-5">
+		
+		<input type="radio" name="sexo" id="sexo" value="Hombre" />			
+		<label for="hombre">Masculino</label>
+		<br>
+		<input type="radio" name="sexo" id="sexo" value="Mujer" />
+		<label for="mujer">Femenino</label>						
+	</div>
+</div> --}}
 
 <div class="form-group">
     <label for="foto" class="col-lg-3 control-label">Foto</label>

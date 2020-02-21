@@ -1,2 +1,2 @@
-<div style="text-align: center;"><img src="{{Storage::url("imagenes/fotos/$personal->foto")}}" alt="Foto del personal"></div>
+<div style="text-align: center;"><img src="{{Storage::url("imagenes/fotos/$personal->foto")}}" alt="No tiene Fotografia"></div>
 <div style="text-align: center;">{{$personal->nombre}}  {{$personal->apellido}}</div>

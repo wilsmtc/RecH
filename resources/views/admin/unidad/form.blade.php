@@ -15,6 +15,6 @@
 <div class="form-group">
 	<label for="descripcion" class="col-lg-3 control-label">Descripcion</label>
 	<div class="col-lg-5">
-		<input type="text" name="descripcion" id="descripcion" class="form-control" value="{{old('descripcion', $unid->descripcion ?? '')}}"/>		
+		<input type="text" name="descripcion" id="descripcion" class="form-control" value="{{old('descripcion', $unid->descripcion ?? '')}}" autocomplete="off"/>		
 	</div>
 </div>

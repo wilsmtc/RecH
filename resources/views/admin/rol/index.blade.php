@@ -9,7 +9,7 @@ Roles
 
 @section('contenido')
 <div class="row">
-    <div class="col-lg-12">
+    <div class="col-lg-10">
         @include('includes.mensaje')
         @include('includes.form-error')
         <div class="box">
@@ -22,11 +22,11 @@ Roles
                 </div>
             </div>
             <div class="box-body">
-                <table class="table table-striped table-bordered table-hover" id="tabla-data">
+                <table class="table table-bordered table-hover table-striped" id="tabla-data" style="background-color:mintcream;">
                     <thead>
                         <tr>
-                            <th>tipo</th>
-                            <th class="width70"></th>
+                            <th class="col-lg-9">Tipo</th>
+                            <th class="col-lg-1" style="text-align: center;">Opción</th>                           
                         </tr>
                     </thead>
                     <tbody>
@@ -34,13 +34,13 @@ Roles
                         <tr>
                             <td>{{$data->tipo}}</td>
                             <td>
-                                <a href="{{route('editar_rol', ['id' => $data->id])}}" class="btn-accion-tabla tooltipsC" title="Editar este registro">
-                                    <i class="fa fa-fw fa-pencil"></i>
+                                <a href="{{route('editar_rol', ['id' => $data->id])}}" class="btn btn-warning btn-xs tooltipC" title="Editar este registro">
+                                    <i class="fas fa fa-wrench"></i>
                                 </a>
                                 <form action="{{route('eliminar_rol', ['id' => $data->id])}}" class="d-inline form-eliminar" method="POST" id="form-eliminar">
                                     @csrf @method("delete")
-                                    <button type="submit" class="btn-accion-tabla eliminar tooltipsC" title="Eliminar este rol">
-                                        <i class="fa fa-fw fa-trash text-danger"></i>
+                                    <button type="submit" class="btn btn-danger btn-xs eliminar tooltipsC" title="Eliminar este rol">
+                                        <i class="fa fa-fw fa-close"></i>
                                     </button>
                                 </form>
                             </td>

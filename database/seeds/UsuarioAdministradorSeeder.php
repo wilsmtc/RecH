@@ -17,7 +17,7 @@ class UsuarioAdministradorSeeder extends Seeder
             'password'=>bcrypt('munich'),
             'nombre'=>'Wilson',
             'apellido'=>'Uño',
-            'email'=>'wils.mtm.cmb@gmail.com'
+            'email'=>'wils.mtc.cmb@gmail.com'
         ]);
 
         DB::table('roles')->insert([
@@ -39,7 +39,7 @@ class UsuarioAdministradorSeeder extends Seeder
             'password'=>bcrypt('wil'),
             'nombre'=>'Arjen',
             'apellido'=>'Robben',
-            'email'=>'Bolivar.mtm.cmb@gmail.com'
+            'email'=>'Bolivar.mtc.cmb@gmail.com'
 
         ]);
         DB::table('usuario_rol')->insert([

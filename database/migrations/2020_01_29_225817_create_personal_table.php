@@ -22,7 +22,8 @@ class CreatePersonalTable extends Migration
             $table->string('ci',15)->unique();
             $table->string('cargo',50);
             $table->string('celular',15)->nullable()->unique();
-            $table->date('fecha_nac');                      
+            $table->date('fecha_nac'); 
+            $table->string('genero',6);                     
             $table->string('curriculum',100)->nullable();
             $table->string('foto',100)->nullable();
             $table->charset = 'utf8mb4';

@@ -87,10 +87,10 @@ class UnidadController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request, $id)
-    {
-        if ($request->ajax()) {
-            if (Unidad::destroy($id)) {
-                return response()->json(['mensaje' => 'ok']);
+    {     
+        if ($request->ajax()) {          
+            if(Unidad::destroy($id)){                
+                return response()->json(['mensaje' => 'ok']);                                  
             } else {
                 return response()->json(['mensaje' => 'ng']);
             }

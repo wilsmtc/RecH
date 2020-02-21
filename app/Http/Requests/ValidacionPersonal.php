@@ -32,7 +32,9 @@ class ValidacionPersonal extends FormRequest
                     'cargo'=>'required|max:50',
                     'celular'=>'nullable|min:5|max:15|unique:personal,celular,'. $this->route('id'),
                     'fecha_nac'=>'required|date',
-                    'unidad_id'=>'required|integer'
+                    'unidad_id'=>'required|integer',
+                    'genero'=>'required|max:6',
+                    'foto_up'=>'nullable|image|max:3000'
                 ];
             }
             else{
@@ -44,7 +46,9 @@ class ValidacionPersonal extends FormRequest
                     'cargo'=>'required|max:50',
                     'celular'=>'nullable|min:5|max:15|unique:personal,celular',
                     'fecha_nac'=>'required|date',
-                    'unidad_id'=>'required|integer'
+                    'unidad_id'=>'required|integer',
+                    'genero'=>'required|max:6',
+                    'foto_up'=>'nullable|image|max:3000'
                 ];  
             }
     }
