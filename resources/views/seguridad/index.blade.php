@@ -25,7 +25,7 @@
         </div>
         <!-- /.login-logo -->
         <div class="login-box-body">
-            <p class="login-box-msg">Inicie su session</p>
+            <p class="login-box-msg">Inicie session</p>
             @if (session('status'))
                 <div class="alert alert-success" role="alert">
                     {{ session('status') }}
@@ -45,7 +45,7 @@
                 @csrf
                 <div class="form-group has-feedback">
                     <input type="text" name="usuario" class="form-control" value="{{old('usuario')}}" placeholder="Usuario">
-                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                    <span class="glyphicon glyphicon-envelope form-control-feedback fa fa-user"></span>
                 </div>
                 <div class="form-group has-feedback">
                     <input type="password" name="password" class="form-control" placeholder="password">

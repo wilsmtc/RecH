@@ -41,6 +41,7 @@ class RolController extends Controller
     {
         Rol::create($request->all());
         return redirect('admin/rol')->with('mensaje', 'Rol creado correctamente');
+        
     }
 
     /**

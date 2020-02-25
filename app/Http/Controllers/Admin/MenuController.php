@@ -89,6 +89,7 @@ class MenuController extends Controller
     {
         Menu::destroy($id);
         return redirect('admin/menu')->with('mensaje', 'Menú eliminado con exito');
+        
     }
     //funcion para guardar los menus
     public function guardarOrden(Request $request)

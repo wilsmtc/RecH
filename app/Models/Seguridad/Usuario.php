@@ -2,6 +2,7 @@
 
 namespace App\Models\Seguridad;
 
+use App\Models\Admin\Permiso;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Models\Admin\Rol;
 use Illuminate\Support\Facades\Hash;
@@ -18,13 +19,17 @@ class Usuario extends Authenticatable
         return $this->belongsToMany(Rol::class, 'usuario_rol'); //se relaciona con el modelo Rol mediate la tabla usuario_rol
     }
 
+    public function permiso()
+        {
+            return $this->hasOne(Permiso::class); // un usuario tiene un permiso(permiso:add,edit,del)
+        }
     public function setSession($roles)
     {
         if (count($roles) == 1) {
             Session::put(
             [
                 'rol_id' => $roles[0]['id'],
-                'rol_tipo' => $roles[0]['tipo'],
+                'rol_tipo' => $roles[0]['tipo'],              
                 'usuario'=> $this->usuario,
                 'usuario_id' =>$this->id,
                 'nombre_usuario'=>$this->nombre,
@@ -38,4 +43,6 @@ class Usuario extends Authenticatable
     {
         $this->attributes['password']=Hash::make($pass);
     }
+
+    
 }

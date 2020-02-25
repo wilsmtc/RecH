@@ -1,5 +1,5 @@
 <div class="form-group">
-	<label for="nombre" class="col-lg-3 control-label requerido">Nombre</label>
+	<label for="nombre" class="col-lg-3 control-label requerido">Nombre de la Unidad</label>
 	<div class="col-lg-5">
 		<input type="text" name="nombre" id="nombre" class="form-control" value="{{old('nombre', $unid->nombre ?? '')}}" required placeholder="Nombre de la Unidad"/>		
 	</div>

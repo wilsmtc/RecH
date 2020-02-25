@@ -50,8 +50,8 @@
 												<label style="width:80px">{{$rol->tipo}}</label>
 											</span>
 										@endif
-										@if($rol->id==3)
-											<span class="label label-danger">
+										@if($rol->id>2)
+											<span class="label label-info">
 												<label style="width:80px">{{$rol->tipo}}</label>
 											</span>
 										@endif								

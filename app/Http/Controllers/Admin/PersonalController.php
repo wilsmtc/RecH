@@ -18,7 +18,6 @@ class PersonalController extends Controller
      */
     public function index()
     {
-        
         $personal = Personal::with('unidad:id,nombre')->orderBy('id')->get();
         //dd($personal);
         return view('admin.personal.index', compact('personal'));

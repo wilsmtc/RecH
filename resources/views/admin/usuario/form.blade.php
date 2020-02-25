@@ -56,3 +56,41 @@
 
 {{-- <option value="{{$id}}">{{$tipo}}</option>     para el select--}}
 {{-- {{!isset($usuario) ? 'requerido' : ''}}    // si no existe $usuario(creacion) es requerido --}}
+<div class="form-group">
+    <label class="col-lg-3 control-label">Permisos</label>
+    <div class="col-lg-5">
+		<label class="checkbox-inline">
+			<div class="font-weight-bold">
+				<label>
+					<input type="checkbox" name="añadir" id="añadir"
+						@if (isset($usuario)&&$usuario->permiso->añadir == 1)
+							checked
+						@endif
+					>Agregar
+				</label>
+			</div>
+		</label>
+		<label class="checkbox-inline">
+			<div class="font-weight-bold">
+				<label>
+					<input type="checkbox" name="editar" id="editar"
+						@if (isset($usuario)&&$usuario->permiso->editar == 1)
+							checked
+						@endif
+					>Editar
+				</label>
+			</div>
+		</label>
+		<label class="checkbox-inline">
+			<div class="font-weight-bold">
+				<label>
+					<input type="checkbox" name="eliminar" id="eliminar"
+						@if (isset($usuario)&&$usuario->permiso->eliminar == 1)
+							checked
+						@endif
+					>Eliminar
+				</label>
+			</div>
+		</label>  
+	</div>
+</div>

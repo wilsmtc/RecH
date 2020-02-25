@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ValidacionUsuario;
+use App\Models\Admin\Permiso;
 use App\Models\seguridad\Usuario;
 use App\Models\Admin\Rol;
 
@@ -43,9 +44,13 @@ class UsuarioController extends Controller
      */
     public function store(ValidacionUsuario $request)
     {
-       $usuario = Usuario::create($request->all());
-       $usuario->roles()->attach($request->rol_id);
-       return redirect('admin/usuario')->with('mensaje','usuario creado con exito');
+        //     $input=$request->all();    dd($input);  //ver ls datos enviados
+        $usuario = Usuario::create($request->all());
+        $usuario->roles()->attach($request->rol_id);
+        $per = new Permiso($request->all());
+        $per->usuario_id=$usuario->id;
+        $per->save();
+        return redirect('admin/usuario')->with('mensaje','usuario creado con exito');    
     }
 
     /**
@@ -72,19 +77,29 @@ class UsuarioController extends Controller
         return view('admin.usuario.editar', compact('usuario', 'rols'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(ValidacionUsuario $request, $id)
     {
         $usuario=Usuario::findOrFail($id);
         $usuario->update(array_filter($request->all()));
         //array_filter($request->all())    array_fiter (elimina los atributos null del &request) 
         $usuario->roles()->sync($request->rol_id);
+        if($request->añadir == "on" )
+            $x = 1;
+        else
+            $x = 0;
+        if($request->editar == "on")
+            $y = 1;    
+        else
+            $y = 0;
+        if($request->eliminar == "on")
+            $z = 1;    
+        else
+            $z = 0;
+        $usuario->permiso()->update([        
+            'añadir'=>$x,
+            'editar'=>$y,
+            'eliminar'=>$z
+        ]);
         return redirect('admin/usuario')->with('mensaje', 'Usuario actualizado con exito');
     }
 

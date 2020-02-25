@@ -52,6 +52,18 @@ class UsuarioAdministradorSeeder extends Seeder
             'sigla'=>'GER',
             'descripcion'=>'los jefes'
         ]);
+        DB::table('permisos')->insert([
+            'usuario_id'=>1,
+            'añadir'=>1,
+            'editar'=>1,
+            'eliminar'=>1
+        ]);
+        DB::table('permisos')->insert([
+            'usuario_id'=>2,
+            'añadir'=>0,
+            'editar'=>0,
+            'eliminar'=>0
+        ]);
 
     }
 }

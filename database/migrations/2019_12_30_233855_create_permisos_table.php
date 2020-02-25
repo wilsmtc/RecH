@@ -18,7 +18,7 @@ class CreatePermisosTable extends Migration
 
             $table->integer('usuario_id')->unsigned();
             $table->foreign('usuario_id')->references('id')->on('usuarios')->onDelete('cascade');
-            $table->enum('añadir',['1','0'])->default('1');
+            $table->enum('añadir',['1','0'])->default('0');
             $table->enum('editar',['1','0'])->default('0');
             $table->enum('eliminar',['1','0'])->default('0');
             $table->charset = 'utf8mb4';

@@ -15,11 +15,11 @@
 			<div class="box box-primary">
 				<div style="text-align: center; background-color:lightblue;" class="box-header whit.border">
 					<h3 class="box-title"><b>Lista de Personal</b></h3>
-					<div class="box-tools pull-right">
-						<a href="{{route('crear_personal')}}" class="btn btn-block btn-success">
-							<i class="fa fa-fw fa-user-plus"></i> Crear Personal
-						</a>
-					</div>
+						<div class="box-tools pull-right">
+							<a href="{{route('crear_personal')}}" class="btn btn-block btn-success">
+								<i class="fa fa-fw fa-user-plus"></i> Crear Personal
+							</a>
+						</div>
 				</div>
 				<div class="box-body table-responsive no.padding">
 					<table class="table table-bordered table-hover table-striped" id="tabla-data" style="background-color:mintcream;">
@@ -27,7 +27,7 @@
 							<tr>
                     			<th class="col-lg-1" style="text-align: center;">Nombre</th>
                     			<th class="col-lg-2" style="text-align: center;">Apellidos</th>
-								<th class="col-lg-1" style="text-align: center;">No. Carnet</th>
+								<th class="col-lg-1" style="text-align: center;">No.Carnet</th>
 								<th class="col-lg-1" style="text-align: center;">Celular</th>
 								<th class="col-lg-1" style="text-align: center;">Unidad</th>
                                 <th class="col-lg-2" style="text-align: center;">Cargo</th>
@@ -43,21 +43,21 @@
                                 <td style="text-align: center;">{{$per->celular}}</td>
 								<td style="text-align: center;">{{$per->unidad->nombre}}</td>
                                 <td style="text-align: center;">{{$per->cargo}}</td>
-								<td style="text-align: center;">
+								<td style="text-align: center;">								
 									@if($per->foto!=null)
 									<a href="{{route('ver_personal', $per)}}" class="ver-personal btn btn-info btn-xs tooltipC" title="ver foto" id="ver-personal">
                                         <i class="fa fa-fw fa-camera-retro"></i>
                                     </a>
-        							@endif							
+									@endif															
 									<a href="{{route('editar_personal', ['id' => $per->id])}}" class="btn btn-warning btn-xs tooltipC" title="Editar personal">
                                         <i class="fas fa fa-wrench"></i>
-                                    </a>
+									</a>
 									<form action="{{route('eliminar_personal', ['id' => $per->id])}}" class="d-inline form-eliminar" method="POST" id="form-eliminar">
                                         @csrf @method("delete")
                                         <button type="submit" class="btn btn-danger btn-xs eliminar tooltipsC" title="Eliminar Personal">
                                             <i class="fa fa-fw fa-close"></i>
                                         </button>
-                                    </form>
+									</form>
                                 </td>
                             </tr>
                             @endforeach

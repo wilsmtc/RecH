@@ -5,5 +5,7 @@ php artisan make:controller Admin/UnidadController -r
 php artisan db:seed --class=UsuarioAdministradorSeeder
 php artisan make:model Models/Admin/Usuario
 php artisan make:request ValidacionMenu
+dd(session()->all());
+@if(Auth::user()->permiso->añadir == 1)    @endif
 
 
