@@ -14,6 +14,7 @@
 
 @section('scripts')
 	<script src="{{asset("assets/pages/scripts/admin/personal/crear.js")}}" type="text/javascript"></script>
+	<script src="{{asset("assets/pages/scripts/admin/flatpickr/flatpickr.js")}}" type="text/javascript"></script>
 @endsection
 @section('contenido')
 	<div class="row">

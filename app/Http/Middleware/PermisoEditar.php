@@ -16,7 +16,7 @@ class PermisoEditar
             return $next($request);
         }
         else{
-            return redirect('/')->with('mensajeerror','No tienes permisos para Editar');
+            return back()->with('mensajeerror','No tienes permisos para Editar');
         }
     }
 }

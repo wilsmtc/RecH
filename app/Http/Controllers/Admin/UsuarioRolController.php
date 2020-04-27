@@ -10,11 +10,6 @@ use App\Models\Seguridad\Usuario;
 
 class UsuarioRolController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $aux=Usuario::with('roles:id,tipo,estado')->orderBy('id')->get();
@@ -23,13 +18,13 @@ class UsuarioRolController extends Controller
     }
     public function store(Request $request)
     {
-        //$rols=Rol::findOrFail($id);
         if ($request->ajax()) {
+            $aux = new Usuario();
             if ($request->input('estado') == 1) {
-                
+               // $aux->find($request->input('usuario_id'))->roles()->update($request->estado=0);//attach=añadir en BD
                 return response()->json(['respuesta' => 'Rol en estado activo']);
             } else {
-                
+               // $aux->find($request->input('usuario_id'))->roles()->update($request->estado=0);
                 return response()->json(['respuesta' => 'Rol en estado inactivo']);
             }
         } else {

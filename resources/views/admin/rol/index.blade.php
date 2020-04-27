@@ -12,6 +12,7 @@ Roles
     <div class="col-lg-10">
         @include('includes.mensaje')
         @include('includes.form-error')
+        @include('includes.mensajeerror')
         <div class="box">
             <div style="text-align: center;" class="box-header with-border">
                 <h3 class="box-title"><b>Lista de Roles</b></h3>

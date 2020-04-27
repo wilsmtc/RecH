@@ -16,7 +16,7 @@ class PermisoAdd
             return $next($request);
         }
         else{
-            return redirect('/')->with('mensajeerror','No tienes permisos para Añadir');
+            return back()->with('mensajeerror','No tienes permisos para Añadir');
         }
     }
 }

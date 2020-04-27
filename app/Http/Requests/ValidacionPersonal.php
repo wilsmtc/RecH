@@ -31,7 +31,7 @@ class ValidacionPersonal extends FormRequest
                     'ci'=>'required|min:7|max:15|unique:personal,ci,'. $this->route('id'),
                     'cargo'=>'required|max:50',
                     'celular'=>'nullable|min:5|max:15|unique:personal,celular,'. $this->route('id'),
-                    'fecha_nac'=>'required|date',
+                    'fecha_nac'=>'required|date|date_format:Y-m-d',
                     'unidad_id'=>'required|integer',
                     'genero'=>'required|max:6',
                     'foto_up'=>'nullable|image|max:3000'
@@ -45,7 +45,7 @@ class ValidacionPersonal extends FormRequest
                     'ci'=>'required|min:7|max:15|unique:personal,ci',
                     'cargo'=>'required|max:50',
                     'celular'=>'nullable|min:5|max:15|unique:personal,celular',
-                    'fecha_nac'=>'required|date',
+                    'fecha_nac'=>'required|date|date_format:Y-m-d',
                     'unidad_id'=>'required|integer',
                     'genero'=>'required|max:6',
                     'foto_up'=>'nullable|image|max:3000'

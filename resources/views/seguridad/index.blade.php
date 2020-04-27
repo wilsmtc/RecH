@@ -25,7 +25,7 @@
         </div>
         <!-- /.login-logo -->
         <div class="login-box-body">
-            <p class="login-box-msg">Inicie session</p>
+            <p class="login-box-msg">Inicie sesion</p>
             @if (session('status'))
                 <div class="alert alert-success" role="alert">
                     {{ session('status') }}

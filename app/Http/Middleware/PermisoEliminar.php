@@ -16,7 +16,7 @@ class PermisoEliminar
             return $next($request);
         }
         else{
-            return redirect('/')->with('mensajeerror','No tienes permisos para Eliminar');
+            return back()->with('mensajeerror','No tienes permisos para Eliminar');
         }
     }
 }

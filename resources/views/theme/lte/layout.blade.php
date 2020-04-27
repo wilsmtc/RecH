@@ -23,6 +23,7 @@
     @yield("styles")
     <link rel="stylesheet" href="{{asset("assets/css/custom.css")}}"> 
     <link rel="stylesheet" href="{{asset("assets/css/jquery.dataTables.min.css")}}"> 
+    <link rel="stylesheet" href="{{asset("assets/css/flatpickr.min.css")}}"/>
 
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -76,6 +77,7 @@
       <script src="{{asset("assets/js/scripts.js")}}"></script>
       <script src="{{asset("assets/js/funciones.js")}}"></script>
       <script src="{{asset("assets/js/datatables/jquery.dataTables.min.js")}}" type="text/javascript"></script>
+      <script src="{{asset("assets/js/flatpickr/flatpickr.js")}}" type="text/javascript"></script>
 
       @yield("scripts")
   </body>

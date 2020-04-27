@@ -12,6 +12,7 @@
 		<div class="col-lg-12">
 			@csrf
 			@include('includes.mensaje')
+			@include('includes.mensajeerror')
 			<div class="box box-primary">
 				<div style="text-align: center; background-color:lightblue;" class="box-header whit.border">
 					<h3 class="box-title"><b>Lista de Personal</b></h3>

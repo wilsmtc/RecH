@@ -36,7 +36,7 @@
 <div class="form-group">
 	<label for="fecha_nac" class="col-lg-3 control-label requerido">Fecha de Nacimiento</label>
 	<div class="col-lg-5">
-		<input type="date" min="1940-01-01" max="2005-01-01" name="fecha_nac" id="fecha_nac" class="form-control" value="{{old('fecha_nac', $personal->fecha_nac ?? '')}}" required placeholder="Fecha de Nacimiento"/>		
+		<input type="date" min="1940-01-01" max="2005-12-31" name="fecha_nac" id="fecha_nac" class="form-control" value="{{old('fecha_nac', $personal->fecha_nac ?? '')}}" required placeholder="Fecha de Nacimiento"/>		
 	</div>
 </div>
 
@@ -54,7 +54,7 @@
     </div>
 </div>
 
-<div class="form-group">
+{{-- <div class="form-group">
     <label for="genero" class="col-lg-3 control-label requerido">Genero</label>
     <div class="col-lg-5">
         <select name="genero" id="genero" class="form-control" required >
@@ -63,18 +63,17 @@
 			<option value="Mujer"{{old("genero",$personal->genero?? "")=="Mujer" ? "selected":""}}>Mujer</option>
         </select>
     </div>
-</div>
-{{-- <div class="form-group">
-	<label for="sexo" class="col-lg-3 control-label requerido">Sexo</label>
-	<div class="col-lg-5">
-		
-		<input type="radio" name="sexo" id="sexo" value="Hombre" />			
-		<label for="hombre">Masculino</label>
-		<br>
-		<input type="radio" name="sexo" id="sexo" value="Mujer" />
-		<label for="mujer">Femenino</label>						
-	</div>
 </div> --}}
+<div class="form-group">
+	<label for="genero" class="col-lg-3 control-label requerido">genero</label>
+	<div class="col-lg-5">
+		<input type="radio" class="flat-red" name="genero" id="genero" value="Hombre"{{old("genero",$personal->genero?? "")=="Hombre" ? "checked":""}}/>			
+		<label for="hombre">Hombre</label>
+		<br>
+		<input type="radio" class="flat-red" name="genero" id="genero" value="Mujer"{{old("genero",$personal->genero?? "")=="Mujer" ? "checked":""}}/>
+		<label for="mujer">Mujer</label>						
+	</div>
+</div>
 
 <div class="form-group">
     <label for="foto" class="col-lg-3 control-label">Foto</label>

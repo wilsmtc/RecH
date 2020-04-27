@@ -9,56 +9,30 @@ use App\Models\Admin\Unidad;
 
 class UnidadController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $unidades = Unidad::orderBy('id')->get();
         return view('admin.unidad.index', compact('unidades'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view ('admin.unidad.crear');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(ValidacionUnidad $request)
     {
+        //$may=strtoupper($request->sigla); //vuelve la sigla en mayusculas
+       // $request->request->add(['sigla'=>$may]);
         Unidad::create($request->all());
         return redirect('admin/unidad')->with('mensaje','unidad creada con exito');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $unid = Unidad::findOrfail($id);
@@ -67,25 +41,14 @@ class UnidadController extends Controller
 
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(ValidacionUnidad $request, $id)
     {
+        //$may=strtoupper($request->sigla); //vuelve la sigla en mayusculas
+        //$request->request->add(['sigla'=>$may]);
         Unidad::findOrFail($id)->update($request->all());
         return redirect('admin/unidad')->with('mensaje', 'Datos actualizados con exito');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Request $request, $id)
     {     
         if ($request->ajax()) {          

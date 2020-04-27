@@ -33,9 +33,11 @@
                 <img src="{{asset("assets/$theme/dist/img/bayern.png")}}" class="img-circle" alt="User Image">
 
                 <p>
+                  <i>
                   {{session()->get('nombre_usuario')}}
                   {{session()->get('apellido_usuario')}}
-                  <small>{{session()->get('email_usuario')}}</small>
+                  </i>
+                  <small><i>{{session()->get('email_usuario')}}</i></small>
                 </p>
               </li>
               <!-- Menu Body -->
