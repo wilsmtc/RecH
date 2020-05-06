@@ -58,7 +58,7 @@ class PersonalController extends Controller
         if ($request->ajax()) {
             $personal = Personal::findOrFail($id);
             if (Personal::destroy($id)) {
-                Storage::disk('public')->delete("imagenes/fotos/$personal->foto");
+                Storage::disk('public')->delete("imagenes/fotos/personal/$personal->foto");
                 return response()->json(['mensaje' => 'ok']);
             } else {
                 return response()->json(['mensaje' => 'ng']);

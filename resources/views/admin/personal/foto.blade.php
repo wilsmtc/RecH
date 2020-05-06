@@ -2,7 +2,7 @@
 <div style="text-align: center;">Nombre: {{$personal->nombre}}  {{$personal->apellido}}</div> --}}
 <div class="form-group">    
     <label class="control-label">
-        <img src="{{Storage::url("imagenes/fotos/$personal->foto")}}" width="50%" alt="No tiene Fotografia">
+        <img src="{{Storage::url("imagenes/fotos/personal/$personal->foto")}}" width="50%" alt="No tiene Fotografia">
         <label class="control-label">
             <div style=""><u>Nombre</u>: <i>{{$personal->nombre}}  {{$personal->apellido}}</i></div>
             <div style=""><u>Unidad</u>: <i>{{$personal->unidad->nombre}}</i></div>

@@ -3,6 +3,17 @@
 @section('titulo')
 	Usuario
 @endsection
+
+@section("styles")
+<link href="{{asset("assets/js/bootstrap-fileinput/css/fileinput.min.css")}}" rel="stylesheet" type="text/css"/>
+@endsection
+
+@section("scriptsPlugins")
+<script src="{{asset("assets/js/bootstrap-fileinput/js/fileinput.min.js")}}" type="text/javascript"></script>
+<script src="{{asset("assets/js/bootstrap-fileinput/js/locales/es.js")}}" type="text/javascript"></script>
+<script src="{{asset("assets/js/bootstrap-fileinput/themes/fas/theme.min.js")}}" type="text/javascript"></script>
+@endsection
+
 @section('scripts')
 	<script src="{{asset("assets/pages/scripts/admin/usuario/crear.js")}}" type="text/javascript"></script>
 @endsection
@@ -20,7 +31,7 @@
 						</a>
 					</div>
 				</div>
-				<form action="{{route ('guardar_usuario')}}" id="form-general" class="form-horizontal" method="POST">
+				<form action="{{route ('guardar_usuario')}}" id="form-general" class="form-horizontal" method="POST" enctype="multipart/form-data">
 					@csrf
 					<div class="box-body">
 						@include('admin.usuario.form')

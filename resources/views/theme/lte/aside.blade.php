@@ -3,9 +3,20 @@
     <section class="sidebar">
       <!-- Sidebar user panel -->
       <div class="user-panel">
-        <div class="pull-left image">
-          <img src="{{asset("assets/$theme/dist/img/bayern.png")}}" class="img-circle" alt="User Image">
-        </div>
+        @php
+          $aux= session()->get('foto_usuario');
+        @endphp
+
+        @if(session()->get('foto_usuario')==null)
+          <div class="pull-left image">
+            <img src="{{asset("assets/$theme/dist/img/bayern.png")}}" class="img-circle" alt="User Image">
+          </div>             
+        @endif
+        @if(session()->get('foto_usuario')!=null)
+          <div class="pull-left image">
+            <img src="{{Storage::url("imagenes/fotos/usuario/$aux")}}" class="img-circle" alt="User Image">  
+          </div>                
+        @endif 
         <div class="pull-left info">
           <p>
             <span class="hidden-xs">{{session()->get('usuario') ?? 'Invitado'}}</span>

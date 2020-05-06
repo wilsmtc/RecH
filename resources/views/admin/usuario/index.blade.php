@@ -4,12 +4,13 @@
 	Usuario
 @endsection
 @section("scripts")
-	<script src="{{asset("assets/pages/scripts/admin/alert/alert.js")}}" type="text/javascript"></script>
+	<script src="{{asset("assets/pages/scripts/admin/usuario/index.js")}}" type="text/javascript"></script>
 	<script src="{{asset("assets/pages/scripts/admin/datatables/datatables.js")}}" type="text/javascript"></script>
 	@endsection
 @section('contenido')
 	<div  class="row">
 		<div class="col-lg-12">
+			@csrf
 			@include('includes.mensaje')
 			@include('includes.mensajeerror')
 			<div class="box box-primary">
@@ -25,12 +26,12 @@
 					<table class="table table-bordered table-hover table-striped" id="tabla-data" style="background-color:mintcream;">
 						<thead>
 							<tr>
-                    			<th class="col-lg-2" style="text-align: center;">Usuario</th>
+                    			<th class="col-lg-1" style="text-align: center;">Usuario</th>
                     			<th class="col-lg-2" style="text-align: center;">Nombre</th>
 								<th class="col-lg-3" style="text-align: center;">Apellidos</th>
 								<th class="col-lg-1" style="text-align: center;">Rol</th>
 								<th class="col-lg-3" style="text-align: center;">Correo</th>
-								<th class="col-lg-1" style="text-align: center;">Opción</th>
+								<th class="col-lg-2" style="text-align: center;">Opción</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -59,7 +60,12 @@
 									@endforeach									
 									</td>
 									<td style="text-align: center;">{{$usuario->email}}</td>
-									<td>
+									<td style="text-align: center;">
+										@if($usuario->foto!=null)
+										<a href="{{route('ver_usuario', $usuario)}}" class="ver-usuario btn btn-info btn-xs tooltipC" title="ver foto" id="ver-usuario">
+											<i class="fa fa-fw fa-camera-retro"></i>
+										</a>
+										@endif
 										<a href="{{route('editar_usuario', ['id' => $usuario->id])}}" class="btn btn-warning btn-xs tooltipC" title="Editar usuario">
 											<i class="fas fa fa-wrench"></i>
 										</a>
@@ -74,6 +80,22 @@
 							@endforeach
 						</tbody>
 					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal modal-info fade in" id="modal-ver-usuario" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">Usuario</h4>
+				</div>
+				<div class="modal-body"></div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cerrar</button>
 				</div>
 			</div>
 		</div>

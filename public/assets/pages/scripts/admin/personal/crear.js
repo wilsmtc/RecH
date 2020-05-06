@@ -3,7 +3,7 @@ $(document).ready(function(){
     $('#foto').fileinput({
         language: 'es',     //lenguaje
         allowedFileExtensions: ['jpg', 'jpeg', 'png'], //archivos permitidos
-        maxFileSize: 3000,  //tamaño maximo 1mb
+        maxFileSize: 3000,  //tamaño maximo 3mb
         showUpload: false,  //no mostratra el boton upload
         showClose: false,   //no mostratra el boton close
         initialPreviewAsData: true,     //mostrar una imagen previa

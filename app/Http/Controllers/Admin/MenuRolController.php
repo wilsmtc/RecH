@@ -9,11 +9,7 @@ use App\Models\Admin\Rol;
 
 class MenuRolController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $rols = Rol::orderBy('id')->pluck('tipo','id')->toArray(); //solo mostrara los atributos del pluck y lo convierte en un array

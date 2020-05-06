@@ -24,15 +24,27 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="{{asset("assets/$theme/dist/img/bayern.png")}}" class="user-image" alt="User Image">
+              @php
+                    $aux= session()->get('foto_usuario');
+              @endphp
+              @if(session()->get('foto_usuario')==null)
+                <img src="{{asset("assets/$theme/dist/img/bayern.png")}}" class="user-image" alt="User Image">              
+              @endif
+              @if(session()->get('foto_usuario')!=null)
+                <img src="{{Storage::url("imagenes/fotos/usuario/$aux")}}" class="user-image" alt="User Image">                  
+              @endif        
               <span class="hidden-xs">{{session()->get('usuario') ?? 'Invitado'}}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="{{asset("assets/$theme/dist/img/bayern.png")}}" class="img-circle" alt="User Image">
-
-                <p>
+                @if(session()->get('foto_usuario')==null)
+                  <img src="{{asset("assets/$theme/dist/img/bayern.png")}}" class="img-circle" alt="User Image">
+                @endif
+                @if(session()->get('foto_usuario')!=null)                
+                  <img src="{{Storage::url("imagenes/fotos/usuario/$aux")}}" class="img-circle" alt="User Image">                 
+                @endif
+                  <p>
                   <i>
                   {{session()->get('nombre_usuario')}}
                   {{session()->get('apellido_usuario')}}

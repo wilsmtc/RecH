@@ -26,6 +26,7 @@ Route ::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware'=> 'auth
 	Route::get('usuario/{id}/editar', 'UsuarioController@edit') ->name('editar_usuario')->middleware('permisoeditar');
 	Route::put('usuario/{id}', 'UsuarioController@update') ->name('actualizar_usuario');
 	Route::delete('usuario/{id}', 'UsuarioController@destroy')->name('eliminar_usuario')->middleware('permisoeliminar');
+	Route::post('usuario/{usuario}', 'UsuarioController@ver')->name('ver_usuario');
 	//rutas usuario-rol
 	Route::get('usuario-rol', 'UsuarioRolController@index') ->name('usuario_rol');
 	Route::post('usuario-rol', 'UsuarioRolController@store') ->name('guardar_usuario_rol');

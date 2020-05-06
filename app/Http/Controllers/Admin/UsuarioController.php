@@ -8,14 +8,10 @@ use App\Http\Requests\ValidacionUsuario;
 use App\Models\Admin\Permiso;
 use App\Models\seguridad\Usuario;
 use App\Models\Admin\Rol;
+use Illuminate\Support\Facades\Storage;
 
 class UsuarioController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $usuarios = Usuario::with('roles:id,tipo')->orderBy('id')->get();
@@ -23,11 +19,6 @@ class UsuarioController extends Controller
         return view('admin.usuario.index', compact('usuarios'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //dd('estas en crear usuario');
@@ -36,15 +27,11 @@ class UsuarioController extends Controller
         return view('admin.usuario.crear', compact('rols'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(ValidacionUsuario $request)
     {
-        //     $input=$request->all();    dd($input);  //ver ls datos enviados
+        //$input=$request->all();    dd($input);  //ver ls datos enviados
+        if($foto=Usuario::setFoto($request->foto_up))
+            $request->request->add(['foto'=>$foto]);
         $usuario = Usuario::create($request->all());
         $usuario->roles()->attach($request->rol_id);
         $per = new Permiso($request->all());
@@ -53,23 +40,12 @@ class UsuarioController extends Controller
         return redirect('admin/usuario')->with('mensaje','usuario creado con exito');    
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function ver(Usuario $usuario)
     {
-        //
+        return view ('admin.usuario.foto', compact('usuario'));
+        //dd($usuario);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $rols = Rol::orderBy('id')->pluck('tipo', 'id')->toArray();
@@ -78,8 +54,11 @@ class UsuarioController extends Controller
     }
 
     public function update(ValidacionUsuario $request, $id)
-    {
+    {       
+        //$input=$request->all();    dd($input);  //ver ls datos enviados
         $usuario=Usuario::findOrFail($id);
+        if ($foto = Usuario::setFoto($request->foto_up, $usuario->foto))
+            $request->request->add(['foto' => $foto]);
         $usuario->update(array_filter($request->all()));
         //array_filter($request->all())    array_fiter (elimina los atributos null del &request) 
         $usuario->roles()->sync($request->rol_id);
@@ -103,16 +82,12 @@ class UsuarioController extends Controller
         return redirect('admin/usuario')->with('mensaje', 'Usuario actualizado con exito');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Request $request, $id)
     {
         if ($request->ajax()) {
+            $usuario=Usuario::findOrFail($id);
             if (Usuario::destroy($id)) {
+                Storage::disk('public')->delete("imagenes/fotos/usuario/$usuario->foto");
                 return response()->json(['mensaje' => 'ok']);
             } else {
                 return response()->json(['mensaje' => 'ng']);

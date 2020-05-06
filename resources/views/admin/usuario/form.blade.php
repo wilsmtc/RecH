@@ -94,3 +94,10 @@
 		</label>  
 	</div>
 </div>
+
+<div class="form-group">
+    <label for="foto" class="col-lg-3 control-label">Foto</label>
+    <div class="col-lg-4">
+        <input type="file" name="foto_up" id="foto" data-initial-preview="{{isset($usuario->foto) ? Storage::url("imagenes/fotos/usuario/$usuario->foto") : "http://www.placehold.it/250x250/EFEFEF/AAAAAA&text=foto+de+usuario"}}" accept="image/*"/>
+    </div>
+</div>
