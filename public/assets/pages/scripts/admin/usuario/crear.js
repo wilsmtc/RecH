@@ -31,6 +31,5 @@ $(document).ready(function(){
         initialPreviewAsData: true,     //mostrar una imagen previa
         dropZoneEnabled: true,     //permitir arrastrar imagenes
         theme: "fa",    //para llamar iconos fa
-    });
-    
+    });   
 });

@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ValidacionUnidad;
+use App\Models\Admin\Personal;
 use App\Models\Admin\Unidad;
+use Barryvdh\DomPDF\Facade as PDF;
+
 
 class UnidadController extends Controller
 {
@@ -28,9 +31,11 @@ class UnidadController extends Controller
         return redirect('admin/unidad')->with('mensaje','unidad creada con exito');
     }
 
-    public function show($id)
+    public function ver($id)
     {
-        //
+        $unid = Unidad::findOrfail($id);
+        $personal = Personal::orderBy('id')->get();
+        return view('admin.unidad.ver-unidad', compact('unid', 'personal'));
     }
 
     public function edit($id)
@@ -51,7 +56,7 @@ class UnidadController extends Controller
 
     public function destroy(Request $request, $id)
     {     
-        if ($request->ajax()) {          
+        if ($request->ajax()) {    
             if(Unidad::destroy($id)){                
                 return response()->json(['mensaje' => 'ok']);                                  
             } else {
@@ -60,5 +65,13 @@ class UnidadController extends Controller
         } else {
              abort(404);
         }
+    }
+    public function pdf($id)
+    {
+        $personal=Personal::all();
+        $unid=Unidad::findOrFail($id);
+        $pdf=PDF::loadview('admin.reportes.unidad-personal', compact('unid','personal'));
+        return $pdf->stream('unidad.pdf');
+
     }
 }

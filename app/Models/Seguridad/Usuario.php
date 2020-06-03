@@ -23,9 +23,9 @@ class Usuario extends Authenticatable
     }
 
     public function permiso()
-        {
-            return $this->hasOne(Permiso::class); // un usuario tiene un permiso(permiso:add,edit,del)
-        }
+    {
+        return $this->hasOne(Permiso::class); // un usuario tiene un permiso(permiso:add,edit,del)
+    }
     public function setSession($roles)
     {
         if (count($roles) == 1) {
@@ -63,7 +63,6 @@ class Usuario extends Authenticatable
             return $imageName; //retorna el nombre de la imagen
         } else {
             return false;
-        }
-        
+        }        
     }
 }

@@ -16,16 +16,27 @@
     <link rel="stylesheet" href="{{asset("assets/$theme/dist/css/AdminLTE.min.css")}}">
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+    
 </head>
 
-<body class="hold-transition login-page">
+<body class="hold-transition login-page" style="background-image:url('/assets/lte/dist/img/fondo1.jpg'); background-size: cover">
+    {{-- <style>
+        html{
+            background-image:url("/assets/lte/dist/img/fondo1.jpg");
+            background-repeat: no-repeat;
+            background-size: cover; 
+            background-position: center;
+            background-attachment: fixed;       
+        }
+    </style> --}}
     <div class="login-box">
-        <div class="login-logo">
-            <a href="{{route('inicio')}}">RRHH</a> <!--RRHH nos direcciona a la ruta inicio-->
-        </div>
+        
         <!-- /.login-logo -->
-        <div class="login-box-body">
-            <p class="login-box-msg">Inicie sesion</p>
+        <div class="login-box-body" style="background-image:url('/assets/lte/dist/img/fondo1.jpg'); background-size: cover">
+            
+            <h4 style="color: rgb(22, 20, 139)"><u><b><p class="login-box-msg">Sistema de Administración de Recursos Humanos</p></b></u></h4>
+            <p style="color: white" class="login-box-msg">Inicie sesion</p>
             @if (session('status'))
                 <div class="alert alert-success" role="alert">
                     {{ session('status') }}
@@ -41,9 +52,9 @@
                     </div>
                 </div>
             @endif
-            <form action="{{route('login_post')}}" method="POST" autocomplete="off">
+            <form action="{{route('login_post')}}" method="POST" autocomplete="off" >
                 @csrf
-                <div class="form-group has-feedback">
+                <div class="form-group has-feedback" >
                     <input type="text" name="usuario" class="form-control" value="{{old('usuario')}}" placeholder="Usuario">
                     <span class="glyphicon glyphicon-envelope form-control-feedback fa fa-user"></span>
                 </div>

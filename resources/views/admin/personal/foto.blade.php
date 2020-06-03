@@ -7,6 +7,7 @@
             <div style=""><u>Nombre</u>: <i>{{$personal->nombre}}  {{$personal->apellido}}</i></div>
             <div style=""><u>Unidad</u>: <i>{{$personal->unidad->nombre}}</i></div>
             <div style=""><u>Carnet</u>: <i>{{$personal->ci}}</i></div>
+            <div style=""><u>Item</u>: <i>{{$personal->item}}</i></div>
             <div style=""><u>Celular</u>: <i>{{$personal->celular}}</i></div>
             <div style=""><u>Cargo</u>: <i>{{$personal->cargo}}</i></div>
             <div style=""><u>F. Nac.</u>: <i>{{$personal->fecha_nac}}</i></div>

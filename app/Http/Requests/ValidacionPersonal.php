@@ -34,7 +34,9 @@ class ValidacionPersonal extends FormRequest
                     'fecha_nac'=>'required|date|date_format:Y-m-d',
                     'unidad_id'=>'required|integer',
                     'genero'=>'required|max:6',
-                    'foto_up'=>'nullable|image|max:3000'
+                    'foto_up'=>'nullable|image|max:3000',
+                    'documento_up'=>'nullable|max:30000',
+                    'item'=>'nullable|min:2|max:5|unique:personal,item,'. $this->route('id')
                 ];
             }
             else{
@@ -48,7 +50,9 @@ class ValidacionPersonal extends FormRequest
                     'fecha_nac'=>'required|date|date_format:Y-m-d',
                     'unidad_id'=>'required|integer',
                     'genero'=>'required|max:6',
-                    'foto_up'=>'nullable|image|max:3000'
+                    'foto_up'=>'nullable|image|max:3000',
+                    'documento_up'=>'nullable|max:30000',
+                    'item'=>'nullable|min:2|max:5|unique:personal,item'
                 ];  
             }
     }

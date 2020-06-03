@@ -10,7 +10,7 @@ use Intervention\Image\Facades\Image;
 class Personal extends Model
 {
     protected $table = "personal";
-    protected $fillable=['nombre','apellido','ci','celular','cargo','fecha_nac','unidad_id','foto','genero'];
+    protected $fillable=['nombre','apellido','ci','celular','cargo','fecha_nac','unidad_id','foto','genero','curriculum','item'];
 
     public function unidad()
     {
@@ -29,6 +29,23 @@ class Personal extends Model
             });
             Storage::disk('public')->put("imagenes/fotos/personal/$imageName", $imagen->stream()); //guarda la imagen
             return $imageName; //retorna el nombre de la imagen
+        } else {
+            return false;
+        }
+        
+    }
+    public static function setDocumento($documento, $actual = false) //documento (al crear), actual (al editar)
+    {
+        if ($documento) {
+            if ($actual) {
+                Storage::disk('public')->delete("imagenes/documentos/personal/$actual"); // si es actual borra la anterior
+            }
+            $docName = Str::random(5) . '.pdf';  //STR para llamar a rando q crea un nombre aleatorio de 15 caracteres con la extension .jpg
+            //$doc = ->encode('pdf'); //codifica a jpg con un 75% de la imagen real
+            
+            //Storage::disk('public')->put("imagenes/documentos/personal/$docName", $documento); //guarda la imagen
+            $documento->move(public_path().'/storage/imagenes/documentos/personal/', $docName);
+            return $docName; //retorna el nombre de la imagen
         } else {
             return false;
         }

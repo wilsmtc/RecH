@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ValidacionPersonal;
 use App\Models\Admin\Personal;
 use App\Models\Admin\Unidad;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Storage;
 
 class PersonalController extends Controller
@@ -28,6 +29,9 @@ class PersonalController extends Controller
     {
         if($foto=Personal::setFoto($request->foto_up))
             $request->request->add(['foto'=>$foto]);
+        if($documento=Personal::setDocumento($request->documento_up))
+            $request->request->add(['curriculum'=>$documento]);
+        //dd($request->all());
         Personal::create($request->all());
         return redirect('admin/personal')->with('mensaje','Personal creado con exito');
     }
@@ -49,6 +53,8 @@ class PersonalController extends Controller
         $personal = Personal::findOrFail($id);
         if ($foto = Personal::setFoto($request->foto_up, $personal->foto))
             $request->request->add(['foto' => $foto]);
+        if ($documento = Personal::setDocumento($request->documento_up, $personal->curriculum))
+            $request->request->add(['curriculum' => $documento]);
         $personal->update($request->all());
         return redirect('admin/personal')->with('mensaje', 'Datos actualizados con exito');
     }
@@ -59,6 +65,7 @@ class PersonalController extends Controller
             $personal = Personal::findOrFail($id);
             if (Personal::destroy($id)) {
                 Storage::disk('public')->delete("imagenes/fotos/personal/$personal->foto");
+                Storage::disk('public')->delete("imagenes/documentos/personal/$personal->curriculum");
                 return response()->json(['mensaje' => 'ok']);
             } else {
                 return response()->json(['mensaje' => 'ng']);
@@ -71,5 +78,19 @@ class PersonalController extends Controller
     public function ver(Personal $personal){ //personal agarra todos los atributos del modelo Personal
         return view ('admin.personal.foto', compact('personal'));
         //dd($personal);
+    }
+
+    public function pdf($id)
+    {
+         //$personal = Personal::findOrFail($id);
+        // $file= public_path().'\storage\imagenes\documentos\personal/'.$personal->curriculum;
+        // $headers = array(
+        //           'Content-Type: application/pdf',
+        //         );
+        // return response()->file($file, $headers);
+
+        $personal = Personal::findOrFail($id);
+        $file= public_path().'\storage\imagenes\documentos\personal/'.$personal->curriculum;
+        return response()->file($file);
     }
 }

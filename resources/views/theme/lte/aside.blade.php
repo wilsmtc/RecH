@@ -1,4 +1,4 @@
- <aside class="main-sidebar">
+ <aside class="main-sidebar" style="background-image:url('/assets/lte/dist/img/fondo2.jpg'); background-size: cover">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
       <!-- Sidebar user panel -->
@@ -39,7 +39,7 @@
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
-        <li style="text-align: center;" class="header">MENÚ PRINCIPAL</li>
+        <li style="text-align: center;  color: rgb(214, 207, 245)" class="header" >MENÚ PRINCIPAL</li>
         @foreach ($menusComposer as $key => $item)
               @if ($item["menu_id"] != 0)<!-- solo va entrar cuando es hijo -->
                   @break

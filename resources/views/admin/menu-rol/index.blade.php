@@ -9,6 +9,7 @@ Menú - Rol
 <div class="row">
     <div class="col-lg-12">
         @include('includes.mensaje')
+        @include('includes.mensajeerror')
         <div class="box box-success">
             <div class="box-header with-border">
                 <h3 class="box-title">Menús - Rol</h3>

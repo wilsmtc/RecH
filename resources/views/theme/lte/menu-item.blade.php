@@ -1,11 +1,11 @@
 @if ($item["submenu"] == [])
     <li class="{{getMenuActivo($item["url"])}}">
-        <a href="{{url($item['url'])}}">
+        <a href="{{url($item['url'])}}" >
           <i class="fa {{$item["icono"]}}"></i> <span>{{$item["nombre"]}}</span>
         </a>
     </li>
 @else
-    <li class="treeview">
+    <li class="treeview" style="background-image:url('/assets/lte/dist/img/fondo2.jpg'); background-size: cover">
         <a href="javascript:;"> <!--no tiene url porq es padre-->
           <i class="fa {{$item["icono"]}}"></i> <span>{{$item["nombre"]}}</span>
           <span class="pull-right-container">

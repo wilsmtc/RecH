@@ -18,12 +18,13 @@
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="{{asset("assets/$theme/dist/css/skins/_all-skins.min.css")}}">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"> --}}
 
     @yield("styles")
     <link rel="stylesheet" href="{{asset("assets/css/custom.css")}}"> 
     <link rel="stylesheet" href="{{asset("assets/css/jquery.dataTables.min.css")}}"> 
     <link rel="stylesheet" href="{{asset("assets/css/flatpickr.min.css")}}"/>
+    <link rel="stylesheet" href="{{asset("assets/css/toastr.min.css")}}"/>
 
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -36,7 +37,7 @@
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
   </head>
-  <body class="hold-transition skin-blue layout-boxed sidebar-mini">
+  <body class="hold-transition skin-blue layout-boxed sidebar-mini" style="background-image:url('/assets/lte/dist/img/fondo1.jpg'); background-size: cover">
   <!-- Site wrapper -->
     <div class="wrapper">
       <!-- inicio de header -->
@@ -45,7 +46,7 @@
       <!-- inicio de aside -->
        @include("theme/$theme/aside")
       <!-- fin de aside -->
-        <div class="content-wrapper">
+        <div class="content-wrapper" style="background-image:url('/assets/lte/dist/img/fondo1.jpg'); background-size: cover">
           <!-- Content Header (Page header) -->
               <section class="content">
 
@@ -72,8 +73,10 @@
       @yield("scriptsPlugins")
       <script src="{{asset("assets/js/jquery-validation/jquery.validate.min.js")}}"></script>
       <script src="{{asset("assets/js/jquery-validation/localization/messages_es.min.js")}}"></script>
-      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+      {{-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> --}}
+      <script src="{{asset("assets/js/sweetalert/sweetalert.min.js")}}" type="text/javascript"></script>
+      {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script> --}}
+      <script src="{{asset("assets/js/sweetalert/toastr.min.js")}}" type="text/javascript"></script>
       <script src="{{asset("assets/js/scripts.js")}}"></script>
       <script src="{{asset("assets/js/funciones.js")}}"></script>
       <script src="{{asset("assets/js/datatables/jquery.dataTables.min.js")}}" type="text/javascript"></script>

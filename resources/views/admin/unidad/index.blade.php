@@ -23,21 +23,24 @@
 					<table class="table table-bordered table-hover table-striped" id="tabla-data" style="background-color:mintcream;">
 						<thead>
 							<tr>
-								<th class="col-lg-1" style="text-align: center;">ID</th>
+								
                     			<th class="col-lg-3" style="text-align: center;">Nombre</th>
                    				<th class="col-lg-1" style="text-align: center;">Sigla</th>
 								<th class="col-lg-6" style="text-align: center;">Descripción</th>
-								<th class="col-lg-1" style="text-align: center;">Opción</th>
+								<th class="col-lg-2" style="text-align: center;">Opción</th>
 							</tr>
 						</thead>
 						<tbody>
 							@foreach($unidades as $unid)
 								<tr>
-									<td style="text-align: center;">{{$unid->id}}</td>
+									
 									<td style="text-align: center;">{{$unid->nombre}}</td>
 									<td style="text-align: center;">{{$unid->sigla}}</td>
 									<td style="text-align: center;">{{$unid->descripcion}}</td>
-									<td>
+									<td style="text-align: center;">
+										<a href="{{route('ver_unidad', ['id' => $unid->id])}}" class="btn btn-info btn-xs tooltipC" title="ver componentes">
+											<i class="fas fa fa-th"></i>
+										</a>
 										<a href="{{route('editar_unidad', ['id' => $unid->id])}}" class="btn btn-warning btn-xs tooltipC" title="Editar unidad">
 												<i class="fas fa fa-wrench"></i>
 										</a>									

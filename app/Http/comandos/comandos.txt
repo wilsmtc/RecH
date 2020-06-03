@@ -1,3 +1,5 @@
+php artisan --version
+php artisan cache:clear
 php artisan make:migration create_roles_table --create=roles
 php artisan migrate
 php artisan migrate:refresh
@@ -5,6 +7,7 @@ php artisan make:controller Admin/UnidadController -r
 php artisan db:seed --class=UsuarioAdministradorSeeder
 php artisan make:model Models/Admin/Usuario
 php artisan make:request ValidacionMenu
+php artisan make:middleware Permisoadd
 dd(session()->all());
 @if(Auth::user()->permiso->añadir == 1)    @endif
 
