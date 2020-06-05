@@ -1,12 +1,19 @@
 <!DOCTYPE html>
-    
     <div style="text-align: center;" class="col-lg-5">
-        <h3 class="box-title"><b>{{$unid->nombre}}</b></h3>
+        <h3 class="box-title"><i><b>Fundación de Software libre Potosí</b><i></h3>
+    </div>
+    <div style="text-align: center;" class="col-lg-5">
+        <h3 class="box-title"><b>Reporte unidad-personal</b></h3>
     </div>
     <div>
-        &nbsp;&nbsp;<b> Sigla:    {{$unid->sigla}}</b>                
+        &nbsp;&nbsp;<b> Unidad:      {{$unid->nombre}}</b>
     </div>
-    <br>
+    <div>
+        &nbsp;&nbsp;<b> Sigla:    &nbsp;&nbsp;&nbsp;&nbsp;{{$unid->sigla}}</b>                
+    </div>
+    &nbsp;&nbsp;<b> Fecha:    &nbsp;&nbsp; {{date("d/m/Y")}}</b>                
+    </div>
+    <br><br>
     <div class="container">
         <table border="1" align="center" WIDTH="80%" >
             <thead>

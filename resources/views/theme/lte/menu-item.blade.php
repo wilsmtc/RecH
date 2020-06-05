@@ -5,7 +5,7 @@
         </a>
     </li>
 @else
-    <li class="treeview" style="background-image:url('/assets/lte/dist/img/fondo2.jpg'); background-size: cover">
+    <li class="treeview">
         <a href="javascript:;"> <!--no tiene url porq es padre-->
           <i class="fa {{$item["icono"]}}"></i> <span>{{$item["nombre"]}}</span>
           <span class="pull-right-container">

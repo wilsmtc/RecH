@@ -21,14 +21,14 @@ class LoginController extends Controller
     }
     protected function authenticated(Request $request, $user) 
     {
-        $roles = $user->roles()->where('estado', 1)->get();
-        //$roles = $user->roles()->get();
-        if ($roles->isNotEmpty()) {
+        //$roles = $user->roles()->where('estado', 1)->get();
+        $roles = $user->roles()->get();
+        if ($user->estado==1) {
             $user->setSession($roles->toArray());//llama a la funcion setsession
         } else {
             $this->guard()->logout();
             $request->session()->invalidate();
-            return redirect('seguridad/login')->withErrors(['error' => 'Este usuario no tiene un rol activo']);
+            return redirect('seguridad/login')->withErrors(['error' => 'Este usuario no esta activo']);
         }
     }
     public function username() //reescribimos la funcion para q se loguee con usuario y no con email

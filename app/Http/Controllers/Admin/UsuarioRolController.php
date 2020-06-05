@@ -29,9 +29,22 @@ class UsuarioRolController extends Controller
             }
         } else {
             abort(404);
-        }
-
-        
+        }       
     }
-   
+    public function desactivar($id)
+    {
+        $usuario=Usuario::findOrFail($id);
+        $usuario->estado=0;
+        $usuario->save();
+        //dd($usuario);      
+        return redirect('admin/usuario-rol');
+    }
+    public function activar($id)
+    {
+        $usuario=Usuario::findOrFail($id);
+        $usuario->estado=1;
+        $usuario->save();
+        //dd($usuario);
+        return redirect('admin/usuario-rol');
+    }
 }

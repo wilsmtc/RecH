@@ -28,7 +28,7 @@
                     $aux= session()->get('foto_usuario');
               @endphp
               @if(session()->get('foto_usuario')==null)
-                <img src="{{asset("assets/$theme/dist/img/bayern.png")}}" class="user-image" alt="User Image">              
+                <img src="{{asset("assets/$theme/dist/img/compu1.png")}}" class="user-image" alt="User Image">              
               @endif
               @if(session()->get('foto_usuario')!=null)
                 <img src="{{Storage::url("imagenes/fotos/usuario/$aux")}}" class="user-image" alt="User Image">                  
@@ -39,7 +39,7 @@
               <!-- User image -->
               <li class="user-header">
                 @if(session()->get('foto_usuario')==null)
-                  <img src="{{asset("assets/$theme/dist/img/bayern.png")}}" class="img-circle" alt="User Image">
+                  <img src="{{asset("assets/$theme/dist/img/compu1.png")}}" class="img-circle" alt="User Image">
                 @endif
                 @if(session()->get('foto_usuario')!=null)                
                   <img src="{{Storage::url("imagenes/fotos/usuario/$aux")}}" class="img-circle" alt="User Image">                 
