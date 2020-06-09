@@ -82,13 +82,6 @@ class PersonalController extends Controller
 
     public function pdf($id)
     {
-         //$personal = Personal::findOrFail($id);
-        // $file= public_path().'\storage\imagenes\documentos\personal/'.$personal->curriculum;
-        // $headers = array(
-        //           'Content-Type: application/pdf',
-        //         );
-        // return response()->file($file, $headers);
-
         $personal = Personal::findOrFail($id);
         $file= public_path().'\storage\imagenes\documentos\personal/'.$personal->curriculum;
         return response()->file($file);

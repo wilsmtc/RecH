@@ -71,7 +71,11 @@ Route ::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware'=> 'auth
 
 	Route::post('personal/{personal}', 'PersonalController@ver')->name('ver_personal');
 	Route::get('personal/{id}/curriculum', 'PersonalController@pdf')->name('ver_curriculum');
-	
+	//rutas del calendario
+	Route::get('calendario', function () {
+		return view('admin/calendario/index');
+	});
+	Route::resource('eventos', 'CalendarioController');
 });
 
 
