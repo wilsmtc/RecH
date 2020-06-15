@@ -35,6 +35,7 @@
 					@csrf
 					<div class="box-body">
 						@include('admin.personal.form')
+						{{-- @include('admin.vacacion.form') --}}
 					</div>
 					<div class="box-footer">
 						<div class="col-lg-3"></div>

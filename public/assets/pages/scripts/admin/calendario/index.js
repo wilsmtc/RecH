@@ -1,5 +1,12 @@
 document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
+        var f=new Date();
+        var a=f.getFullYear();
+        var  m=f.getMonth()+1;
+        var d=f.getDate();
+            m=(m<10)?"0"+m:m;
+            d=(d<10)?"0"+d:d;
+        var fechaactual=a+"-"+m+"-"+d;
     var calendar = new FullCalendar.Calendar(calendarEl, {
       plugins: [ 'dayGrid','interaction','timeGrid', 'list' ],
       //defaultView:'timeGridDay'
@@ -9,13 +16,17 @@ document.addEventListener('DOMContentLoaded', function() {
         right:'dayGridMonth,timeGridWeek,timeGridDay'
       },
       dateClick:function(info){
-        //console.log(info);
         limpiarFormulario();
         $('#fecha').val(info.dateStr);
-        $('#btncrear').prop("disabled",false);
-        $('#btneditar').prop("disabled",true);
-        $('#btneliminar').prop("disabled",true);
-        $('#modal-calendario').modal();
+        if(($('#fecha').val())>=fechaactual){
+            $('#btncrear').prop("disabled",false);
+            $('#btneditar').prop("disabled",true);
+            $('#btneliminar').prop("disabled",true);
+            $('#modal-calendario').modal();          
+        }else{
+            alert("no puede crear eventos en fechas pasadas");
+        }
+        
       },
       eventClick:function(info){
         //console.log(info.event.title);
@@ -60,34 +71,55 @@ document.addEventListener('DOMContentLoaded', function() {
     calendar.render();
 
     $('#btncrear').click(function(){
-      objEvento=recolectarDatos("POST");
-      EnviarInformacion('', objEvento);
+        if(($('#fecha').val())>=fechaactual){
+            objEvento=recolectarDatos("POST");
+            EnviarInformacion('', objEvento);         
+        }else{
+            alert("no puede crear eventos en fechas pasadas");
+            $('#modal-calendario').modal('toggle');//en modal se cerrara
+        }
     });
 
     $('#btneliminar').click(function(){
-      objEvento=recolectarDatos("DELETE");
-      EnviarInformacion('/'+$('#id').val(), objEvento);
+        if(($('#fecha').val())>=fechaactual){
+            objEvento=recolectarDatos("DELETE");
+            EnviarInformacion('/'+$('#id').val(), objEvento);       
+        }else{
+            alert("no puede eliminar eventos de fechas pasadas");
+            $('#modal-calendario').modal('toggle');//en modal se cerrara
+        }
     });
 
     $('#btneditar').click(function(){
-      objEvento=recolectarDatos("PATCH");
-      EnviarInformacion('/'+$('#id').val(), objEvento);
+        if(($('#fecha').val())>=fechaactual){
+            objEvento=recolectarDatos("PATCH");
+            EnviarInformacion('/'+$('#id').val(), objEvento);         
+        }else{
+            alert("no puede editar eventos de fechas pasadas");
+            $('#modal-calendario').modal('toggle');//en modal se cerrara
+        }
+
     });
 
     function recolectarDatos(method){
-      nuevoEvento={
-        id:$('#id').val(),
-        title:$('#titulo').val(),
-        lugar:$('#lugar').val(),
-        descripcion:$('#descripcion').val(),
-        color:$('#color').val(),
-        textColor:'#FFFFFF',
-        start:$('#fecha').val()+" "+$('#hora').val(),
-        end:$('#fecha').val()+" "+$('#hora').val(),
-        '_token':$('meta[name="csrf-token"]').attr('content'),
-        '_method':method 
-      }
-      return (nuevoEvento); 
+        if(validarDatos()){
+           
+           nuevoEvento={
+            //id:$('#id').val(),
+            title:$('#titulo').val(),
+            lugar:$('#lugar').val(),
+            descripcion:$('#descripcion').val(),
+            color:$('#color').val(),
+            textColor:'#FFFFFF',
+            start:$('#fecha').val()+" "+$('#hora').val(),
+            end:$('#fecha').val()+" "+$('#hora').val(),
+            '_token':$('meta[name="csrf-token"]').attr('content'),
+            '_method':method 
+            }
+            return (nuevoEvento);  
+        }else{
+            return
+        }      
     }
     function EnviarInformacion(accion, objEvento){
       //accion sera una variable q agarre el metodo
@@ -104,6 +136,10 @@ document.addEventListener('DOMContentLoaded', function() {
           error:function(msg){alert("hay un error");},
         }
       );
+    }
+    function validarDatos(){
+
+            return true;
     }
     function limpiarFormulario(){
       $('#id').val("");

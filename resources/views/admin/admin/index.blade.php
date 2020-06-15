@@ -3,6 +3,7 @@
 admin
 @endsection
 @section('contenido')
+@include('includes.mensajeerror')
 <div style="text-align: center">
     <h3><b>Sistema de Administración de Recursos Humanos<b></h3>
 </div>
@@ -100,13 +101,14 @@ admin
         <!-- small box -->
         <div class="small-box bg-red">
         <div class="inner">
-            <h3>0</h3>
-
-            <p>Reportes</p>
+            <h3>{{$ev}}</h3>
+            <p>Actividades</p>
         </div>
-        <div class="icon">
-            <i class="ion ion-stats-bars"></i>
-        </div>
+        <a href="eventos" >
+            <div class="icon">
+                <i class="fa fa-calendar"></i>
+            </div>
+        </a>
             <div class="box box-default collapsed-box bg-red" style="text-align: center">
                 <div class="box-header with-border" >
                     <h5 class="box-title text-black" >Información</h5>
@@ -118,7 +120,7 @@ admin
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    Usuarios que tienen acceso al sistema
+                    Actividades de la institución
                 </div>
                 <!-- /.box-body -->
             </div>

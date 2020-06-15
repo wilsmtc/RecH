@@ -41,9 +41,9 @@
 </div>
 
 <div class="form-group">
-	<label for="fecha_nac" class="col-lg-3 control-label requerido">Fecha de Nacimiento</label>
+	<label for="fecha_ing" class="col-lg-3 control-label requerido">Fecha de ingreso</label>
 	<div class="col-lg-5">
-		<input type="date" min="1940-01-01" max="2005-12-31" name="fecha_nac" id="fecha_nac" class="form-control" value="{{old('fecha_nac', $personal->fecha_nac ?? '')}}" required placeholder="Fecha de Nacimiento"/>		
+		<input type="date" min="1960-01-01" name="fecha_ing" id="fecha_ing" class="form-control" value="{{old('fecha_ing', $personal->fecha_ing ?? '')}}" required placeholder="Fecha de Ingreso"/>		
 	</div>
 </div>
 

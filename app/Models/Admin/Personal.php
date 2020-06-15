@@ -10,11 +10,14 @@ use Intervention\Image\Facades\Image;
 class Personal extends Model
 {
     protected $table = "personal";
-    protected $fillable=['nombre','apellido','ci','celular','cargo','fecha_nac','unidad_id','foto','genero','curriculum','item'];
+    protected $fillable=['nombre','apellido','ci','celular','cargo','fecha_ing','unidad_id','foto','genero','curriculum','item','fecha_ret','estado','razon_ret'];
 
     public function unidad()
     {
         return $this->belongsTo(Unidad::class); //muchos personales pertenecen a una unidad
+    }
+    public function vacacion(){
+        return $this->hasMany(Vacacion::class);
     }
     public static function setFoto($foto, $actual = false) //foto (al crear), actual (al editar)
     {

@@ -23,10 +23,13 @@ class CreatePersonalTable extends Migration
             $table->string('ci',15)->unique();
             $table->string('cargo',50);
             $table->string('celular',15)->nullable()->unique();
-            $table->date('fecha_nac'); 
+            $table->date('fecha_ing'); 
+            $table->date('fecha_ret')->nullable();
             $table->string('genero',6);                     
             $table->string('curriculum',100)->nullable();
             $table->string('foto',100)->nullable();
+            $table->string('estado',1)->nullable()->default(1);
+            $table->string('razon_ret',50)->nullable();
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_spanish_ci';
             $table->timestamps();

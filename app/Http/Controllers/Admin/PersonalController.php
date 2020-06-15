@@ -75,15 +75,19 @@ class PersonalController extends Controller
         }
     }
 
-    public function ver(Personal $personal){ //personal agarra todos los atributos del modelo Personal
-        return view ('admin.personal.foto', compact('personal'));
-        //dd($personal);
-    }
-
+    // public function ver(Personal $personal){ //personal agarra todos los atributos del modelo Personal
+    //     return view ('admin.personal.foto', compact('personal'));
+    // }
     public function pdf($id)
     {
         $personal = Personal::findOrFail($id);
         $file= public_path().'\storage\imagenes\documentos\personal/'.$personal->curriculum;
         return response()->file($file);
+    }
+    
+    public function prueba($id){
+        $personal = Personal::findOrFail($id);
+        return view ('admin.personal.ver', compact('personal'));
+        //dd($personal);
     }
 }

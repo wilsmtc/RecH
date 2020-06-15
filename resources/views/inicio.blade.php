@@ -15,5 +15,10 @@ Recursos Humanos
     <div style="text-align: center">
         <img src="/assets/lte/dist/img/compu1.png" height="250px" width="250px">
     </div>
+    <div style="text-align: center">
+        <h3><b>Usted a ingresado al sistema como Invitado<b></h3>
+            <h3><b>por lo mismo sus opciones son limitadas <b></h3><br>
+             
+    </div>
 </div>
 @endsection

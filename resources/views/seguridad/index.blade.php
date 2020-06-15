@@ -63,9 +63,12 @@
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                 </div>
                 <div class="row">
-                    <div class="col-xs-4">
-                        <button type="submit" class="btn btn-primary btn-block btn-flat">Login</button>
-                    </div>
+                    <div class="col-xs-5">
+                        <button type="submit" class="btn btn-success btn-block btn-flat">Login</button>
+                    </div>              
+                    <div class="col-xs-7">
+                        <a href="{{route('inicio')}}" class="btn btn-primary btn-block btn-flat">Acceder como invitado</a>
+                      </div>
                     <!-- /.col -->
                     <div class="col-xs-6">
                         @if (Route::has('password.request'))

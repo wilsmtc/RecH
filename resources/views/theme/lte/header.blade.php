@@ -15,13 +15,6 @@
 
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
-          <!-- Messages: style can be found in dropdown.less-->
-          
-          <!-- Notifications: style can be found in dropdown.less -->
-         
-          <!-- Tasks: style can be found in dropdown.less -->
-          
-          <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               @php
@@ -55,12 +48,16 @@
               <!-- Menu Body -->
               <!-- Menu Footer-->
               <li class="user-footer">
-                <div class="pull-left">
-                <a href="{{route('login')}}" class="btn btn-default btn-flat">Login</a>
-                </div>
-                <div class="pull-right">
-                <a href="{{route('logout')}}" class="btn btn-default btn-flat">Salir</a>
-                </div>
+                @if(session()->get('usuario')==null)
+                  <div class="pull-left">
+                    <a href="{{route('login')}}" class="btn btn-success btn-flat">Login</a>
+                  </div>
+                @endif
+                @if(session()->get('usuario')!=null)
+                  <div class="pull-right">
+                    <a href="{{route('logout')}}" class="btn btn-danger btn-flat">Salir</a>
+                  </div>
+                @endif
               </li>
             </ul>
           </li>

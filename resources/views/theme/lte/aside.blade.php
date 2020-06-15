@@ -39,15 +39,39 @@
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
-        <a href="/admin" >
-          <li style="text-align: center;  color: rgb(214, 207, 245)" class="header" >- - - MENÚ PRINCIPAL - - -</li>
-        </a>
-        @foreach ($menusComposer as $key => $item)
+        @if(session()->get('usuario')!=null)
+          <a href="/admin" >
+            <li style="text-align: center;  color: rgb(214, 207, 245)" class="header" >- - - MENÚ PRINCIPAL - - -</li>
+          </a>
+        @endif
+        @if(session()->get('usuario')==null)
+          <a href="/" >
+              <li style="text-align: center;  color: rgb(214, 207, 245)" class="header" >- - - MENÚ PRINCIPAL - - -</li>
+            </a>
+        @endif         
+          @foreach ($menusComposer as $key => $item)
               @if ($item["menu_id"] != 0)<!-- solo va entrar cuando es hijo -->
                   @break
               @endif
               @include("theme.$theme.menu-item", ["item" => $item])<!-- me redirecciona a la vista menu.item -->
           @endforeach
+          
+          <li class="treeview">
+            <a href="javascript:;"> <!--no tiene url porq es padre-->
+              <i class="fa fa-calendar-plus-o"></i> <span>Capacitación</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li>
+                <a href="{{ url('eventos') }}" >
+                  <i class="fa fa-calendar"></i> <span>Calendario de Actividades</span>
+                </a>
+              </li>
+            </ul>
+        </li>
+
       </ul>
     </section>
     <!-- /.sidebar -->
