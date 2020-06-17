@@ -34,7 +34,7 @@ class UnidadController extends Controller
     public function ver($id)
     {
         $unid = Unidad::findOrfail($id);
-        $personal = Personal::orderBy('id')->get();
+        $personal = Personal::where('estado',1)->orderBy('id')->get();
         return view('admin.unidad.ver-unidad', compact('unid', 'personal'));
     }
 
@@ -68,7 +68,7 @@ class UnidadController extends Controller
     }
     public function pdf($id)
     {
-        $personal=Personal::all();
+        $personal = Personal::where('estado',1)->orderBy('id')->get();
         $unid=Unidad::findOrFail($id);
         $pdf=PDF::loadview('admin.reportes.unidad-personal', compact('unid','personal'));
         return $pdf->stream('unidad.pdf');

@@ -40,12 +40,17 @@ class RolController extends Controller
 
     public function update(ValidacionRol $request, $id)
     {
-        Rol::findOrFail($id)->update($request->all());
-        return redirect('admin/rol')->with('mensaje', 'Rol actualizado con exito');
+        if($id==1){
+            return redirect('admin/rol')->with('mensajeerror', 'no puedes editar el rol de Administrador');
+        }
+        else{
+            Rol::findOrFail($id)->update($request->all());
+            return redirect('admin/rol')->with('mensaje', 'Rol actualizado con exito');  
+        }
     }
 
     public function destroy(Request $request, $id)
-    {
+    {    
         if ($request->ajax()) {           
             if (Rol::destroy($id)) {
                 return response()->json(['mensaje' => 'ok']);
@@ -53,7 +58,7 @@ class RolController extends Controller
                 return response()->json(['mensaje' => 'ng']);
             }
         } else {
-             abort(404);
-        }
+            abort(404);
+        }                       
     }
 }

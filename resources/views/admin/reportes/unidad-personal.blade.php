@@ -14,6 +14,9 @@
     &nbsp;&nbsp;<b> Fecha:    &nbsp;&nbsp; {{date("d/m/Y")}}</b>                
     </div>
     <br><br>
+    <p>
+        A continuación se muestra a todo el personal activo de la unidad: {{$unid->nombre}}
+    </p>
     <div class="container">
         <table border="1" align="center" WIDTH="80%" >
             <thead>

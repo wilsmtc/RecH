@@ -8,16 +8,25 @@
                     <div class="panel-heading clearfix" style="background-color: rgb(100, 221, 230)">
                         <h3 class="panel-title pull-left" ><b>Datos del Personal</b></h3>  
                         <div class="box-tools pull-right">
-                            <a href="{{route('personal')}}" class="btn btn-block btn-info btn-sm">
-                                <i class="fa fa-fw fa-reply-all"></i> Volver
-                            </a>
-                        </div>
-                        @if(Auth::user()->permiso->editar == 1)	   
-                            <div class="box-tools pull-right">
-                                <a href="{{route('editar_personal', ['id' => $personal->id])}}" class="btn btn-block btn-warning btn-sm">
-                                    <i class="fa fa-fw fa-wrench"></i> Edicar
+                            @if($personal->estado==1)
+                                <a href="{{route('personal')}}" class="btn btn-block btn-info btn-sm">
+                                    <i class="fa fa-fw fa-reply-all"></i> Volver
                                 </a>
-                            </div>
+                            @endif
+                            @if($personal->estado==0)
+                                <a href="{{route('personalretirado')}}" class="btn btn-block btn-info btn-sm">
+                                    <i class="fa fa-fw fa-reply-all"></i> Volver
+                                </a>
+                            @endif
+                        </div>
+                        @if(Auth::user()->permiso->editar == 1)
+                            @if($personal->estado==1)
+                                <div class="box-tools pull-right">
+                                    <a href="{{route('editar_personal', ['id' => $personal->id])}}" class="btn btn-block btn-warning btn-sm">
+                                        <i class="fa fa-fw fa-wrench"></i> Editar
+                                    </a>
+                                </div>
+                            @endif                          
                         @endif                  
                     </div>            
                     <div class="panel-body" >
@@ -136,20 +145,33 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <th>Fecha</th>
-                                <th>Nro Dias</th>
-                                <th>Razón</th>
-                                <th>Observación</th>
+                                <th style="text-align: center; width: 15%">Fecha</th>
+                                <th style="text-align: center; width: 10%">Nro Dias</th>
+                                <th style="text-align: center; width: 30%">Razón</th>
+                                <th style="text-align: center; width: 35%">Observación</th>
+                                <th style="text-align: center; width: 10%">Opción</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach ($personal->vacacion as $vac)
                                 @if($vac->tipo == 'Vacación')
                                     <tr>
-                                        <td>{{$vac->fecha_ini}}</td>
-                                        <td>{{$vac->dias_t}}</td>
-                                        <td>{{$vac->razon}}</td>
-                                        <td>{{$vac->observacion}}</td>
+                                        <td style="text-align: center;">{{$vac->fecha_ini}}</td>
+                                        <td style="text-align: center;">{{$vac->dias_t}}</td>
+                                        <td style="text-align: center;">{{$vac->razon}}</td> 
+                                            @if($vac->observacion==null)
+                                                <td style="text-align: center;">ninguna</td>
+                                            @endif
+                                            @if($vac->observacion!=null)
+                                                <td style="text-align: center;">{{$vac->observacion}}</td>
+                                            @endif
+                                        <td style="text-align: center;">
+                                        @if($vac->memorandum!=null)
+                                            <a href="{{route('ver_memorandum', ['id' => $vac->id])}}" target="_blank" class="btn btn-success btn-xs tooltipC" title="ver memorandum" id="ver-memorandum">
+                                                <i class="fa fa-fw  fa-file-pdf-o"></i>																			
+                                            </a>
+                                        @endif
+                                        </td>
                                     </tr>
                                 @endif
                             @endforeach
@@ -165,20 +187,33 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <th>Fecha</th>
-                                <th>Nro Dias</th>
-                                <th>Razón</th>
-                                <th>Observación</th>
+                                <th style="text-align: center; width: 15%">Fecha</th>
+                                <th style="text-align: center; width: 10%">Nro Dias</th>
+                                <th style="text-align: center; width: 30%">Razón</th>
+                                <th style="text-align: center; width: 35%">Observación</th>
+                                <th style="text-align: center; width: 10%">Opción</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach ($personal->vacacion as $vac)
                                 @if($vac->tipo == 'Permiso')
                                     <tr>
-                                        <td>{{$vac->fecha_ini}}</td>
-                                        <td>{{$vac->dias_t}}</td>
-                                        <td>{{$vac->razon}}</td>
-                                        <td>{{$vac->observacion}}</td>
+                                        <td style="text-align: center;">{{$vac->fecha_ini}}</td>
+                                        <td style="text-align: center;">{{$vac->dias_t}}</td>
+                                        <td style="text-align: center;">{{$vac->razon}}</td>
+                                            @if($vac->observacion==null)
+                                                <td style="text-align: center;">ninguna</td>
+                                            @endif
+                                            @if($vac->observacion!=null)
+                                                <td style="text-align: center;">{{$vac->observacion}}</td>
+                                            @endif
+                                        <td style="text-align: center;">
+                                        @if($vac->memorandum!=null)
+                                            <a href="{{route('ver_memorandum', ['id' => $vac->id])}}" target="_blank" class="btn btn-success btn-xs tooltipC" title="ver memorandum" id="ver-memorandum">
+                                                <i class="fa fa-fw  fa-file-pdf-o"></i>																			
+                                            </a>
+                                        @endif
+                                        </td>
                                     </tr>
                                 @endif
                             @endforeach
@@ -194,20 +229,33 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <th>Fecha</th>
-                                <th>Nro Dias</th>
-                                <th>Razón</th>
-                                <th>Observación</th>
+                                <th style="text-align: center; width: 15%">Fecha</th>
+                                <th style="text-align: center; width: 10%">Nro Dias</th>
+                                <th style="text-align: center; width: 30%">Razón</th>
+                                <th style="text-align: center; width: 35%">Observación</th>
+                                <th style="text-align: center; width: 10%">Opción</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach ($personal->vacacion as $vac)
                                 @if($vac->tipo == 'Falta')
                                     <tr>
-                                        <td>{{$vac->fecha_ini}}</td>
-                                        <td>{{$vac->dias_t}}</td>
-                                        <td>{{$vac->razon}}</td>
-                                        <td>{{$vac->observacion}}</td>
+                                        <td style="text-align: center;">{{$vac->fecha_ini}}</td>
+                                        <td style="text-align: center;">{{$vac->dias_t}}</td>
+                                        <td style="text-align: center;">{{$vac->razon}}</td>
+                                            @if($vac->observacion==null)
+                                                <td style="text-align: center;">ninguna</td>
+                                            @endif
+                                            @if($vac->observacion!=null)
+                                                <td style="text-align: center;">{{$vac->observacion}}</td>
+                                            @endif
+                                        <td style="text-align: center;">
+                                        @if($vac->memorandum!=null)
+                                            <a href="{{route('ver_memorandum', ['id' => $vac->id])}}" target="_blank" class="btn btn-success btn-xs tooltipC" title="ver memorandum" id="ver-memorandum">
+                                                <i class="fa fa-fw  fa-file-pdf-o"></i>																			
+                                            </a>
+                                        @endif
+                                        </td>
                                     </tr>
                                 @endif
                             @endforeach

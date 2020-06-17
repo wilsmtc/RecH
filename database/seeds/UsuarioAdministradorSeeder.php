@@ -122,7 +122,7 @@ class UsuarioAdministradorSeeder extends Seeder
         ]);
         DB::table('menu')->insert([
             'menu_id'=>8,
-            'nombre'=>'Ver Personal',
+            'nombre'=>'Personal Activo',
             'url'=>'admin/personal',
             'orden'=>1,
             'icono'=>'fa-eye'
@@ -148,6 +148,13 @@ class UsuarioAdministradorSeeder extends Seeder
             'orden'=>2,
             'icono'=>'fa-key'
         ]);
+        DB::table('menu')->insert([
+            'menu_id'=>8,
+            'nombre'=>'Personal Retirado',
+            'url'=>'admin/personalret',
+            'orden'=>2,
+            'icono'=>'fa-eye'
+        ]);
         DB::table('menu_rol')->insert(['rol_id'=>1,'menu_id'=>1]);
         DB::table('menu_rol')->insert(['rol_id'=>1,'menu_id'=>2]);
         DB::table('menu_rol')->insert(['rol_id'=>1,'menu_id'=>3]);
@@ -160,5 +167,38 @@ class UsuarioAdministradorSeeder extends Seeder
         DB::table('menu_rol')->insert(['rol_id'=>1,'menu_id'=>9]);
         DB::table('menu_rol')->insert(['rol_id'=>1,'menu_id'=>10]);
         DB::table('menu_rol')->insert(['rol_id'=>1,'menu_id'=>11]);
+        DB::table('menu_rol')->insert(['rol_id'=>1,'menu_id'=>13]);
+
+        DB::table('personal')->insert([
+            'nombre'=>'Tomas',
+            'apellido'=>'Muller',
+            'unidad_id'=>1,
+            'ci'=>'1597894',
+            'cargo'=>'Director',
+            'celular'=>'78561265',
+            'fecha_ing'=>"2018-06-13",
+            'genero'=>'Hombre',
+            'estado'=>1
+        ]);
+        DB::table('personal')->insert([
+            'nombre'=>'Roberto',
+            'apellido'=>'Lewandoski',
+            'unidad_id'=>1,
+            'ci'=>'8545789',
+            'cargo'=>'Gerente',
+            'celular'=>'76485932',
+            'fecha_ing'=>"2017-02-11",
+            'genero'=>'Hombre',
+            'estado'=>1
+        ]);
+        DB::table('eventos')->insert([
+            'title'=>'Informe General',
+            'lugar'=>'Auditorio',
+            'descripcion'=>'Detalle anual',
+            'color'=>'#ff0000',
+            'textColor'=>'#FFFFFF',
+            'start'=>"2020-06-15 09:30:00",
+            'end'=>"2020-06-15 09:30:00"
+        ]);
     }
 }

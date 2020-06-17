@@ -22,7 +22,7 @@ Route::get('seguridad/logout', 'Seguridad\LoginController@logout')->name('logout
 	Route::resource('eventos', 'Admin\CalendarioController');
 Route ::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware'=> 'auth'], function(){
 	Route::get('', 'AdminController@index');
-		Route ::group(['middleware'=> 'permisocrear'], function(){
+		Route ::group(['middleware'=> 'permisoadmin'], function(){
 							//rutar del usuario
 				Route::get('usuario', 'UsuarioController@index') ->name('usuario');
 				Route::get('usuario/crear', 'UsuarioController@create') ->name('crear_usuario')->middleware('permisocrear');
@@ -34,8 +34,8 @@ Route ::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware'=> 'auth
 										//rutas usuario-rol
 				Route::get('usuario-rol', 'UsuarioRolController@index') ->name('usuario_rol');
 				Route::post('usuario-rol', 'UsuarioRolController@store') ->name('guardar_usuario_rol');
-				Route::get('usuario/{id}/inactivo', 'UsuarioRolController@desactivar') ->name('desactivar_usuario')->middleware('permisoeliminar');
-				Route::get('usuario/{id}/activo', 'UsuarioRolController@activar') ->name('activar_usuario')->middleware('permisoeliminar');
+				Route::get('usuario/{id}/inactivo', 'UsuarioRolController@desactivar') ->name('desactivar_usuario')->middleware('permisoeditar');
+				Route::get('usuario/{id}/activo', 'UsuarioRolController@activar') ->name('activar_usuario')->middleware('permisoeditar');
 										//rutas del menu
 				Route::get('menu/crear', 'MenuController@create') ->name('crear_menu')->middleware('permisocrear');
 				Route::get('menu', 'MenuController@index') ->name('menu');
@@ -71,15 +71,17 @@ Route ::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware'=> 'auth
 	Route::get('personal/{id}/editar', 'PersonalController@edit') ->name('editar_personal')->middleware('permisoeditar');
 	Route::put('personal/{id}', 'PersonalController@update') ->name('actualizar_personal');
 	Route::delete('personal/{id}', 'PersonalController@destroy')->name('eliminar_personal')->middleware('permisoeliminar');
-	//Route::post('personal/{personal}', 'PersonalController@ver')->name('ver_personal');
 	Route::get('personal/{id}/curriculum', 'PersonalController@pdf')->name('ver_curriculum');
 	Route::get('personal/{id}', 'PersonalController@prueba') ->name('ver_personal');
+	Route::get('personal/{id}/retirar', 'PersonalController@retirar') ->name('retirar_personal')->middleware('permisoeliminar');
+	Route::put('personal/{id}/retirado', 'PersonalController@guardarretiro') ->name('guardar_retiro');
+	Route::get('personalret', 'PersonalController@indexretirado') ->name('personalretirado');
+	Route::get('personal/{id}/activo', 'PersonalController@activar') ->name('activar_personal')->middleware('permisoeditar');
 						//rutas de vacacion
 	Route::get('vacacion/crear/{id}', 'VacacionController@create') ->name('crear_vacacion')->middleware('permisocrear');
 	Route::get('vacacion/{id}/editar', 'VacacionController@edit') ->name('editar_vacacion')->middleware('permisoeditar');
 	Route::post('vacacion', 'VacacionController@store') ->name('guardar_vacacion');
-	Route::put('vacacion/{id}', 'VacacionController@update') ->name('actualizar_vacacion');
-	Route::delete('vacacion/{id}', 'VacacionController@destroy')->name('eliminar_vacacion')->middleware('permisoeliminar');
+	Route::get('vacacion/{id}/memorandum', 'VacacionController@pdf')->name('ver_memorandum');
 });
 
 

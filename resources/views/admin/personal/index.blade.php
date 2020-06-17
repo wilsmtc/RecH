@@ -103,7 +103,7 @@
 	Personal
 @endsection
 @section("scripts")
-	<script src="{{asset("assets/pages/scripts/admin/personal/index.js")}}" type="text/javascript"></script>
+	{{-- <script src="{{asset("assets/pages/scripts/admin/personal/index.js")}}" type="text/javascript"></script> --}}
 	<script src="{{asset("assets/pages/scripts/admin/datatables/datatables.js")}}" type="text/javascript"></script>
 @endsection
 @section('contenido')
@@ -114,7 +114,7 @@
 			@include('includes.mensajeerror')
 			<div class="box box-primary">
 				<div style="text-align: center; background-color:lightblue;" class="box-header whit.border">
-					<h3 class="box-title"><b>Lista de Personal</b></h3>
+					<h3 class="box-title"><b>Lista de Personal Activo</b></h3>
 					@if(Auth::user()->permiso->añadir == 1)	
 						<div class="box-tools pull-right">
 							<a href="{{route('crear_personal')}}" class="btn btn-block btn-success">
@@ -148,7 +148,7 @@
 										<th style="text-align: center; color: red">{{$dias_g-$dias_t}}</th>
 									@endif
 									@if(($dias_g-$dias_t)<90)
-										<th style="text-align: center; color: green">{{$dias_g-$dias_t}}</th>
+										<th style="text-align: center; color: rgb(72, 179, 72)">{{$dias_g-$dias_t}}</th>
 									@endif
 								<td style="text-align: right;">								
 									@if($per->curriculum!=null)
@@ -166,15 +166,19 @@
 											</a>
 										@endif	
 									@endif
-									@if(Auth::user()->permiso->eliminar == 1)
+									{{-- @if(Auth::user()->permiso->eliminar == 1)
 										<form action="{{route('eliminar_personal', ['id' => $per->id])}}" class="d-inline form-eliminar" method="POST" id="form-eliminar">
 											@csrf @method("delete")
-											<button type="submit" class="btn btn-danger btn-xs eliminar tooltipsC" title="Eliminar Personal">
-												<i class="fa fa-fw fa-close"></i>
+											<button type="submit" class="btn btn-success btn-xs eliminar tooltipsC" title="Retirar Personal">
+												<i class="fa fa-fw fa-user"></i>
 											</button>
 										</form>
+									@endif									 --}}
+									@if(Auth::user()->permiso->eliminar == 1)
+										<a href="{{route('retirar_personal', ['id' => $per->id])}}" class="btn btn-danger btn-xs eliminar tooltipsC" title="Retirar Personal">
+											<i class="fas fa fa-close"></i>
+										</a>
 									@endif
-									
                                 </td>
                             </tr>
                             @endforeach

@@ -28,8 +28,8 @@ class CreatePersonalTable extends Migration
             $table->string('genero',6);                     
             $table->string('curriculum',100)->nullable();
             $table->string('foto',100)->nullable();
-            $table->string('estado',1)->nullable()->default(1);
-            $table->string('razon_ret',50)->nullable();
+            $table->integer('estado')->nullable()->default(1);
+            $table->string('razon_ret',30)->nullable();
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_spanish_ci';
             $table->timestamps();

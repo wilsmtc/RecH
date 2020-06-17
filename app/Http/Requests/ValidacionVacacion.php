@@ -19,7 +19,8 @@ class ValidacionVacacion extends FormRequest
                 'razon' => 'nullable|max:200',
                 'observacion' => 'nullable|max:200',
                 'fecha_ini'=>'required|date|date_format:Y-m-d',
-                'dias_t' => 'required|integer|min:1|max:90'
+                'dias_t' => 'required|integer|min:1|max:90',
+                'curriculum_up'=>'nullable|max:1000'
             ];
         }
         else{
@@ -29,7 +30,8 @@ class ValidacionVacacion extends FormRequest
                 'razon' => 'nullable|max:200',
                 'observacion' => 'nullable|max:200',
                 'fecha_ini'=>'required|date|date_format:Y-m-d',
-                'dias_t' => 'required|integer|min:1|max:90'
+                'dias_t' => 'required|integer|min:1|max:90',
+                'curriculum_up'=>'nullable|max:1000'
             ]; 
         }
     }

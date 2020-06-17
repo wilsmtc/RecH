@@ -43,7 +43,7 @@ class Personal extends Model
             if ($actual) {
                 Storage::disk('public')->delete("imagenes/documentos/personal/$actual"); // si es actual borra la anterior
             }
-            $docName = Str::random(5) . '.pdf';  //STR para llamar a rando q crea un nombre aleatorio de 15 caracteres con la extension .jpg
+            $docName = Str::random(10) . '.pdf';  //STR para llamar a rando q crea un nombre aleatorio de 15 caracteres con la extension .jpg
             //$doc = ->encode('pdf'); //codifica a jpg con un 75% de la imagen real
             
             //Storage::disk('public')->put("imagenes/documentos/personal/$docName", $documento); //guarda la imagen

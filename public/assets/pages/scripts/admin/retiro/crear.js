@@ -1,5 +1,7 @@
-$(document).ready(function () {
-    $("#tabla-data").on('submit', '.form-eliminar', function () {   //. es clase  #id
+$(document).ready(function(){
+    RRHH.validacionGeneral('form-general'); //form general porq con ese id lo creamos al form de menu
+    
+    $("#retirar").on('submit', '.form-general', function () {
         event.preventDefault();
         const form = $(this);
         swal({

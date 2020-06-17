@@ -29,7 +29,7 @@ class ValidacionPersonal extends FormRequest
                     'documento_up'=>'nullable|max:30000',
                     'item'=>'nullable|min:2|max:5|unique:personal,item,'. $this->route('id'),
                     'fecha_ret'=>'nullable|date|date_format:Y-m-d',
-                    'razon_ret'=>'nullable|max:50'
+                    'razon_ret'=>'nullable|max:30'
                 ];
             }
             else{
@@ -47,7 +47,7 @@ class ValidacionPersonal extends FormRequest
                     'documento_up'=>'nullable|max:30000',
                     'item'=>'nullable|min:2|max:5|unique:personal,item',
                     'fecha_ret'=>'nullable|date|date_format:Y-m-d',
-                    'razon_ret'=>'nullable|max:50'
+                    'razon_ret'=>'nullable|max:30'
                 ];  
             }
     }

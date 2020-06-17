@@ -14,7 +14,7 @@ class PersonalController extends Controller
 {
     public function index()
     {
-        $personal = Personal::with('unidad:id,nombre')->orderBy('id')->get();
+        $personal = Personal::where('estado',1)-> with('unidad:id,nombre')->orderBy('id')->get();
         //dd($personal);
         return view('admin.personal.index', compact('personal'));
     }
@@ -75,9 +75,6 @@ class PersonalController extends Controller
         }
     }
 
-    // public function ver(Personal $personal){ //personal agarra todos los atributos del modelo Personal
-    //     return view ('admin.personal.foto', compact('personal'));
-    // }
     public function pdf($id)
     {
         $personal = Personal::findOrFail($id);
@@ -89,5 +86,39 @@ class PersonalController extends Controller
         $personal = Personal::findOrFail($id);
         return view ('admin.personal.ver', compact('personal'));
         //dd($personal);
+    }
+
+    public function retirar($id)
+    {
+        $personal = Personal::findOrFail($id);        
+        return view('admin.personal.retirar', compact('personal'));
+    }
+    
+    public function guardarretiro(Request $request, $id)
+    {
+        //dd($request->all());
+        $personal = Personal::findOrFail($id);
+        $personal->estado=0;
+        $personal->fecha_ret=$request->fecha_ret;
+        $personal->razon_ret=$request->razon_ret;
+        $personal->save();
+        return redirect('admin/personalret')->with('mensaje', 'Personal retirado con exito');
+    }
+    public function indexretirado()
+    {
+        $retirados = Personal::where('estado',0)-> with('unidad:id,nombre')->orderBy('id')->get();
+        //dd($personal);
+        return view('admin.personal.listaretirados', compact('retirados'));
+    }
+    public function activar($id)
+    {
+        $personal=Personal::findOrFail($id);
+        $personal->estado=1;
+        $personal->razon_ret=null;
+        $personal->fecha_ret=null;
+        $personal->fecha_ing=date("Y-m-d");
+        $personal->save();
+        //dd($usuario);
+        return redirect('admin/personal')->with('mensaje', 'Personal integrado con exito');
     }
 }

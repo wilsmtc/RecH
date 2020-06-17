@@ -22,6 +22,7 @@ class CreateVacacionTable extends Migration
             $table->string('observacion',200)->nullable();
             $table->date('fecha_ini'); 
             $table->integer('dias_t');
+            $table->string('memorandum',20)->nullable();
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_spanish_ci';
             $table->timestamps();

@@ -15,3 +15,7 @@ dd(session()->all());
 @endphp
 
 
+El artículo 44º de la Ley General del Trabajo, norma que tienen derecho a la vacación anual todos los trabajadores
+ sean del sector público o privado, en base a una escala donde las primeras cuatro vacaciones corresponden a periodos
+  de quince días, las cinco siguientes a periodos de veinte días y, a partir de la décima vacación, a periodos de
+   treinta días hábiles. El Decreto Supremo No. 12059, de 24 de diciembre de 1974

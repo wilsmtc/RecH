@@ -27,13 +27,17 @@ class VacacionController extends Controller
     public function store(ValidacionVacacion $request)
     {
         //dd($request->all());
+        if($memorandum=Vacacion::setMemorandum($request->memorandum_up))
+            $request->request->add(['memorandum'=>$memorandum]);
         Vacacion::create($request->all());
         return redirect('admin/personal')->with('mensaje','descuento de dias realizado con exito');
     }
 
-    public function show($id)
+    public function pdf($id)
     {
-        //
+        $vacacion = Vacacion::findOrFail($id);
+        $file= public_path().'\storage\imagenes\documentos\personal\vacacion/'.$vacacion->memorandum;
+        return response()->file($file);
     }
 
     public function edit($id)

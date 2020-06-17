@@ -16,3 +16,8 @@ $('#fecha_ini').flatpickr({
     minDate: "1960-01-01",
     maxDate: fechaactual
 });
+$('#fecha_ret').flatpickr({
+    dateFormat: "Y-m-d",
+    minDate: "1960-01-01",
+    maxDate: fechaactual
+});

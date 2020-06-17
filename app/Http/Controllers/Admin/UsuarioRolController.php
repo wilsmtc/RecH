@@ -37,7 +37,7 @@ class UsuarioRolController extends Controller
         $usuario->estado=0;
         $usuario->save();
         //dd($usuario);      
-        return redirect('admin/usuario-rol');
+        return redirect('admin/usuario-rol')->with('mensaje', 'Usuario inactivado');
     }
     public function activar($id)
     {
@@ -45,6 +45,6 @@ class UsuarioRolController extends Controller
         $usuario->estado=1;
         $usuario->save();
         //dd($usuario);
-        return redirect('admin/usuario-rol');
+        return redirect('admin/usuario-rol')->with('mensaje', 'Usuario activado con exito');
     }
 }

@@ -1,4 +1,5 @@
 <input type="hidden" name="personal_id" id="personal_id" value={{$personal->id}}>
+
 <div class="form-group">
     <label for="tipo" class="col-lg-3 control-label requerido">Tipo</label>
     <div class="col-lg-5">
@@ -37,4 +38,11 @@
 	<div class="col-lg-5">
 		<input type="text" name="observacion" id="observacion" class="form-control" value="{{old('observacion', $vacacion->observacion ?? '')}}" autocomplete="on'" placeholder="observación"/>		
 	</div>
+</div>
+
+<div class="form-group">
+    <label for="documento" class="col-lg-3 control-label">Memorándum</label>
+    <div class="col-lg-4">
+        <input type="file" name="memorandum_up" id="memorandum" data-initial-preview="{{isset($vacacion->memorandum) ? Storage::url("imagenes/documentos/personal/vacacion/$vacacion->memorandum") : "http://www.placehold.it/250x250/EFEFEF/AAAAAA&text=memorandum"}}" accept=".pdf"/>
+    </div>
 </div>
