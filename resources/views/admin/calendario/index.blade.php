@@ -24,9 +24,9 @@ Calendario
 @section('contenido')
 <div class="row" style="text-align: center" >
   <div class="col-lg-10">
-    <div class="box" style="height: 640px; width:700px; margin-left: 125px; background-color: rgb(248, 248, 248)" >
+    <div class="box" style="height: 640px; width:700px; margin-left: 125px; background-color: rgb(250, 250, 250)" >
       <h4 class="box-title"><b>Calendario de actividades</b></h4>
-      <div class="box-header with-border" id="calendar">
+      <div class="box-header with-border box box-primary" id="calendar">
       </div>
     </div>
   </div>
@@ -49,16 +49,16 @@ Calendario
             <input type="text" class="form-control" name="titulo" id="titulo" required placeholder="Nombre del evento" autocomplete="off">
           </div>
           <div class="form-group col-lg-8">
-            <label>lugar</label>
-            <input type="text" class="form-control" name="lugar" id="lugar" placeholder="¿Donde será el evento?" autocomplete="off">
+            <label class="requerido">lugar</label>
+            <input type="text" class="form-control" name="lugar" id="lugar" required placeholder="¿Donde será el evento?" autocomplete="off">
           </div>
           <div class="form-group col-lg-4">
-            <label>fecha</label>
-            <input type="date"  class="form-control" name="fecha" id="fecha">
+            <label class="requerido">fecha</label>
+            <input type="date"  class="form-control" name="fecha" id="fecha" required>
           </div>
           <div class="form-group col-lg-4">
-            <label>Hora</label>
-            <input type="time" min="07:00" max="19:59" step="600" class="form-control" name="hora" id="hora">
+            <label class="requerido">Hora</label>
+            <input type="time" min="07:00" max="19:59" step="600" class="form-control" name="hora" id="hora" required>
           </div>
           <div class="form-group col-lg-8">
             <label>color</label>

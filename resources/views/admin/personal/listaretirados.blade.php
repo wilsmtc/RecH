@@ -45,7 +45,7 @@
                                     <a href="{{route('ver_personal', ['id' => $per->id])}}" class="btn btn-primary btn-xs tooltipC" title="Ver Personal">
 										<i class="fas fa fa-navicon"></i>
 									</a>
-									<a href="{{route('activar_personal', ['id' => $per->id])}}" class="btn btn-danger btn-xs tooltipC" onclick="return confirm('la fecha de ingreso se modificara automaticamente a la fecha actual ¿Desa continuar?')" title="incorporar personal">
+									<a href="{{route('activar_personal', ['id' => $per->id])}}" class="btn btn-danger btn-xs tooltipC" onclick="return confirm('la fecha de ingreso se mantendra ¿Desa continuar?')" title="incorporar personal">
 										<i class="fas fa fa-user"></i>
 									</a>
                                 </td>

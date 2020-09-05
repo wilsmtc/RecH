@@ -34,19 +34,6 @@ class UsuarioAdministradorSeeder extends Seeder
             'estado'=>1 //1=activo    
         ]);
 
-        DB::table('usuarios')->insert([
-            'usuario'=>'cr7',
-            'password'=>bcrypt('cr7'),
-            'nombre'=>'Cristiano',
-            'apellido'=>'Ronaldo',
-            'email'=>'cr7.@gmail.com'
-
-        ]);
-        DB::table('usuario_rol')->insert([
-            'rol_id'=>2,
-            'usuario_id'=>2,
-            'estado'=>0 //0=inactivo    
-        ]);
         DB::table('unidades')->insert([
             'nombre'=>'Gerencia',
             'sigla'=>'GER',
@@ -58,12 +45,7 @@ class UsuarioAdministradorSeeder extends Seeder
             'editar'=>1,
             'eliminar'=>1
         ]);
-        DB::table('permisos')->insert([
-            'usuario_id'=>2,
-            'añadir'=>0,
-            'editar'=>0,
-            'eliminar'=>0
-        ]);
+       
         DB::table('menu')->insert([
             'menu_id'=>0,
             'nombre'=>'Menú',
@@ -199,6 +181,15 @@ class UsuarioAdministradorSeeder extends Seeder
             'textColor'=>'#FFFFFF',
             'start'=>"2020-06-15 09:30:00",
             'end'=>"2020-06-15 09:30:00"
+        ]);
+        DB::table('eventos')->insert([
+            'title'=>'Informe General',
+            'lugar'=>'Auditorio',
+            'descripcion'=>'Detalle anual',
+            'color'=>'#ff0000',
+            'textColor'=>'#FFFFFF',
+            'start'=>"2020-09-01 09:30:00",
+            'end'=>"2020-09-01 09:30:00"
         ]);
     }
 }

@@ -72,6 +72,5 @@ class UnidadController extends Controller
         $unid=Unidad::findOrFail($id);
         $pdf=PDF::loadview('admin.reportes.unidad-personal', compact('unid','personal'));
         return $pdf->stream('unidad.pdf');
-
     }
 }

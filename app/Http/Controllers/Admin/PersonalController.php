@@ -116,7 +116,7 @@ class PersonalController extends Controller
         $personal->estado=1;
         $personal->razon_ret=null;
         $personal->fecha_ret=null;
-        $personal->fecha_ing=date("Y-m-d");
+        //$personal->fecha_ing=date("Y-m-d");
         $personal->save();
         //dd($usuario);
         return redirect('admin/personal')->with('mensaje', 'Personal integrado con exito');
