@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ValidacionPersonal;
+use App\Models\Admin\Cargo;
 use App\Models\Admin\Personal;
 use App\Models\Admin\Unidad;
 use Barryvdh\DomPDF\Facade as PDF;
@@ -22,7 +23,8 @@ class PersonalController extends Controller
     public function create()
     {
         $unidad = Unidad::orderBy('id')->pluck('nombre', 'id')->toArray();
-        return view('admin.personal.crear', compact('unidad'));
+        $cargo = Cargo::orderBy('id')->pluck('nombre', 'id')->toArray();
+        return view('admin.personal.crear', compact('unidad', 'cargo'));
     }
 
     public function store(ValidacionPersonal $request)
@@ -44,8 +46,9 @@ class PersonalController extends Controller
     public function edit($id)
     {
         $unidad = Unidad::orderBy('id')->pluck('nombre', 'id')->toArray();
+        $cargo = Cargo::orderBy('id')->pluck('nombre', 'id')->toArray();
         $personal = Personal::with('unidad')->findOrFail($id);        
-        return view('admin.personal.editar', compact('personal','unidad'));
+        return view('admin.personal.editar', compact('personal','unidad','cargo'));
     }
 
     public function update(ValidacionPersonal $request, $id)

@@ -21,7 +21,8 @@ class CreatePersonalTable extends Migration
             $table->integer('unidad_id')->unsigned();
             $table->foreign('unidad_id')->references('id')->on('unidades')->onDelete('restrict');
             $table->string('ci',15)->unique();
-            $table->string('cargo',50);
+            $table->integer('cargo_id')->unsigned();
+            $table->foreign('cargo_id')->references('id')->on('cargos')->onDelete('restrict');
             $table->string('celular',15)->nullable()->unique();
             $table->date('fecha_ing'); 
             $table->date('fecha_ret')->nullable();

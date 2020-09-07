@@ -34,10 +34,17 @@
 </div>
 
 <div class="form-group">
-	<label for="cargo" class="col-lg-3 control-label requerido">Cargo</label>
-	<div class="col-lg-5">
-		<input type="text" name="cargo" id="cargo" class="form-control" value="{{old('cargo', $personal->cargo ?? '')}}" required placeholder="Cargo que ocupa" autocomplete="off"/>		
-	</div>
+    <label for="cargo_id" class="col-lg-3 control-label requerido">Cargo</label>
+    <div class="col-lg-5">
+        <select name="cargo_id" id="cargo_id" class="form-control" required >
+            <option value="">Seleccione su Cargo</option>
+            @foreach($cargo as $id => $nombre)
+                <option
+                value="{{$id}}"{{old("cargo_id",$personal->cargo->id ?? "")==$id ? "selected":""}}>{{$nombre}}
+                </option>
+            @endforeach
+        </select>
+    </div>
 </div>
 
 <div class="form-group">

@@ -1,0 +1,57 @@
+@extends("theme.$theme.layout")
+@section('titulo')
+	Cargos
+@endsection
+@section("scripts")
+<script src="{{asset("assets/pages/scripts/admin/alert/alert.js")}}" type="text/javascript"></script>
+<script src="{{asset("assets/pages/scripts/admin/datatables/datatables.js")}}" type="text/javascript"></script>
+@endsection
+@section('contenido')
+	<div  class="row">
+		<div class="col-lg-12">
+			@include('includes.mensaje')
+			@include('includes.mensajeerror')
+			<div class="box box-primary">
+				<div style="text-align: center; background-color:lightblue;" class="box-header whit.border">
+					<h3 class="box-title"><b>Lista de Cargos</b></h3>
+					<div class="box-tools pull-right">
+						<a href="{{route('crear_cargo')}}" class="btn btn-block btn-success btn-sm">
+							<i class="fa fa-fw fa-plus-circle"></i> Crear nuevo Cargo
+						</a>
+					</div>
+				</div>
+				<div class="box-body">
+					<table class="table table-bordered table-hover table-striped" id="tabla-data" style="background-color:mintcream;">
+						<thead>
+							<tr>
+								
+                    			<th class="col-lg-3" style="text-align: center;">Nombre</th>
+								<th class="col-lg-6" style="text-align: center;">Descripción</th>
+								<th class="col-lg-2" style="text-align: center;">Opción</th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach($cargos as $cargo)
+								<tr>			
+									<td style="text-align: center;">{{$cargo->nombre}}</td>
+									<td style="text-align: center;">{{$cargo->descripcion}}</td>
+									<td style="text-align: center;">
+										<a href="{{route('editar_cargo', ['id' => $cargo->id])}}" class="btn btn-warning btn-xs tooltipC" title="Editar cargo">
+												<i class="fas fa fa-wrench"></i>
+										</a>									
+										<form action="{{route('eliminar_cargo', ['id' => $cargo->id])}}" class="d-inline form-eliminar" method="POST">
+											@csrf @method("delete")
+											<button type="submit" class="btn btn-danger btn-xs eliminar tooltipsC" title="Eliminar cargo">
+												<i class="fa fa-fw fa-close"></i>
+											</button>
+										</form>
+									</td>
+								</tr>
+							@endforeach
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+@endsection

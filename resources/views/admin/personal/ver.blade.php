@@ -123,7 +123,7 @@
                                     <p><b>Cargo:</b></p>
                                 </div>
                                 <div class="col-md-9">
-                                    <i><p>{{$personal->cargo}}</p></i>
+                                    <i><p>{{$personal->cargo->nombre}}</p></i>
                                 </div>
                             </div>
                             <div class="row">

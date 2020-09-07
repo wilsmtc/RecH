@@ -39,6 +39,14 @@ class UsuarioAdministradorSeeder extends Seeder
             'sigla'=>'GER',
             'descripcion'=>'los jefes'
         ]);
+        DB::table('cargos')->insert([
+            'nombre'=>'Gerente General',
+            'descripcion'=>'Máxima autoridad institucional'
+        ]);
+        DB::table('cargos')->insert([
+            'nombre'=>'Asesor Comercial',
+            'descripcion'=>'ninguna'
+        ]);
         DB::table('permisos')->insert([
             'usuario_id'=>1,
             'añadir'=>1,
@@ -137,6 +145,20 @@ class UsuarioAdministradorSeeder extends Seeder
             'orden'=>2,
             'icono'=>'fa-eye'
         ]);
+        DB::table('menu')->insert([
+            'menu_id'=>0,
+            'nombre'=>'Cargo',
+            'url'=>'admin/cargo/#',
+            'orden'=>4,
+            'icono'=>'fa-book'
+        ]);
+        DB::table('menu')->insert([
+            'menu_id'=>14,
+            'nombre'=>'Ver Cargo',
+            'url'=>'admin/cargo',
+            'orden'=>1,
+            'icono'=>'fa-book'
+        ]);
         DB::table('menu_rol')->insert(['rol_id'=>1,'menu_id'=>1]);
         DB::table('menu_rol')->insert(['rol_id'=>1,'menu_id'=>2]);
         DB::table('menu_rol')->insert(['rol_id'=>1,'menu_id'=>3]);
@@ -150,13 +172,15 @@ class UsuarioAdministradorSeeder extends Seeder
         DB::table('menu_rol')->insert(['rol_id'=>1,'menu_id'=>10]);
         DB::table('menu_rol')->insert(['rol_id'=>1,'menu_id'=>11]);
         DB::table('menu_rol')->insert(['rol_id'=>1,'menu_id'=>13]);
+        DB::table('menu_rol')->insert(['rol_id'=>1,'menu_id'=>14]);
+        DB::table('menu_rol')->insert(['rol_id'=>1,'menu_id'=>15]);
 
         DB::table('personal')->insert([
             'nombre'=>'Tomas',
             'apellido'=>'Muller',
             'unidad_id'=>1,
             'ci'=>'1597894',
-            'cargo'=>'Director',
+            'cargo_id'=>1,
             'celular'=>'78561265',
             'fecha_ing'=>"2018-06-13",
             'genero'=>'Hombre',
@@ -167,7 +191,7 @@ class UsuarioAdministradorSeeder extends Seeder
             'apellido'=>'Lewandoski',
             'unidad_id'=>1,
             'ci'=>'8545789',
-            'cargo'=>'Gerente',
+            'cargo_id'=>1,
             'celular'=>'76485932',
             'fecha_ing'=>"2017-02-11",
             'genero'=>'Hombre',

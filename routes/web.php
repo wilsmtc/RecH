@@ -19,7 +19,7 @@ Route::get('seguridad/login', 'Seguridad\LoginController@index')->name('login');
 Route::post('seguridad/login', 'Seguridad\LoginController@login')->name('login_post');
 Route::get('seguridad/logout', 'Seguridad\LoginController@logout')->name('logout');
 							//rutas del calendario
-	Route::resource('eventos', 'Admin\CalendarioController');
+Route::resource('eventos', 'Admin\CalendarioController');
 Route ::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware'=> 'auth'], function(){
 	Route::get('', 'AdminController@index');
 		Route ::group(['middleware'=> 'permisoadmin'], function(){
@@ -64,6 +64,13 @@ Route ::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware'=> 'auth
 	Route::delete('unidad/{id}', 'UnidadController@destroy')->name('eliminar_unidad')->middleware('permisoeliminar');
 	Route::get('ver_unidad/{id}', 'UnidadController@ver') ->name('ver_unidad');
 	Route::get('unidad/{id}/pdf', 'UnidadController@pdf')->name('pdf_unidad');
+						//rutas para los cargos
+	Route::get('cargo', 'CargoController@index') ->name('cargo');
+	Route::get('cargo/crear', 'CargoController@create')->name('crear_cargo')->middleware('permisocrear');
+	Route::post('cargo', 'CargoController@store')->name('guardar_cargo');
+	Route::get('cargo/{id}/editar', 'CargoController@edit') ->name('editar_cargo')->middleware('permisoeditar');
+	Route::put('cargo/{id}', 'CargoController@update') ->name('actualizar_cargo');
+	Route::delete('cargo/{id}', 'CargoController@destroy')->name('eliminar_cargo')->middleware('permisoeliminar');
 						//rutas para el personal
 	Route::get('personal', 'PersonalController@index') ->name('personal');
 	Route::get('personal/crear', 'PersonalController@create')->name('crear_personal')->middleware('permisocrear');
