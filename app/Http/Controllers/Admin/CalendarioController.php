@@ -18,12 +18,25 @@ class CalendarioController extends Controller
     }
     public function store(Request $request)
     {
-        $datos=request()->except(['_token','_method']);
+        $datos=request()->except(['_token','_method']);//en la variable $datos almacena todo lo q se envio en el array excepto lo q es el _token y _method del request
         Evento::insert($datos);
-        print_r($datos);
+        print_r($datos);//muestra en consola lo q se guardara en la BD
     }
     public function show()
     {
+        //$ev=Evento::all()->count();
+        //if($ev!=0)
+            //for(int i=1,i<=$ev,i++)
+                //$evento=Evento::findOrfail(i);
+                //if($evento->start<fecha_actual){
+                    //$evento->color=red;
+                    //$evento->save();}
+                //if($evento->start==fecha_actual){
+                    //$evento->color=amarillo;
+                    //$evento->save();}
+                //if($evento->start>fecha_actual){
+                    //$evento->color=verde;
+                    //$evento->save();}
         $data['eventos']=Evento::all();
         return response()->json($data['eventos']);
     }

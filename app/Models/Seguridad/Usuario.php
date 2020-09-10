@@ -43,6 +43,7 @@ class Usuario extends Authenticatable
             );
         }
     }
+
     public function setPasswordAttribute($pass) //esta funcion es de laravel para encriptar password
     {
         $this->attributes['password']=Hash::make($pass);

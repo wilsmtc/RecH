@@ -84,7 +84,7 @@ class UsuarioAdministradorSeeder extends Seeder
         ]);
         DB::table('menu')->insert([
             'menu_id'=>4,
-            'nombre'=>'Ver Usuarios',
+            'nombre'=>'Ver Usuarios Activos',
             'url'=>'admin/usuario',
             'orden'=>1,
             'icono'=>'fa-users'
@@ -133,10 +133,10 @@ class UsuarioAdministradorSeeder extends Seeder
         ]);
         DB::table('menu')->insert([
             'menu_id'=>4,
-            'nombre'=>'Estado Usuario',
+            'nombre'=>'Ver Usuarios Inactivos',
             'url'=>'admin/usuario-rol',
             'orden'=>2,
-            'icono'=>'fa-key'
+            'icono'=>'fa-users'
         ]);
         DB::table('menu')->insert([
             'menu_id'=>8,

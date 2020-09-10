@@ -20,6 +20,9 @@ Route::post('seguridad/login', 'Seguridad\LoginController@login')->name('login_p
 Route::get('seguridad/logout', 'Seguridad\LoginController@logout')->name('logout');
 							//rutas del calendario
 Route::resource('eventos', 'Admin\CalendarioController');
+											//rutas del invitado
+Route::get('invitado', 'Admin\InvitadoController@create') ->name('invitado');	
+Route::post('invitado/verificar', 'Admin\InvitadoController@store')->name('verificar');
 Route ::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware'=> 'auth'], function(){
 	Route::get('', 'AdminController@index');
 		Route ::group(['middleware'=> 'permisoadmin'], function(){
@@ -84,6 +87,7 @@ Route ::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware'=> 'auth
 	Route::put('personal/{id}/retirado', 'PersonalController@guardarretiro') ->name('guardar_retiro');
 	Route::get('personalret', 'PersonalController@indexretirado') ->name('personalretirado');
 	Route::get('personal/{id}/activo', 'PersonalController@activar') ->name('activar_personal')->middleware('permisoeditar');
+	Route::get('personal/{id}/memo_ret', 'PersonalController@memo_pdf')->name('ver_memo_ret');
 						//rutas de vacacion
 	Route::get('vacacion/crear/{id}', 'VacacionController@create') ->name('crear_vacacion')->middleware('permisocrear');
 	Route::get('vacacion/{id}/editar', 'VacacionController@edit') ->name('editar_vacacion')->middleware('permisoeditar');

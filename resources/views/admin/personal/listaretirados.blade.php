@@ -41,6 +41,11 @@
 									<a href="{{route('ver_curriculum', ['id' => $per->id])}}" target="_blank" class="ver-curriculum btn btn-success btn-xs tooltipC" title="ver curriculum" id="ver-curriculum">
 										<i class="fa fa-fw fa-file"></i>																			
                                     </a>
+									@endif
+									@if($per->memorandum_ret!=null)
+									<a href="{{route('ver_memo_ret', ['id' => $per->id])}}" target="_blank" class="ver-memo-ret btn btn-info btn-xs tooltipC" title="ver memo de retiro" id="ver-memo-ret">
+										<i class="fa fa-fw fa-file"></i>																			
+                                    </a>
                                     @endif	
                                     <a href="{{route('ver_personal', ['id' => $per->id])}}" class="btn btn-primary btn-xs tooltipC" title="Ver Personal">
 										<i class="fas fa fa-navicon"></i>

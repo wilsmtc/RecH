@@ -10,7 +10,7 @@ use Intervention\Image\Facades\Image;
 class Personal extends Model
 {
     protected $table = "personal";
-    protected $fillable=['nombre','apellido','ci','celular','cargo_id','fecha_ing','unidad_id','foto','genero','curriculum','item','fecha_ret','estado','razon_ret'];
+    protected $fillable=['nombre','apellido','ci','celular','cargo_id','fecha_ing','unidad_id','foto','genero','curriculum','item','fecha_ret','estado','razon_ret','memorandum_ret'];
 
     public function unidad()
     {
@@ -55,7 +55,22 @@ class Personal extends Model
             return $docName; //retorna el nombre de la imagen
         } else {
             return false;
-        }
-        
+        }        
+    }
+    public static function setMemorandum_ret($memorandum, $actual = false) //documento (al crear), actual (al editar)
+    {
+        if ($memorandum) {
+            if ($actual) {
+                Storage::disk('public')->delete("imagenes/documentos/personal/$actual"); // si es actual borra la anterior
+            }
+            $docName = Str::random(10) . '.pdf';  //STR para llamar a rando q crea un nombre aleatorio de 15 caracteres con la extension .jpg
+            //$doc = ->encode('pdf'); //codifica a jpg con un 75% de la imagen real
+            
+            //Storage::disk('public')->put("imagenes/documentos/personal/$docName", $documento); //guarda la imagen
+            $memorandum->move(public_path().'/storage/imagenes/documentos/personal/', $docName);
+            return $docName; //retorna el nombre de la imagen
+        } else {
+            return false;
+        }        
     }
 }

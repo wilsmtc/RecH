@@ -14,9 +14,10 @@ class UsuarioController extends Controller
 {
     public function index()
     {
-        $usuarios = Usuario::with('roles:id,tipo')->orderBy('id')->get();
+        $usuarios = Usuario::where('estado',1)->with('roles:id,tipo')->orderBy('id')->get();
         //roles es el nombre de la funcion q relaciona muchos a muchos a usuario con rol (models/seg/usuario)
-        return view('admin.usuario.index', compact('usuarios'));
+        $activo='Activos';
+        return view('admin.usuario.index', compact('usuarios','activo'));
     }
 
     public function create()
@@ -79,7 +80,10 @@ class UsuarioController extends Controller
             'editar'=>$y,
             'eliminar'=>$z
         ]);
-        return redirect('admin/usuario')->with('mensaje', 'Usuario actualizado con exito');
+        if($usuario->estado==1)
+            return redirect('admin/usuario')->with('mensaje', 'Usuario actualizado con exito');
+        else
+            return redirect('admin/usuario-rol')->with('mensaje', 'Usuario actualizado con exito');
     }
 
     public function destroy(Request $request, $id)

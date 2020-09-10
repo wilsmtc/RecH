@@ -32,9 +32,15 @@ class ValidacionRol extends FormRequest
         return [
             //para crear
             'tipo' => 'required|max:50|unique:roles,tipo'//. \Request::get('id'), //si funciona
-           // 'tipo' => 'required|max:50|unique:roles,tipo,'. $this->route('id'),// es para actualizar
-           // 'tipo' => 'required|max:50|unique:roles,tipo' . $this->route('id'), // es para crear
             ];
         }
+    }
+    public function messages()
+    {
+        return [
+            'tipo.required' => 'Olvidaste el Tipo de Rol',
+            'tipo.max' => 'El Tipo de Rol debe ser mas corto (50 caracteres)',
+            'tipo.unique' => 'El Tipo de Rol ya ha sido tomado',
+        ];
     }
 }

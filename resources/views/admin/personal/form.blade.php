@@ -15,7 +15,7 @@
 <div class="form-group">
 	<label for="ci" class="col-lg-3 control-label requerido">Número de Carnet</label>
 	<div class="col-lg-5">
-		<input type="text" name="ci" id="ci" class="form-control" value="{{old('ci', $personal->ci ?? '')}}" required minlength="7" placeholder="12345678"/>		
+		<input type="text" name="ci" id="ci" class="form-control" value="{{old('ci', $personal->ci ?? '')}}" required minlength="7"  placeholder="12345678"/>		
 	</div>
 </div>
 
@@ -79,7 +79,7 @@
     </div>
 </div> --}}
 <div class="form-group">
-	<label for="genero" class="col-lg-3 control-label requerido">genero</label>
+	<label for="genero" class="col-lg-3 control-label requerido">Genero</label>
 	<div class="col-lg-5">
 		<input type="radio" name="genero" id="genero" value="Hombre"{{old("genero",$personal->genero?? "")=="Hombre" ? "checked":""}}/>			
 		<label for="hombre">Hombre</label>

@@ -1,5 +1,5 @@
 @if(session ("mensajeerror"))
-	<div class="alert alert-error alert-dismissible" data-auto-dismiss="3000">
+	<div class="alert alert-error alert-dismissible" data-auto-dismiss="4000">
 		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
 		<h4><i class="icon fa fa-close"></i> Error </h4>
 		<ul>

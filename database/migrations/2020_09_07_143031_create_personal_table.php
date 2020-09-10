@@ -31,6 +31,7 @@ class CreatePersonalTable extends Migration
             $table->string('foto',100)->nullable();
             $table->integer('estado')->nullable()->default(1);
             $table->string('razon_ret',30)->nullable();
+            $table->string('memorandum_ret',100)->nullable();
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_spanish_ci';
             $table->timestamps();

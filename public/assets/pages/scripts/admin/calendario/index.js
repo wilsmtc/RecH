@@ -15,20 +15,20 @@ document.addEventListener('DOMContentLoaded', function() {
         center:'title',
         right:'dayGridMonth,timeGridWeek,timeGridDay'
       },
-      dateClick:function(info){
+      dateClick:function(info){//cuando hacemos click en un dia del calendario (crear)
         limpiarFormulario();
-        $('#fecha').val(info.dateStr);
+        $('#fecha').val(info.dateStr);//recupera la fecha donde se hizo click
         if(($('#fecha').val())>=fechaactual){
             $('#btncrear').prop("disabled",false);
             $('#btneditar').prop("disabled",true);
             $('#btneliminar').prop("disabled",true);
-            $('#modal-calendario').modal();          
+            $('#modal-calendario').modal();//activa el modal      
         }else{
             alert("no puede crear eventos en fechas pasadas");
         }
         
       },
-      eventClick:function(info){
+      eventClick:function(info){//cuando hacemos click en un evento
         //console.log(info.event.title);
         //console.log(info.event.extendedProps.descripcion);
         $('#btncrear').prop("disabled",true);
@@ -65,15 +65,15 @@ document.addEventListener('DOMContentLoaded', function() {
       //     descripcion:"describo el evento"
       //   }
       // ]
-      events:url_show
+      events:url_show //es aqui donde estan los eventos guardados en la BD de aqui se muestran
     });
     calendar.setOption('locale','es')
     calendar.render();
 
-    $('#btncrear').click(function(){
+    $('#btncrear').click(function(){ //cuando damos click en boton crear
         if(($('#fecha').val())>=fechaactual){
-            objEvento=recolectarDatos("POST");
-            EnviarInformacion('', objEvento);         
+            objEvento=recolectarDatos("POST");//llama a la funcion q agarra los datos del form y le deciomos q es POST
+            EnviarInformacion('', objEvento);  //llama a la funcion para almacenar los datos (es decir STORE)       
         }else{
             alert("no puede crear eventos en fechas pasadas");
             $('#modal-calendario').modal('toggle');//en modal se cerrara
@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     });
 
-    function recolectarDatos(method){
+    function recolectarDatos(method){//agarrar los datos q llenamos en el form y recive un metodo (post,etc)
         if(validarDatos()){
            
            nuevoEvento={
@@ -116,19 +116,17 @@ document.addEventListener('DOMContentLoaded', function() {
             '_token':$('meta[name="csrf-token"]').attr('content'),
             '_method':method 
             }
-            return (nuevoEvento);  
+            return (nuevoEvento);  //nos devuelve un array con todos los datos del evento
         }else{
             return
         }      
     }
-    function EnviarInformacion(accion, objEvento){
-      //accion sera una variable q agarre el metodo
-      //objEvento agarra los datos atributos
+    function EnviarInformacion(accion, objEvento){//envia los datos al metodo STORE del controlador      
       $.ajax(
         {
           type:"POST",
-          url:url_+accion,
-          data:objEvento,
+          url:url_+accion,//accion sera una variable q agarre el metodo
+          data:objEvento,//objEvento agarra los datos atributos
           success:function(msg){
             $('#modal-calendario').modal('toggle');//en modal se cerrara
             calendar.refetchEvents();//actualiza el calendario
@@ -151,3 +149,4 @@ document.addEventListener('DOMContentLoaded', function() {
       $('#descripcion').val("");
     }
   });
+

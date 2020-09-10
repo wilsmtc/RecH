@@ -55,7 +55,23 @@
               @endif
               @include("theme.$theme.menu-item", ["item" => $item])<!-- me redirecciona a la vista menu.item -->
           @endforeach
-          
+          @if(session()->get('usuario')==null)
+          <li class="treeview">
+              <a href="javascript:;"> <!--no tiene url porq es padre-->
+                <i class="fa fa-user"></i> <span>Invitado</span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+                <li>
+                  <a href="{{ url('invitado') }}" >
+                    <i class="fa fa-eye"></i> <span>Solicitar Información</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+          @endif
           <li class="treeview">
             <a href="javascript:;"> <!--no tiene url porq es padre-->
               <i class="fa fa-calendar-plus-o"></i> <span>Capacitación</span>
@@ -71,7 +87,7 @@
               </li>
             </ul>
         </li>
-
+        
       </ul>
     </section>
     <!-- /.sidebar -->

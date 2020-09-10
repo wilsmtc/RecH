@@ -28,4 +28,13 @@ class ValidacionCargo extends FormRequest
             ]; 
         }
     }
+    public function messages()
+    {
+        return [
+            'nombre.required' => 'Olvidaste el nombre del cargo',
+            'nombre.max' => 'El nombre del cargo debe ser mas corto (50 caracteres)',
+            'nombre.unique' => 'El nombre del cargo ya ha sido tomado',
+            'descripcion.max' => 'La descripción debe ser mas corta (250 caracteres)'
+        ];
+    }
 }

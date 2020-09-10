@@ -2,8 +2,18 @@
 @section('titulo')
 	Retirar Personal
 @endsection
+@section("styles")
+<link href="{{asset("assets/js/bootstrap-fileinput/css/fileinput.min.css")}}" rel="stylesheet" type="text/css"/>
+@endsection
+
+@section("scriptsPlugins")
+<script src="{{asset("assets/js/bootstrap-fileinput/js/fileinput.min.js")}}" type="text/javascript"></script>
+<script src="{{asset("assets/js/bootstrap-fileinput/js/locales/es.js")}}" type="text/javascript"></script>
+<script src="{{asset("assets/js/bootstrap-fileinput/themes/fas/theme.min.js")}}" type="text/javascript"></script>
+@endsection
 @section('scripts')
-	<script src="{{asset("assets/pages/scripts/admin/retiro/crear.js")}}" type="text/javascript"></script>
+    {{-- <script src="{{asset("assets/pages/scripts/admin/retiro/crear.js")}}" type="text/javascript"></script> --}}
+    <script src="{{asset("assets/pages/scripts/admin/personal/crear.js")}}" type="text/javascript"></script>
     <script src="{{asset("assets/pages/scripts/admin/flatpickr/flatpickr.js")}}" type="text/javascript"></script>
 @endsection
 @section('contenido')
@@ -20,16 +30,18 @@
                         </a>
                     </div>
                 </div>
-                <form action="{{route('guardar_retiro', ['id' => $personal->id])}}" id="form-general" class="form-horizontal form-general" method="POST">
+                <form action="{{route('guardar_retiro', ['id' => $personal->id])}}" id="form-general" class="form-horizontal form-general" method="POST" enctype="multipart/form-data">
                     
                     @csrf @method("put")
 					<div class="box-body">
+
 						<div class="form-group">
                             <label for="fecha_ret" class="col-lg-3 control-label requerido">Fecha de Retiro</label>
                             <div class="col-lg-5">
                                 <input type="date" min="1960-01-01" name="fecha_ret" id="fecha_ret" class="form-control" value="{{old('fecha_ret' ?? '')}}" required placeholder="Fecha de Retiro"/>		
                             </div>
                         </div>
+
                         <div class="form-group">
                             <label for="razon_ret" class="col-lg-3 control-label requerido">Razón del Retiro</label>
                             <div class="col-lg-5">
@@ -43,9 +55,18 @@
                                     <option value="Retiro forzoso"{{old("razon_ret",$vacacion->razon_ret?? "")=="Retiro forzoso" ? "selected":""}}>Retiro forzoso</option>
                                     <option value="Rescisión de contrato"{{old("razon_ret",$vacacion->razon_ret?? "")=="Rescisión de contrato" ? "selected":""}}>Rescisión de contrato</option>
                                     <option value="Motivos Personales"{{old("razon_ret",$vacacion->razon_ret?? "")=="Motivos Personales" ? "selected":""}}>Motivos Personales</option>
+                                    <option value="Otros"{{old("razon_ret",$vacacion->razon_ret?? "")=="Otros" ? "selected":""}}>Otros</option>
                                 </select>
                             </div>
                         </div>
+
+                        <div class="form-group">
+                            <label for="memorandum" class="col-lg-3 control-label">Memorandum de Retiro</label>
+                            <div class="col-lg-4">
+                                <input type="file" name="memorandum_up" id="memorandum" data-initial-preview="{{isset($personal->memorandum_ret) ? Storage::url("imagenes/documentos/personal/$personal->memorandum_ret") : "http://www.placehold.it/250x250/EFEFEF/AAAAAA&text=documento+personal"}}" accept=".pdf"/>
+                            </div>
+                        </div>
+
                     </div>                   
 					<div class="box-footer">
 						<div class="col-lg-4"></div>

@@ -12,9 +12,12 @@ class UsuarioRolController extends Controller
 {
     public function index()
     {
-        $aux=Usuario::with('roles:id,tipo,estado')->orderBy('id')->get();
-        //$aux=UsuarioRol::orderBy('id')->get();
-        return view ('admin.usuariorol.index', compact('aux'));
+        // $aux=Usuario::with('roles:id,tipo,estado')->orderBy('id')->get();
+        // return view ('admin.usuariorol.index', compact('aux'));
+        $usuarios = Usuario::where('estado',0)->with('roles:id,tipo')->orderBy('id')->get();
+        //roles es el nombre de la funcion q relaciona muchos a muchos a usuario con rol (models/seg/usuario)
+        $activo=' Inactivos';
+        return view('admin.usuario.index', compact('usuarios','activo'));
     }
     public function store(Request $request)
     {
@@ -45,6 +48,6 @@ class UsuarioRolController extends Controller
         $usuario->estado=1;
         $usuario->save();
         //dd($usuario);
-        return redirect('admin/usuario-rol')->with('mensaje', 'Usuario activado con exito');
+        return redirect('admin/usuario')->with('mensaje', 'Usuario activado con exito');
     }
 }

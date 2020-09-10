@@ -51,4 +51,26 @@ class ValidacionUsuario extends FormRequest
             ];  
         }
     }
+    public function messages()
+    {
+        return [
+            'usuario.required' => 'Olvidaste el Usuario',
+            'usuario.max' => 'El Usuario debe ser mas corto (50 caracteres)',
+            'usuario.unique' => 'El Usuario ya ha sido tomado',
+            'nombre.required' => 'Olvidaste el Nombre del Usuario',
+            'nombre.max' => 'El nombre del Usuario excede el número de caracteres (50 caracteres)',
+            'apellido.required' => 'Olvidaste el Apellido del Usuario',
+            'apellido.max' => 'Los Apellidos del Usuario excede el número de caracteres (50 caracteres)',
+            'email.required' => 'Olvidaste el Correo Electrónico del Usuario',
+            'email.max' => 'El Correo Electrónico del Usuario debe ser mas corto (100 caracteres)',
+            'email.unique' => 'El Correo Electrónico del Usuario ya ha sido tomado',
+            'rol_id.required' => 'Olvidaste asignar un Rol al Usuario',
+            'password.required' => 'Olvidaste La contraseña del Usuario',
+            'password.max' => 'La contraseña excede el número de caracteres (50 caracteres)',
+            'password.min' => 'La contraseña debe tener al menos 6 caracteres',
+            're_password.same' => 'Las Contraseñas no son iguales',
+            'foto_up.image' => 'La Foto debe de estar en un formato .jpg .png .jpeg',
+            'foto_up.max' => 'El tamaño máximo de la Foto es de 3 MB',
+        ];
+    }
 }

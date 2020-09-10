@@ -104,6 +104,11 @@ class PersonalController extends Controller
         $personal->estado=0;
         $personal->fecha_ret=$request->fecha_ret;
         $personal->razon_ret=$request->razon_ret;
+        if($memorandum = Personal::setMemorandum_ret($request->memorandum_up))
+        {
+            $request->request->add(['memorandum_ret'=>$memorandum]);
+            $personal->memorandum_ret=$request->memorandum_ret;
+        }
         $personal->save();
         return redirect('admin/personalret')->with('mensaje', 'Personal retirado con exito');
     }
@@ -120,8 +125,17 @@ class PersonalController extends Controller
         $personal->razon_ret=null;
         $personal->fecha_ret=null;
         //$personal->fecha_ing=date("Y-m-d");
+        Storage::disk('public')->delete("imagenes/documentos/personal/$personal->memorandum_ret");
+        $personal->memorandum_ret=null;
         $personal->save();
         //dd($usuario);
         return redirect('admin/personal')->with('mensaje', 'Personal integrado con exito');
+    }
+
+    public function memo_pdf($id)
+    {
+        $personal = Personal::findOrFail($id);
+        $file= public_path().'\storage\imagenes\documentos\personal/'.$personal->memorandum_ret;
+        return response()->file($file);
     }
 }

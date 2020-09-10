@@ -41,4 +41,16 @@ class ValidacionMenu extends FormRequest
         }
         
     }
+    public function messages()
+    {
+        return [
+            'nombre.required' => 'Olvidaste el nombre del Menú',
+            'nombre.max' => 'El nombre del Menú debe ser mas corto (50 caracteres)',
+            'nombre.unique' => 'El nombre del Menú ya ha sido tomado',
+            'url.required' => 'Olvidaste el Url',
+            'url.max' => 'El Url debe ser mas corto (100 caracteres)',
+            'url.unique' => 'El Url ya ha sido tomado',
+            'icono.max' => 'El Icono debe ser mas corto (50 caracteres)'
+        ];
+    }
 }

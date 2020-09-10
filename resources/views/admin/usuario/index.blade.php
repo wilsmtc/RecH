@@ -15,7 +15,7 @@
 			@include('includes.mensajeerror')
 			<div class="box box-primary">
 				<div style="text-align: center; background-color:lightblue;" class="box-header whit.border">
-					<h3 class="box-title"><b>Lista de Usuarios</b></h3>
+				<h3 class="box-title"><b>Lista de Usuarios {{$activo}}</b></h3>
 					<div class="box-tools pull-right">
 						<a href="{{route('crear_usuario')}}" class="btn btn-block btn-success">
 							<i class="fa fa-fw fa-user-plus"></i> Crear Usuario
@@ -69,12 +69,24 @@
 										<a href="{{route('editar_usuario', ['id' => $usuario->id])}}" class="btn btn-warning btn-xs tooltipC" title="Editar usuario">
 											<i class="fas fa fa-wrench"></i>
 										</a>
-										<form action="{{route('eliminar_usuario', ['id' => $usuario->id])}}" class="d-inline form-eliminar" method="POST" id="form-eliminar">
+										{{-- <form action="{{route('eliminar_usuario', ['id' => $usuario->id])}}" class="d-inline form-eliminar" method="POST" id="form-eliminar">
 											@csrf @method("delete")
 											<button type="submit" class="btn btn-danger btn-xs eliminar tooltipsC" title="Eliminar Usuario">
 												<i class="fa fa-fw fa-close "></i>
 											</button>
-										</form>
+										</form> --}}
+										@if($usuario->estado==1)
+												<a href="{{route('desactivar_usuario', ['id' => $usuario->id])}}" class="btn btn-success btn-xs tooltipC" 
+													onclick="return confirm('¿Esta seguro de inactivar al usuario?')" title="desactivar usuario" id="usuario_rol">
+													<i class="fas fa fa-user"></i>
+												</a>
+											@endif	
+											@if($usuario->estado==0)
+												<a href="{{route('activar_usuario', ['id' => $usuario->id])}}" class="btn btn-danger btn-xs tooltipC" 
+													onclick="return confirm('¿Esta seguro de activar al usuario?')" title="activar usuario" id="usuario_rol">
+													<i class="fas fa fa-user"></i>
+												</a>
+											@endif
 									</td>
 								</tr>
 							@endforeach
