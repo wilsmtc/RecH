@@ -17,9 +17,11 @@ Roles
             <div style="text-align: center;" class="box-header with-border">
                 <h3 class="box-title"><b>Lista de Roles</b></h3>
                 <div class="box-tools pull-right">
+                @if(Auth::user()->permiso->añadir == 1)
                     <a href="{{route('crear_rol')}}" class="btn btn-block btn-success btn-sm">
                         <i class="fa fa-fw fa-plus-circle"></i> Crear nuevo rol
                     </a>
+                @endif
                 </div>
             </div>
             <div class="box-body">
@@ -35,15 +37,19 @@ Roles
                         <tr>
                             <td>{{$data->tipo}}</td>
                             <td>
+                            @if(Auth::user()->permiso->editar == 1)
                                 <a href="{{route('editar_rol', ['id' => $data->id])}}" class="btn btn-warning btn-xs tooltipC" title="Editar este registro">
                                     <i class="fas fa fa-wrench"></i>
                                 </a>
+                            @endif
+                            @if(Auth::user()->permiso->eliminar == 1)
                                 <form action="{{route('eliminar_rol', ['id' => $data->id])}}" class="d-inline form-eliminar" method="POST" id="form-eliminar">
                                     @csrf @method("delete")
                                     <button type="submit" class="btn btn-danger btn-xs eliminar tooltipsC" title="Eliminar este rol">
                                         <i class="fa fa-fw fa-close"></i>
                                     </button>
                                 </form>
+                            @endif
                             </td>
                         </tr>
                         @endforeach

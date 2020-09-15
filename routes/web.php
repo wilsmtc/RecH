@@ -19,8 +19,9 @@ Route::get('seguridad/login', 'Seguridad\LoginController@index')->name('login');
 Route::post('seguridad/login', 'Seguridad\LoginController@login')->name('login_post');
 Route::get('seguridad/logout', 'Seguridad\LoginController@logout')->name('logout');
 							//rutas del calendario
+Route::get('evento', 'Admin\CalendarioController@index') ->name('eventos');
 Route::resource('eventos', 'Admin\CalendarioController');
-											//rutas del invitado
+									//rutas del invitado
 Route::get('invitado', 'Admin\InvitadoController@create') ->name('invitado');	
 Route::post('invitado/verificar', 'Admin\InvitadoController@store')->name('verificar');
 Route ::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware'=> 'auth'], function(){
@@ -93,6 +94,14 @@ Route ::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware'=> 'auth
 	Route::get('vacacion/{id}/editar', 'VacacionController@edit') ->name('editar_vacacion')->middleware('permisoeditar');
 	Route::post('vacacion', 'VacacionController@store') ->name('guardar_vacacion');
 	Route::get('vacacion/{id}/memorandum', 'VacacionController@pdf')->name('ver_memorandum');
+						//rutas de capacitacion
+	Route::get('capacitacion', 'CapacitacionController@index') ->name('capacitacion');
+	Route::get('capacitacion/crear', 'CapacitacionController@create') ->name('crear_capacitacion')->middleware('permisocrear');
+	Route::post('capacitacion', 'CapacitacionController@store')->name('guardar_capacitacion');
+	Route::get('capacitacion/{id}/editar', 'CapacitacionController@edit') ->name('editar_capacitacion')->middleware('permisoeditar');
+	Route::put('capacitacion/{id}', 'CapacitacionController@update') ->name('actualizar_capacitacion');
+	Route::delete('capacitacion/{id}', 'CapacitacionController@destroy')->name('eliminar_capacitacion')->middleware('permisoeliminar');
+	Route::get('capacitacion/{id}/capacitacion', 'CapacitacionController@documento')->name('ver_capacitacion');
 });
 
 

@@ -70,7 +70,7 @@
                   </a>
                 </li>
               </ul>
-            </li>
+          </li>         
           @endif
           <li class="treeview">
             <a href="javascript:;"> <!--no tiene url porq es padre-->
@@ -80,14 +80,20 @@
               </span>
             </a>
             <ul class="treeview-menu">
+              @if(session()->get('usuario')!=null)
+              <li>
+                <a href="{{route('capacitacion')}}" >
+                  <i class="fa fa-bar-chart"></i> <span>Ver Capacitación</span>
+                </a>
+              </li>
+              @endif
               <li>
                 <a href="{{ url('eventos') }}" >
                   <i class="fa fa-calendar"></i> <span>Calendario de Actividades</span>
                 </a>
               </li>
             </ul>
-        </li>
-        
+          </li>       
       </ul>
     </section>
     <!-- /.sidebar -->

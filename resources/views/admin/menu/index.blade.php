@@ -22,9 +22,11 @@
 				<div class="box-header whit-border">
 					<h3 class="box-title"><b>Lista de Menús</b></h3>
 					<div class="box-tools pull-right">
+					@if(Auth::user()->permiso->añadir == 1)
 						<a href="{{route('crear_menu')}}" class="btn btn-block btn-success btn-sm">
 							<i class="fa fa-fw fa-plus-circle"></i> Crear nuevo Menu
 						</a>
+					@endif
 					</div>
 				</div>	
 				<div class="box-body">

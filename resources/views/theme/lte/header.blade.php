@@ -14,55 +14,51 @@
       </a>
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
-
-
-
-          <li class="dropdown notifications-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-bell-o"></i>             
-              <span class="label label-warning">10</span>
-            </a>
-            <ul class="dropdown-menu">
-            <li class="header">You have notifications</li>
-              <li>
-                <!-- inner menu: contains the actual data -->
-                <ul class="menu">
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the
-                      page and may cause design problems
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-users text-red"></i> 5 new members joined
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-shopping-cart text-green"></i> 25 sales made
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-user text-red"></i> You changed your username
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li class="footer"><a href="#">View all</a></li>
-            </ul>
-          </li>
-
-
-
-
-
+          @php
+            $cant=MyHelper::CantidadEventos(); //obtiene la cantidad de eventos posteriores a la fecha actual 
+          @endphp
+          @if(($cant>0))
+            <li class="dropdown notifications-menu">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <i class="fa fa-calendar text-white"></i>            
+                <span class="label label-warning">{{$cant}}</span>
+              </a>
+              <ul class="dropdown-menu">
+              <li class="footer"><a href="{{route('eventos')}}"><h5><b>{{$cant}} Actividad(es) por Desarrollarse</b></h5></a></li>
+              <li class="header"></li>
+                <li>
+                  <ul class="menu">
+                    <table class="table table-bordered table-hover table-striped" style="background-color:mintcream;">
+                      <thead>
+                        <tr style="width: 100%">
+                          <th style="text-align: center; width: 60%">Evento</th>
+                          <th style="text-align: center; width: 40%">fecha</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        @php
+                          $eventos=MyHelper::DetalleEventos(); //agarra los eventos posteriores a la fecha actual
+                        @endphp
+                        @foreach($eventos as $ev)
+                          <tr>
+                            <td style="text-align: center;">{{$ev->title}}</td>
+                            @php $dias=MyHelper::DiasEvento($ev->start); @endphp
+                            @if($dias==0)
+                              <td style="text-align: center;"><b>Hoy</b></td>
+                            @endif
+                            @if($dias>0)
+                              <td style="text-align: center;">En <b>{{$dias+1}}</b> Días</td>
+                            @endif
+                          </tr>
+                        @endforeach
+                          {{-- @for($i=$cant;$i>0;$i--)--}} 
+                      </tbody>
+                    </table>                                   
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          @endif
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               @php

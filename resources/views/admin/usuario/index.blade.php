@@ -17,9 +17,11 @@
 				<div style="text-align: center; background-color:lightblue;" class="box-header whit.border">
 				<h3 class="box-title"><b>Lista de Usuarios {{$activo}}</b></h3>
 					<div class="box-tools pull-right">
-						<a href="{{route('crear_usuario')}}" class="btn btn-block btn-success">
-							<i class="fa fa-fw fa-user-plus"></i> Crear Usuario
-						</a>
+						@if(Auth::user()->permiso->añadir == 1)
+							<a href="{{route('crear_usuario')}}" class="btn btn-block btn-success">
+								<i class="fa fa-fw fa-user-plus"></i> Crear Usuario
+							</a>
+						@endif
 					</div>
 				</div>
 				<div class="box-body table-responsive no.padding">
@@ -66,16 +68,19 @@
 											<i class="fa fa-fw fa-camera-retro"></i>
 										</a>
 										@endif
-										<a href="{{route('editar_usuario', ['id' => $usuario->id])}}" class="btn btn-warning btn-xs tooltipC" title="Editar usuario">
-											<i class="fas fa fa-wrench"></i>
-										</a>
+										@if(Auth::user()->permiso->editar == 1)
+											<a href="{{route('editar_usuario', ['id' => $usuario->id])}}" class="btn btn-warning btn-xs tooltipC" title="Editar usuario">
+												<i class="fas fa fa-wrench"></i>
+											</a>
+										@endif
 										{{-- <form action="{{route('eliminar_usuario', ['id' => $usuario->id])}}" class="d-inline form-eliminar" method="POST" id="form-eliminar">
 											@csrf @method("delete")
 											<button type="submit" class="btn btn-danger btn-xs eliminar tooltipsC" title="Eliminar Usuario">
 												<i class="fa fa-fw fa-close "></i>
 											</button>
 										</form> --}}
-										@if($usuario->estado==1)
+										@if(Auth::user()->permiso->eliminar == 1)
+											@if($usuario->estado==1)
 												<a href="{{route('desactivar_usuario', ['id' => $usuario->id])}}" class="btn btn-success btn-xs tooltipC" 
 													onclick="return confirm('¿Esta seguro de inactivar al usuario?')" title="desactivar usuario" id="usuario_rol">
 													<i class="fas fa fa-user"></i>
@@ -87,6 +92,7 @@
 													<i class="fas fa fa-user"></i>
 												</a>
 											@endif
+										@endif
 									</td>
 								</tr>
 							@endforeach

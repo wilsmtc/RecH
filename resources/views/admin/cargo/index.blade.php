@@ -15,9 +15,11 @@
 				<div style="text-align: center; background-color:lightblue;" class="box-header whit.border">
 					<h3 class="box-title"><b>Lista de Cargos</b></h3>
 					<div class="box-tools pull-right">
-						<a href="{{route('crear_cargo')}}" class="btn btn-block btn-success btn-sm">
-							<i class="fa fa-fw fa-plus-circle"></i> Crear nuevo Cargo
-						</a>
+						@if(Auth::user()->permiso->añadir == 1)
+							<a href="{{route('crear_cargo')}}" class="btn btn-block btn-success btn-sm">
+								<i class="fa fa-fw fa-plus-circle"></i> Crear nuevo Cargo
+							</a>
+						@endif
 					</div>
 				</div>
 				<div class="box-body">
@@ -36,15 +38,19 @@
 									<td style="text-align: center;">{{$cargo->nombre}}</td>
 									<td style="text-align: center;">{{$cargo->descripcion}}</td>
 									<td style="text-align: center;">
+									@if(Auth::user()->permiso->editar == 1)
 										<a href="{{route('editar_cargo', ['id' => $cargo->id])}}" class="btn btn-warning btn-xs tooltipC" title="Editar cargo">
 												<i class="fas fa fa-wrench"></i>
-										</a>									
+										</a>
+									@endif	
+									@if(Auth::user()->permiso->eliminar == 1)								
 										<form action="{{route('eliminar_cargo', ['id' => $cargo->id])}}" class="d-inline form-eliminar" method="POST">
 											@csrf @method("delete")
 											<button type="submit" class="btn btn-danger btn-xs eliminar tooltipsC" title="Eliminar cargo">
 												<i class="fa fa-fw fa-close"></i>
 											</button>
 										</form>
+									@endif
 									</td>
 								</tr>
 							@endforeach

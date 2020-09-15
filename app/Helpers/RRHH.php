@@ -1,6 +1,8 @@
 <?php
 
+use App\Models\Admin\Evento;
 use App\Models\Admin\Vacacion;
+use Illuminate\Support\Facades\DB;
 
 if (!function_exists('getMenuActivo')) {
     function getMenuActivo($ruta)
@@ -31,5 +33,27 @@ class MyHelper {
     public static function DiasTomados($id){
         $dias_tomados = Vacacion::where('personal_id',$id)->sum('dias_t');
         return $dias_tomados;
+    }
+    public static function CantidadEventos(){
+        $fecha_hoy= date("Y-m-d");
+        $eventos = Evento::orderBy('id')->get();
+        $cont=0;
+        foreach($eventos as $ev)
+            if($ev->start>=$fecha_hoy){
+                $cont++;
+            }               
+        return $cont;
+    }
+    public static function DetalleEventos(){
+        $fecha_hoy= date("Y-m-d");
+        $eventos = Evento::where('start','>=',$fecha_hoy)->orderBy('start')->get();
+        return $eventos;                     
+    }
+    public static function DiasEvento($fecha_evento){
+        $fecha_hoy= new \DateTime();
+        $fecha_ev=new \DateTime($fecha_evento);
+        $dias = $fecha_hoy->diff($fecha_ev);
+        $dif = $dias->format('%d');
+        return $dif;                     
     }
 }

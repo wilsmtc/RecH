@@ -114,7 +114,7 @@ class UsuarioAdministradorSeeder extends Seeder
             'menu_id'=>8,
             'nombre'=>'Personal Activo',
             'url'=>'admin/personal',
-            'orden'=>1,
+            'orden'=>2,
             'icono'=>'fa-eye'
         ]);
         DB::table('menu')->insert([
@@ -142,18 +142,11 @@ class UsuarioAdministradorSeeder extends Seeder
             'menu_id'=>8,
             'nombre'=>'Personal Retirado',
             'url'=>'admin/personalret',
-            'orden'=>2,
+            'orden'=>3,
             'icono'=>'fa-eye'
         ]);
         DB::table('menu')->insert([
-            'menu_id'=>0,
-            'nombre'=>'Cargo',
-            'url'=>'admin/cargo/#',
-            'orden'=>4,
-            'icono'=>'fa-book'
-        ]);
-        DB::table('menu')->insert([
-            'menu_id'=>14,
+            'menu_id'=>8,
             'nombre'=>'Ver Cargo',
             'url'=>'admin/cargo',
             'orden'=>1,
@@ -173,7 +166,6 @@ class UsuarioAdministradorSeeder extends Seeder
         DB::table('menu_rol')->insert(['rol_id'=>1,'menu_id'=>11]);
         DB::table('menu_rol')->insert(['rol_id'=>1,'menu_id'=>13]);
         DB::table('menu_rol')->insert(['rol_id'=>1,'menu_id'=>14]);
-        DB::table('menu_rol')->insert(['rol_id'=>1,'menu_id'=>15]);
 
         DB::table('personal')->insert([
             'nombre'=>'Tomas',
