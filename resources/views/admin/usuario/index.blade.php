@@ -18,9 +18,11 @@
 				<h3 class="box-title"><b>Lista de Usuarios {{$activo}}</b></h3>
 					<div class="box-tools pull-right">
 						@if(Auth::user()->permiso->añadir == 1)
-							<a href="{{route('crear_usuario')}}" class="btn btn-block btn-success">
-								<i class="fa fa-fw fa-user-plus"></i> Crear Usuario
-							</a>
+							@if($activo=='Activos')
+								<a href="{{route('crear_usuario')}}" class="btn btn-block btn-success">
+									<i class="fa fa-fw fa-user-plus"></i> Crear Usuario
+								</a>
+							@endif
 						@endif
 					</div>
 				</div>

@@ -1,6 +1,6 @@
 @extends("theme.$theme.layout")
 @section('titulo')
-	Unidad
+	Contrato
 @endsection
 @section("scripts")
 	<script src="{{asset("assets/pages/scripts/admin/datatables/datatables.js")}}" type="text/javascript"></script>
@@ -11,16 +11,15 @@
 			<div class="box box-primary">
 				<div style="background-color:lightblue; text-align: center;" class="box-header whit.border">
                     <div class="box-tools pull-right">
-                        <a href="{{route('unidad')}}" class="btn btn-block btn-info btn-sm">
-                            <i class="fa fa-fw fa-reply-all"></i> Volver a Unidades
+                        <a href="{{route('contrato')}}" class="btn btn-block btn-info btn-sm">
+                            <i class="fa fa-fw fa-reply-all"></i> Volver a Contratos
                         </a>
                     </div>
-                    <h3 class="box-title"><b>{{$unid->nombre}}</b></h3>
+                    <h3 class="box-title"><b>{{$contrato->nombre}}</b></h3>
                 </div>
                 <div>
-                    &nbsp;&nbsp;<b> Desctripción:    {{$unid->descripcion}}</b> 
                     <div class="box-tools pull-right col-lg-2">
-                        <a href="{{route('pdf_unidad', ['id' => $unid->id])}}" target="_blank" class="btn btn-block btn-success btn-sm">
+                        <a href="{{route('pdf_contrato', ['id' => $contrato->id])}}" target="_blank" class="btn btn-block btn-success btn-sm">
                             <i class=" fa fa-file-pdf-o"></i> Ver en PDF
                         </a>
                     </div>                  
@@ -36,7 +35,7 @@
 						</thead>
 						<tbody>
                             @foreach($personal as $per)                          
-                            @if($per->unidad->nombre==$unid->nombre)
+                            @if($per->contrato->nombre==$contrato->nombre)
 								<tr>									
 									<td style="text-align: center;">{{$per->ci}}</td>
 									<td style="text-align: center;">{{$per->nombre}}</td>

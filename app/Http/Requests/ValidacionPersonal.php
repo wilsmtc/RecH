@@ -27,7 +27,7 @@ class ValidacionPersonal extends FormRequest
                     'genero'=>'required|max:6',
                     'foto_up'=>'nullable|image|max:3000',
                     'documento_up'=>'nullable|max:10000',
-                    'item'=>'nullable|min:2|max:5|unique:personal,item,'. $this->route('id'),
+                    'contrato_id'=>'required|integer',
                     'fecha_ret'=>'nullable|date|date_format:Y-m-d',
                     'razon_ret'=>'nullable|max:30',
                     'memorandum_ret'=>'nullable|max:1000'
@@ -46,7 +46,7 @@ class ValidacionPersonal extends FormRequest
                     'genero'=>'required|max:6',
                     'foto_up'=>'nullable|image|max:3000',
                     'documento_up'=>'nullable|max:10000',
-                    'item'=>'nullable|min:2|max:5|unique:personal,item',
+                    'contrato_id'=>'required|integer',
                     'fecha_ret'=>'nullable|date|date_format:Y-m-d',
                     'razon_ret'=>'nullable|max:30',
                     'memorandum_ret'=>'nullable|max:1000'
@@ -74,9 +74,7 @@ class ValidacionPersonal extends FormRequest
             'foto_up.image' => 'La Foto debe de estar en un formato .jpg .png .jpeg',
             'foto_up.max' => 'El tamaño máximo de la Foto es de 3 MB',
             'documento_up.max' => 'El tamaño máximo del Curriculum es de 10 MB',
-            'item.max' => 'El número de Item no puede tener mas de 5 digitos',
-            'item.min' => 'El número de Item debe tener al menos 2 digitos',
-            'item.unique' => 'El número de Item ya ha sido tomado',
+            'contrato_id.required' => 'Olvidaste asignar un tipo de Contrato',
             'razon_ret.max' => 'La razón del retiro debe ser mas corta (30 caracteres)',
             'memorandum_ret.max' => 'El tamaño máximo del Memorandum de Retiro es de 1 MB',
         ];

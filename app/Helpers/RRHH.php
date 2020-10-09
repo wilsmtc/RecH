@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Admin\Evento;
+use App\Models\Admin\Personal;
 use App\Models\Admin\Vacacion;
 use Illuminate\Support\Facades\DB;
 
@@ -35,7 +36,7 @@ class MyHelper {
         return $dias_tomados;
     }
     public static function CantidadEventos(){
-        $fecha_hoy= date("Y-m-d");
+        $fecha_hoy= date("Y-m-d H:i:s");
         $eventos = Evento::orderBy('id')->get();
         $cont=0;
         foreach($eventos as $ev)
@@ -45,7 +46,7 @@ class MyHelper {
         return $cont;
     }
     public static function DetalleEventos(){
-        $fecha_hoy= date("Y-m-d");
+        $fecha_hoy= date("Y-m-d H:i:s");
         $eventos = Evento::where('start','>=',$fecha_hoy)->orderBy('start')->get();
         return $eventos;                     
     }
@@ -55,5 +56,46 @@ class MyHelper {
         $dias = $fecha_hoy->diff($fecha_ev);
         $dif = $dias->format('%d');
         return $dif;                     
+    }
+    public static function horasEvento($fecha_evento){
+        $fecha_hoy= new \DateTime();
+        $fecha_ev=new \DateTime($fecha_evento);
+        $dias = $fecha_hoy->diff($fecha_ev);
+        $dif = $dias->format('%h');
+        return $dif;                     
+    }
+
+    public static function CantidadEventos_inv(){
+        $fecha_hoy= date("Y-m-d H:i:s");
+       // session_start();
+        //ob_start();
+        $id=$_SESSION['id_invitado'];
+        $personal=Personal::findOrfail($id);
+        $eventos=Evento::where('unidad_id','=',$personal->unidad_id)->orderBy('id')->get();
+        $cont=0;
+        foreach($eventos as $ev)
+            if($ev->start>=$fecha_hoy){
+                $cont++;
+            }               
+        return $cont;
+    }
+    public static function DetalleEventos_inv(){
+        $fecha_hoy= date("Y-m-d H:i:s");
+        //session_start();
+        //ob_start();
+        $id=$_SESSION['id_invitado'];
+        $personal=Personal::findOrfail($id);
+        $eventos = Evento::where([
+            ['start','>=',$fecha_hoy],
+            ['unidad_id','=',$personal->unidad_id],
+        ])->orderBy('start')->get();
+        return $eventos;                     
+    }
+    public static function Unidad_inv(){
+        //session_start();
+        //ob_start();
+        $id=$_SESSION['id_invitado'];
+        $personal=Personal::findOrfail($id);
+        return $personal;                     
     }
 }

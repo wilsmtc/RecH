@@ -1,7 +1,7 @@
 <div class="form-group">
 	<label for="nombre" class="col-lg-3 control-label requerido">Nombre</label>
 	<div class="col-lg-5">
-		<input type="text" name="nombre" id="nombre" class="form-control" value="{{old('nombre', $capacitacion->nombre ?? '')}}" required placeholder="Nombre de la Capacitación" autocomplete="off"/>		
+		<input type="text" name="nombre" id="nombre" class="form-control" value="{{old('nombre', $capacitacion->nombre ?? '')}}" required placeholder="Nombre de la Capacitación" autocomplete="off" onkeyup="NombreMayus()"/>		
 	</div>
 </div>
 
@@ -31,3 +31,16 @@
         <input type="file" name="documento_up" id="documento" data-initial-preview="{{isset($capacitaciones->documento) ? Storage::url("imagenes/documentos/capacitacion/$capacitacion->documento") : "http://www.placehold.it/250x250/EFEFEF/AAAAAA&text=documento+de+capacitación"}}" accept=".pdf, .docx, .pptx"/>
     </div>
 </div>
+
+<script>
+    var nombre = document.getElementById('nombre');  //instanciamos el elemento input
+        function NombreMayus() {            //función que capitaliza la primera letra              
+        var palabra = nombre.value;                    //almacenamos el valor del input 
+        if(!nombre.value) return;                      //Si el valor es nulo o undefined salimos  
+        var mayuscula = palabra.substring(0,1).toUpperCase(); // almacenamos la mayuscula  
+        if (palabra.length > 0) {                     //si la palabra tiene más de una letra almacenamos las minúsculas
+            var minuscula = palabra.substring(1).toLowerCase();
+        }                                              
+        nombre.value = mayuscula.concat(minuscula);    //escribimos la palabra con la primera letra mayuscula
+    }
+</script>

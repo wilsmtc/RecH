@@ -6,13 +6,16 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ValidacionCargo;
 use App\Models\Admin\Cargo;
+use App\Models\Admin\Personal;
+use App\Models\Admin\Unidad;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class CargoController extends Controller
 {
 
     public function index()
     {
-        $cargos = Cargo::orderBy('id')->get();
+        $cargos = Cargo::orderBy('id','desc')->get();
         return view('admin.cargo.index', compact('cargos'));
     }
 
@@ -56,5 +59,18 @@ class CargoController extends Controller
         } else {
              abort(404);
         }
+    }
+    public function ver($id)
+    {
+        $cargo = Cargo::findOrfail($id);
+        $personal = Personal::where('estado',1)->orderBy('id')->get();
+        return view('admin.cargo.ver-cargo', compact('cargo', 'personal'));
+    }
+    public function pdf($id)
+    {
+        $personal = Personal::where('estado',1)->orderBy('id')->get();
+        $cargo=Cargo::findOrFail($id);
+        $pdf=PDF::loadview('admin.reportes.cargo-personal', compact('cargo','personal'));
+        return $pdf->stream('cargo.pdf');
     }
 }

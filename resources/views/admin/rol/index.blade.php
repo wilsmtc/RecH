@@ -5,6 +5,7 @@ Roles
 
 @section("scripts")
 <script src="{{asset("assets/pages/scripts/admin/alert/alert.js")}}" type="text/javascript"></script>
+	<script src="{{asset("assets/pages/scripts/admin/datatables/datatables.js")}}" type="text/javascript"></script>
 @endsection
 
 @section('contenido')
@@ -53,7 +54,6 @@ Roles
                             </td>
                         </tr>
                         @endforeach
-
                     </tbody>
                 </table>
             </div>

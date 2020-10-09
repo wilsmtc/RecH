@@ -48,14 +48,14 @@
                                 <select name="razon_ret" id="razon_ret" class="form-control" required >
                                     <option value="">Seleccione su Opción</option>
                                     <option value="Renuncia"{{old("razon_ret",$personal->razon_ret?? "")=="Renuncia" ? "selected":""}}>Renuncia</option>
-                                    <option value="Jubilación"{{old("razon_ret",$vacacion->razon_ret?? "")=="Jubilación" ? "selected":""}}>Jubilación</option>
-                                    <option value="Invalidez"{{old("razon_ret",$vacacion->razon_ret?? "")=="Invalidez" ? "selected":""}}>Invalidez</option>
-                                    <option value="Destitución"{{old("razon_ret",$vacacion->razon_ret?? "")=="Destitución" ? "selected":""}}>Destitución</option>
-                                    <option value="Abandono"{{old("razon_ret",$vacacion->razon_ret?? "")=="Abandono" ? "selected":""}}>Abandono</option>
-                                    <option value="Retiro forzoso"{{old("razon_ret",$vacacion->razon_ret?? "")=="Retiro forzoso" ? "selected":""}}>Retiro forzoso</option>
-                                    <option value="Rescisión de contrato"{{old("razon_ret",$vacacion->razon_ret?? "")=="Rescisión de contrato" ? "selected":""}}>Rescisión de contrato</option>
-                                    <option value="Motivos Personales"{{old("razon_ret",$vacacion->razon_ret?? "")=="Motivos Personales" ? "selected":""}}>Motivos Personales</option>
-                                    <option value="Otros"{{old("razon_ret",$vacacion->razon_ret?? "")=="Otros" ? "selected":""}}>Otros</option>
+                                    <option value="Jubilación"{{old("razon_ret",$personal->razon_ret?? "")=="Jubilación" ? "selected":""}}>Jubilación</option>
+                                    <option value="Invalidez"{{old("razon_ret",$personal->razon_ret?? "")=="Invalidez" ? "selected":""}}>Invalidez</option>
+                                    <option value="Destitución"{{old("razon_ret",$personal->razon_ret?? "")=="Destitución" ? "selected":""}}>Destitución</option>
+                                    <option value="Abandono"{{old("razon_ret",$personal->razon_ret?? "")=="Abandono" ? "selected":""}}>Abandono</option>
+                                    <option value="Retiro forzoso"{{old("razon_ret",$personal->razon_ret?? "")=="Retiro forzoso" ? "selected":""}}>Retiro forzoso</option>
+                                    <option value="Rescisión de contrato"{{old("razon_ret",$personal->razon_ret?? "")=="Rescisión de contrato" ? "selected":""}}>Rescisión de contrato</option>
+                                    <option value="Motivos Personales"{{old("razon_ret",$personal->razon_ret?? "")=="Motivos Personales" ? "selected":""}}>Motivos Personales</option>
+                                    <option value="Otros"{{old("razon_ret",$personal->razon_ret?? "")=="Otros" ? "selected":""}}>Otros</option>
                                 </select>
                             </div>
                         </div>

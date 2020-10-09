@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin\Personal;
 use Illuminate\Http\Request;
 
 class InicioController extends Controller
@@ -13,7 +14,16 @@ class InicioController extends Controller
      */
     public function index()
     {
-       return view('inicio');
+        session_start();
+        ob_start();       
+        if($_SESSION['id_invitado']==0){
+            // header("HTTP/1.0 404 Not Found");
+            Personal::findOrfail(0);
+        }
+        else{
+           return view('inicio'); 
+        }
+       
 //        return ("hola");
     }
 

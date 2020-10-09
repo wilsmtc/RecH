@@ -14,12 +14,24 @@ class ValidacionCapacitacion extends FormRequest
 
     public function rules()
     {
-        return [
-                    'nombre'=>'required|max:50',
-                    'unidad_id'=>'required|integer',
-                    'descripcion' => 'nullable|max:250',
-                    'documento_up'=>'required|max:10000'
-                ];
+        if($this->route('id')){
+            return [
+                //editar
+                'nombre'=>'required|max:50',
+                'unidad_id'=>'required|integer',
+                'descripcion' => 'nullable|max:250',
+                'documento_up'=>'nullable|max:10000'
+            ];
+        }
+        else{
+           return [
+               //crear
+                'nombre'=>'required|max:50',
+                'unidad_id'=>'required|integer',
+                'descripcion' => 'nullable|max:250',
+                'documento_up'=>'required|max:10000'
+            ]; 
+        }
     }
     public function messages()
     {

@@ -17,25 +17,23 @@ document.addEventListener('DOMContentLoaded', function() {
       },
       dateClick:function(info){//cuando hacemos click en un dia del calendario (crear)
         limpiarFormulario();
-        $('#fecha').val(info.dateStr);//recupera la fecha donde se hizo click
-        if(($('#fecha').val())>=fechaactual){
-            $('#btncrear').prop("disabled",false);
-            $('#btneditar').prop("disabled",true);
-            $('#btneliminar').prop("disabled",true);
-            $('#modal-calendario').modal();//activa el modal      
+        $('#fechaC').val(info.dateStr);//recupera la fecha donde se hizo click
+        if(($('#fechaC').val())>=fechaactual){
+
+
+            $('#modal-calendario-crear').modal();//activa el modal      
         }else{
             alert("no puede crear eventos en fechas pasadas");
         }
         
       },
       eventClick:function(info){//cuando hacemos click en un evento
-        //console.log(info.event.title);
+        //console.log(info.event.extendedProps.unidad_id);
         //console.log(info.event.extendedProps.descripcion);
-        $('#btncrear').prop("disabled",true);
-        $('#btneditar').prop("disabled",false);
-        $('#btneliminar').prop("disabled",false);
+
 
         $('#id').val(info.event.id);
+        $('#unidad_id').val(info.event.extendedProps.unidad_id);
         $('#titulo').val(info.event.title);
         $('#lugar').val(info.event.extendedProps.lugar);
           dia=(info.event.start.getDate());
@@ -53,7 +51,26 @@ document.addEventListener('DOMContentLoaded', function() {
         $('#hora').val(hrs);
         $('#color').val(info.event.backgroundColor);
         $('#descripcion').val(info.event.extendedProps.descripcion);
-        $('#modal-calendario').modal();
+$('#modal-calendario').modal();
+        $('#unidad_idC').val(info.event.extendedProps.unidad_id);
+        $('#tituloC').val(info.event.title);
+        $('#lugarC').val(info.event.extendedProps.lugar);
+          dia=(info.event.start.getDate());
+          mes=(info.event.start.getMonth()+1);
+          año=(info.event.start.getFullYear());
+            mes=(mes<10)?"0"+mes:mes;
+            dia=(dia<10)?"0"+dia:dia;
+            fecha=año+"-"+mes+"-"+dia;
+          hora=(info.event.start.getHours());
+          minuto=(info.event.start.getMinutes());
+            hora=(hora<10)?"0"+hora:hora;
+            minuto=(minuto<10)?"0"+minuto:minuto;
+            hrs=hora+":"+minuto;
+        $('#fechaC').val(fecha);
+        $('#horaC').val(hrs);
+        $('#colorC').val(info.event.backgroundColor);
+        $('#descripcionC').val(info.event.extendedProps.descripcion);
+
       },
       // events:[
       //   {
@@ -71,19 +88,21 @@ document.addEventListener('DOMContentLoaded', function() {
     calendar.render();
 
     $('#btncrear').click(function(){ //cuando damos click en boton crear
-        if(($('#fecha').val())>=fechaactual){
+        if(($('#fechaC').val())>=fechaactual){
             objEvento=recolectarDatos("POST");//llama a la funcion q agarra los datos del form y le deciomos q es POST
-            EnviarInformacion('', objEvento);  //llama a la funcion para almacenar los datos (es decir STORE)       
+            EnviarInformacion('', objEvento);  //llama a la funcion para almacenar los datos (es decir STORE)  
+            calendar.refetchEvents();
         }else{
             alert("no puede crear eventos en fechas pasadas");
-            $('#modal-calendario').modal('toggle');//en modal se cerrara
+            $('#modal-calendario-crear').modal('toggle');//en modal se cerrara
         }
     });
 
     $('#btneliminar').click(function(){
         if(($('#fecha').val())>=fechaactual){
             objEvento=recolectarDatos("DELETE");
-            EnviarInformacion('/'+$('#id').val(), objEvento);       
+            EnviarInformacion('/'+$('#id').val(), objEvento);
+            calendar.refetchEvents();//actualiza el calendario       
         }else{
             alert("no puede eliminar eventos de fechas pasadas");
             $('#modal-calendario').modal('toggle');//en modal se cerrara
@@ -92,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     $('#btneditar').click(function(){
         if(($('#fecha').val())>=fechaactual){
-            objEvento=recolectarDatos("PATCH");
+            objEvento=recolectarDatos2("PATCH");
             EnviarInformacion('/'+$('#id').val(), objEvento);         
         }else{
             alert("no puede editar eventos de fechas pasadas");
@@ -106,13 +125,14 @@ document.addEventListener('DOMContentLoaded', function() {
            
            nuevoEvento={
             //id:$('#id').val(),
-            title:$('#titulo').val(),
-            lugar:$('#lugar').val(),
-            descripcion:$('#descripcion').val(),
-            color:$('#color').val(),
+            unidad_id:$('#unidad_idC').val(),
+            title:$('#tituloC').val(),
+            lugar:$('#lugarC').val(),
+            descripcion:$('#descripcionC').val(),
+            color:$('#colorC').val(),
             textColor:'#FFFFFF',
-            start:$('#fecha').val()+" "+$('#hora').val(),
-            end:$('#fecha').val()+" "+$('#hora').val(),
+            start:$('#fechaC').val()+" "+$('#horaC').val(),
+            end:$('#fechaC').val()+" "+$('#horaC').val(),
             '_token':$('meta[name="csrf-token"]').attr('content'),
             '_method':method 
             }
@@ -121,6 +141,26 @@ document.addEventListener('DOMContentLoaded', function() {
             return
         }      
     }
+    function recolectarDatos2(method){//agarrar los datos q llenamos en el form y recive un metodo (post,etc)
+      if(validarDatos()){       
+         nuevoEvento={
+          //id:$('#id').val(),
+          unidad_id:$('#unidad_id').val(),
+          title:$('#titulo').val(),
+          lugar:$('#lugar').val(),
+          descripcion:$('#descripcion').val(),
+          color:$('#color').val(),
+          textColor:'#FFFFFF',
+          start:$('#fecha').val()+" "+$('#hora').val(),
+          end:$('#fecha').val()+" "+$('#hora').val(),
+          '_token':$('meta[name="csrf-token"]').attr('content'),
+          '_method':method 
+          }
+          return (nuevoEvento);  //nos devuelve un array con todos los datos del evento
+      }else{
+          return
+      }      
+  }
     function EnviarInformacion(accion, objEvento){//envia los datos al metodo STORE del controlador      
       $.ajax(
         {
@@ -128,7 +168,7 @@ document.addEventListener('DOMContentLoaded', function() {
           url:url_+accion,//accion sera una variable q agarre el metodo
           data:objEvento,//objEvento agarra los datos atributos
           success:function(msg){
-            $('#modal-calendario').modal('toggle');//en modal se cerrara
+            $('#modal-calendario-crear').modal('toggle');//en modal se cerrara
             calendar.refetchEvents();//actualiza el calendario
           },
           error:function(msg){alert("hay un error");},
@@ -141,6 +181,14 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     function limpiarFormulario(){
       $('#id').val("");
+      $('#unidad_idC').val("");
+      $('#tituloC').val("");
+      $('#lugarC').val("");
+      $('#fechaC').val("");
+      $('#horaC').val("07:00");
+      $('#colorC').val("");
+      $('#descripcionC').val("");
+      $('#unidad_id').val("");
       $('#titulo').val("");
       $('#lugar').val("");
       $('#fecha').val("");

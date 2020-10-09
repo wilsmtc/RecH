@@ -11,10 +11,17 @@ use Illuminate\Support\Facades\Storage;
 
 class CapacitacionController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $capacitaciones = Capacitacion::orderBy('id')->get();
-        return view('admin.capacitacion.index', compact('capacitaciones'));
+        if ($request){
+            $query= trim($request->get('search'));
+            $capacitaciones=Capacitacion::where('nombre', 'LIKE', '%'. $query . '%')->orderBy('id','desc')->paginate(15);
+            return view('admin.capacitacion.index',['capacitaciones'=>$capacitaciones,'search'=>$query]);      
+        }
+        else{
+            $capacitaciones = Capacitacion::orderBy('id','desc')->paginate(15);
+            return view('admin.capacitacion.index', compact('capacitaciones'));  
+        }
     }
 
     public function create()

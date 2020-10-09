@@ -17,6 +17,9 @@ class LoginController extends Controller
     }
     public function index()
     {
+        session_start();
+        ob_start();
+        $_SESSION['id_invitado']=0;
         return view('seguridad.index');
     }
     protected function authenticated(Request $request, $user) 

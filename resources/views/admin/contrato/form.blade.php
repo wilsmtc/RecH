@@ -1,15 +1,19 @@
 <div class="form-group">
-	<label for="nombre" class="col-lg-3 control-label requerido">Nombre del Cargo</label>
+	<label for="nombre" class="col-lg-3 control-label requerido">Nombre del Contrato</label>
 	<div class="col-lg-5">
-		<input type="text" name="nombre" id="nombre" class="form-control" value="{{old('nombre', $cargo->nombre ?? '')}}" required autocomplete="off" placeholder="Nombre del Cargo" onkeyup="NombreMayus()"/>		
+		<input type="text" name="nombre" id="nombre" class="form-control" value="{{old('nombre', $contrato->nombre ?? '')}}" required autocomplete="off" placeholder="Nombre del Contrato" minlength="3" onkeyup="NombreMayus()"/>		
 	</div>
 </div>
 
 <div class="form-group">
-	<label for="descripcion" class="col-lg-3 control-label">Descripción</label>
-	<div class="col-lg-5">
-		<input type="text" name="descripcion" id="descripcion" class="form-control" value="{{old('descripcion', $cargo->descripcion ?? '')}}" autocomplete="off" placeholder="Desscripción"/>		
-	</div>
+    <label for="vacacion" class="col-lg-3 control-label requerido">Privilegio de Vacación</label>
+    <div class="col-lg-5">
+        <select name="vacacion" id="vacacion" class="form-control" required >
+            <option value="">Seleccione su Opción</option>
+            <option value="si"{{old("vacacion",$contrato->vacacion?? "")=="si" ? "selected":""}}>Tiene</option>
+            <option value="no"{{old("vacacion",$contrato->vacacion?? "")=="no" ? "selected":""}}>No tiene</option>
+        </select>
+    </div>
 </div>
 
 <script>

@@ -24,6 +24,8 @@ Route::resource('eventos', 'Admin\CalendarioController');
 									//rutas del invitado
 Route::get('invitado', 'Admin\InvitadoController@create') ->name('invitado');	
 Route::post('invitado/verificar', 'Admin\InvitadoController@store')->name('verificar');
+Route::get('verinvitado', 'Admin\InvitadoController@verinfo') ->name('ver_invitado');
+Route::get('capacitacion/{id}/capacitacion', 'Admin\CapacitacionController@documento')->name('ver_cap');
 Route ::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware'=> 'auth'], function(){
 	Route::get('', 'AdminController@index');
 		Route ::group(['middleware'=> 'permisoadmin'], function(){
@@ -75,6 +77,17 @@ Route ::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware'=> 'auth
 	Route::get('cargo/{id}/editar', 'CargoController@edit') ->name('editar_cargo')->middleware('permisoeditar');
 	Route::put('cargo/{id}', 'CargoController@update') ->name('actualizar_cargo');
 	Route::delete('cargo/{id}', 'CargoController@destroy')->name('eliminar_cargo')->middleware('permisoeliminar');
+	Route::get('ver_cargo/{id}', 'CargoController@ver') ->name('ver_cargo');
+	Route::get('cargo/{id}/pdf', 'CargoController@pdf')->name('pdf_cargo');
+						//rtuas para los contratos
+	Route::get('contrato', 'ContratoController@index') ->name('contrato');
+	Route::get('contrato/crear', 'ContratoController@create')->name('crear_contrato')->middleware('permisocrear');
+	Route::post('contrato', 'ContratoController@store')->name('guardar_contrato');
+	Route::get('contrato/{id}/editar', 'ContratoController@edit') ->name('editar_contrato')->middleware('permisoeditar');
+	Route::put('contrato/{id}', 'ContratoController@update') ->name('actualizar_contrato');
+	Route::delete('contrato/{id}', 'ContratoController@destroy')->name('eliminar_contrato')->middleware('permisoeliminar');	
+	Route::get('ver_contrato/{id}', 'ContratoController@ver') ->name('ver_contrato');	
+	Route::get('contrato/{id}/pdf', 'ContratoController@pdf')->name('pdf_contrato');			
 						//rutas para el personal
 	Route::get('personal', 'PersonalController@index') ->name('personal');
 	Route::get('personal/crear', 'PersonalController@create')->name('crear_personal')->middleware('permisocrear');

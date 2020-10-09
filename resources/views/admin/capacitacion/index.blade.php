@@ -3,7 +3,8 @@
 	Capacitación
 @endsection
 @section("scripts")
-<script src="{{asset("assets/pages/scripts/admin/alert/alert.js")}}" type="text/javascript"></script>
+	<script src="{{asset("assets/pages/scripts/admin/alert/alert.js")}}" type="text/javascript"></script>
+	{{-- <script src="{{asset("assets/pages/scripts/admin/datatables/datatables.js")}}" type="text/javascript"></script> --}}
 @endsection
 @section('contenido')
 	<div  class="row">
@@ -21,6 +22,27 @@
 						@endif
 					</div>
 				</div>
+				{{-- busqueda --}}
+				<form class="form-inline ml-3">
+					<div class="input-group">
+					  <input type="search" name="search" class="form-control" placeholder="Buscar por nombre" aria-label="search" value="{{old('search', $search ?? '')}}" autocomplete="off">						
+					  <span class="input-group-btn">							
+							<button type="submit" class="btn btn-flat">
+								<i class="fa fa-search"></i>
+							</button>
+							
+						</span>
+					</div>
+				</form>
+				@if($search)
+					<div class="callout callout-info">
+						<a href="{{route('capacitacion')}}" class="ver-curriculum btn btn-primary btn-xs tooltipC" title="volver">
+							<i class="fa fa-fw fa-reply-all"></i>																			
+						</a>
+						Los resultados de tu busqueda <b>'{{$search}}'</b> son:	
+					</div>
+				@endif
+				{{-- busqueda --}}
 				<div class="box-body">
 					<table class="table table-bordered table-hover table-striped" id="tabla-data" style="background-color:mintcream;">
 						<thead>
@@ -48,16 +70,15 @@
 												</span>																													
 											@endif
 											@if($extencion=="docx")
-											<span class="label label-primary">
-												<label style="width:80px">WORD</label>
-											</span>	
+												<span class="label label-primary">
+													<label style="width:80px">WORD</label>
+												</span>	
 											@endif
 											@if($extencion=="pptx")
-											<span class="label label-warning">
-												<label style="width:80px">PowerPoint</label>
-											</span>	
-											@endif	
-										</a>	
+												<span class="label label-warning">
+													<label style="width:80px">PowerPoint</label>
+												</span>	
+											@endif		
 									</td>
 									<td style="text-align: center;">
 										<a href="{{route('ver_capacitacion', ['id' => $capacitacion->id])}}" target="_blank" class="ver-capacitacion btn btn-success btn-xs tooltipC" title="ver capacitacion" id="ver-capacitacion">																
@@ -81,6 +102,7 @@
 							@endforeach
 						</tbody>
 					</table>
+					{{$capacitaciones->links()}}
 				</div>
 			</div>
 		</div>

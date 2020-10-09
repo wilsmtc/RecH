@@ -3,19 +3,19 @@
         <h3 class="box-title"><i><b>Fundación de Software libre Potosí</b><i></h3>
     </div>
     <div style="text-align: center;" class="col-lg-5">
-        <h3 class="box-title"><b>Reporte unidad-personal</b></h3>
+        <h3 class="box-title"><b>Reporte Cargo-Personal</b></h3>
     </div>
     <div>
-        &nbsp;&nbsp;<b> Unidad:      {{$unid->nombre}}</b>
+        &nbsp;&nbsp;<b> Cargo:      {{$cargo->nombre}}</b>
     </div>
     <div>
-        &nbsp;&nbsp;<b> Sigla:    &nbsp;&nbsp;&nbsp;&nbsp;{{$unid->sigla}}</b>                
+        &nbsp;&nbsp;<b> Descripcion:    &nbsp;&nbsp;&nbsp;&nbsp;{{$cargo->descripcion}}</b>                
     </div>
     &nbsp;&nbsp;<b> Fecha:    &nbsp;&nbsp; {{date("d/m/Y")}}</b>                
     </div>
     <br><br>
     <p>
-        A continuación se muestra a todo el personal activo de la unidad: {{$unid->nombre}}
+        A continuación se muestra a todo el personal activo con el cargo de: {{$cargo->nombre}}
     </p>
     <div class="container">
         <table border="1" align="center" WIDTH="80%" >
@@ -28,7 +28,7 @@
             </thead>          
             <tbody>
                 @foreach($personal as $per)                          
-                @if($per->unidad->nombre==$unid->nombre)
+                @if($per->cargo->nombre==$cargo->nombre)
                     <tr>									
                         <td style="text-align: center;">{{$per->ci}}</td>
                         <td style="text-align: center;">{{$per->nombre}}</td>

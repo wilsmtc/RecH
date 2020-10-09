@@ -19,3 +19,258 @@ El artículo 44º de la Ley General del Trabajo, norma que tienen derecho a la v
  sean del sector público o privado, en base a una escala donde las primeras cuatro vacaciones corresponden a periodos
   de quince días, las cinco siguientes a periodos de veinte días y, a partir de la décima vacación, a periodos de
    treinta días hábiles. El Decreto Supremo No. 12059, de 24 de diciembre de 1974
+
+DEL CONTRATO COLECTIVO 
+DEL CONTRATO DE APRENDIZAJE 
+DEL CONTRATO DE ENGANCHE 
+
+1. Contrato Indefinido
+    Se trata de un tipo de contrato que se establece sin una limitación temporal en lo que respecta al período de
+    realización del servicio. Dicho de otro modo, en este tipo de contrato no se estipula una fecha de finalización
+3. Por obra o servicio
+    Se emplea este tipo de contrato en aquellas vinculaciones laborales que se sabe que van a tener un inicio y
+    final determinados, si bien la fecha de finalización es incierta y se circunscribe a la finalización de un
+    determinado servicio.
+4. Eventual
+    Este tipo de contrato, que como máximo ha de durar seis meses, es uno de los más habituales en la actualidad. 
+    En principio este contrato se emplea en aquellos momentos en que una empresa o empleador precisa de una ayuda 
+    temporal debido a circunstancias imprevistas en las que se precisa de mayor cantidad de trabajadores de lo habitual.
+7. De formación y aprendizaje
+    Su principal función es la de permitir una alternancia entre actividad laboral y formación,
+
+
+
+
+
+    <?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreatePersonalTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('personal', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('nombre',50);
+            $table->string('apellido',50);
+            $table->integer('unidad_id')->unsigned();
+            $table->foreign('unidad_id')->references('id')->on('unidades')->onDelete('restrict');
+            $table->string('ci',15)->unique();
+            $table->integer('contrato_id')->unsigned();
+            $table->foreign('contrato_id')->references('id')->on('contrato')->onDelete('restrict');
+            $table->integer('cargo_id')->unsigned();
+            $table->foreign('cargo_id')->references('id')->on('cargos')->onDelete('restrict');
+            $table->string('celular',15)->nullable()->unique();
+            $table->date('fecha_ing'); 
+            $table->date('fecha_ret')->nullable();
+            $table->string('genero',6);                     
+            $table->string('curriculum',100)->nullable();
+            $table->string('foto',100)->nullable();
+            $table->integer('estado')->nullable()->default(1);
+            $table->string('razon_ret',30)->nullable();
+            $table->string('memorandum_ret',100)->nullable();
+            $table->charset = 'utf8mb4';
+            $table->collation = 'utf8mb4_spanish_ci';
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('personal');
+    }
+}
+
+
+
+
+Schema::create('vacacion', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('personal_id')->unsigned();
+            $table->foreign('personal_id')->references('id')->on('personal')->onDelete('restrict');
+            $table->string('tipo',10);
+            $table->string('razon',200)->nullable();
+            $table->string('observacion',200)->nullable();
+            $table->date('fecha_ini'); 
+            $table->integer('dias_t');
+            $table->string('memorandum',20)->nullable();
+            $table->charset = 'utf8mb4';
+            $table->collation = 'utf8mb4_spanish_ci';
+            $table->timestamps();
+        });
+
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+        var f=new Date();
+        var a=f.getFullYear();
+        var  m=f.getMonth()+1;
+        var d=f.getDate();
+            m=(m<10)?"0"+m:m;
+            d=(d<10)?"0"+d:d;
+        var fechaactual=a+"-"+m+"-"+d;
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      plugins: [ 'dayGrid','interaction','timeGrid', 'list' ],
+      //defaultView:'timeGridDay'
+      header:{
+        left:'prev,next,today',
+        center:'title',
+        right:'dayGridMonth,timeGridWeek,timeGridDay'
+      },
+      dateClick:function(info){//cuando hacemos click en un dia del calendario (crear)
+        limpiarFormulario();
+        $('#fecha').val(info.dateStr);//recupera la fecha donde se hizo click
+        if(($('#fecha').val())>=fechaactual){
+            $('#btncrear').prop("disabled",false);
+            $('#btneditar').prop("disabled",true);
+            $('#btneliminar').prop("disabled",true);
+            $('#modal-calendario').modal();//activa el modal      
+        }else{
+            alert("no puede crear eventos en fechas pasadas");
+        }
+        
+      },
+      eventClick:function(info){//cuando hacemos click en un evento
+        //console.log(info.event.extendedProps.unidad_id);
+        //console.log(info.event.extendedProps.descripcion);
+        $('#btncrear').prop("disabled",true);
+        $('#btneditar').prop("disabled",false);
+        $('#btneliminar').prop("disabled",false);
+
+        $('#id').val(info.event.id);
+        $('#unidad_id').val(info.event.extendedProps.unidad_id);
+        $('#titulo').val(info.event.title);
+        $('#lugar').val(info.event.extendedProps.lugar);
+          dia=(info.event.start.getDate());
+          mes=(info.event.start.getMonth()+1);
+          año=(info.event.start.getFullYear());
+            mes=(mes<10)?"0"+mes:mes;
+            dia=(dia<10)?"0"+dia:dia;
+            fecha=año+"-"+mes+"-"+dia;
+          hora=(info.event.start.getHours());
+          minuto=(info.event.start.getMinutes());
+            hora=(hora<10)?"0"+hora:hora;
+            minuto=(minuto<10)?"0"+minuto:minuto;
+            hrs=hora+":"+minuto;
+        $('#fecha').val(fecha);
+        $('#hora').val(hrs);
+        $('#color').val(info.event.backgroundColor);
+        $('#descripcion').val(info.event.extendedProps.descripcion);
+
+        $('#modal-calendario').modal();
+      },
+      // events:[
+      //   {
+      //     title:'evento 1',
+      //     start:"2020-06-07 10:30:00",
+      //     end:"2020-06-08 10:30:00",
+      //     color:"#FFCCAA",
+      //     textColor:"#000000",
+      //     descripcion:"describo el evento"
+      //   }
+      // ]
+      events:url_show //es aqui donde estan los eventos guardados en la BD de aqui se muestran
+    });
+    calendar.setOption('locale','es')
+    calendar.render();
+
+    $('#btncrear').click(function(){ //cuando damos click en boton crear
+        if(($('#fecha').val())>=fechaactual){
+            objEvento=recolectarDatos("POST");//llama a la funcion q agarra los datos del form y le deciomos q es POST
+            EnviarInformacion('', objEvento);  //llama a la funcion para almacenar los datos (es decir STORE)       
+        }else{
+            alert("no puede crear eventos en fechas pasadas");
+            $('#modal-calendario').modal('toggle');//en modal se cerrara
+        }
+    });
+
+    $('#btneliminar').click(function(){
+        if(($('#fecha').val())>=fechaactual){
+            objEvento=recolectarDatos("DELETE");
+            EnviarInformacion('/'+$('#id').val(), objEvento);
+            calendar.refetchEvents();//actualiza el calendario       
+        }else{
+            alert("no puede eliminar eventos de fechas pasadas");
+            $('#modal-calendario').modal('toggle');//en modal se cerrara
+        }
+    });
+
+    $('#btneditar').click(function(){
+        if(($('#fecha').val())>=fechaactual){
+            objEvento=recolectarDatos("PATCH");
+            EnviarInformacion('/'+$('#id').val(), objEvento);         
+        }else{
+            alert("no puede editar eventos de fechas pasadas");
+            $('#modal-calendario').modal('toggle');//en modal se cerrara
+        }
+
+    });
+
+    function recolectarDatos(method){//agarrar los datos q llenamos en el form y recive un metodo (post,etc)
+        if(validarDatos()){
+           
+           nuevoEvento={
+            //id:$('#id').val(),
+            unidad_id:$('#unidad_id').val(),
+            title:$('#titulo').val(),
+            lugar:$('#lugar').val(),
+            descripcion:$('#descripcion').val(),
+            color:$('#color').val(),
+            textColor:'#FFFFFF',
+            start:$('#fecha').val()+" "+$('#hora').val(),
+            end:$('#fecha').val()+" "+$('#hora').val(),
+            '_token':$('meta[name="csrf-token"]').attr('content'),
+            '_method':method 
+            }
+            return (nuevoEvento);  //nos devuelve un array con todos los datos del evento
+        }else{
+            return
+        }      
+    }
+    function EnviarInformacion(accion, objEvento){//envia los datos al metodo STORE del controlador      
+      $.ajax(
+        {
+          type:"POST",
+          url:url_+accion,//accion sera una variable q agarre el metodo
+          data:objEvento,//objEvento agarra los datos atributos
+          success:function(msg){
+            $('#modal-calendario').modal('toggle');//en modal se cerrara
+            calendar.refetchEvents();//actualiza el calendario
+          },
+          error:function(msg){alert("hay un error");},
+        }
+      );
+    }
+    function validarDatos(){
+
+            return true;
+    }
+    function limpiarFormulario(){
+      $('#id').val("");
+      $('#unidad_id').val("");
+      $('#titulo').val("");
+      $('#lugar').val("");
+      $('#fecha').val("");
+      $('#hora').val("07:00");
+      $('#color').val("");
+      $('#descripcion').val("");
+    }
+  });
+

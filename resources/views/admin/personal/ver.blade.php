@@ -59,18 +59,11 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-3" style="text-align: right">
-                                    <p><b>Item:</b></p>
+                                    <p><b>Tipo Contrato:</b></p>
                                 </div>
-                                @if($personal->item==null)
-                                    <div class="col-md-9">
-                                        <i><p>No cuenta con Item</p></i>
-                                    </div>
-                                @endif
-                                @if($personal->item!=null)
-                                    <div class="col-md-9">
-                                        <i><p>{{$personal->item}}</p></i>
-                                    </div>
-                                @endif
+                                <div class="col-md-9">
+                                <i><p>{{$personal->contrato->nombre}}</p></i>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-3" style="text-align: right">

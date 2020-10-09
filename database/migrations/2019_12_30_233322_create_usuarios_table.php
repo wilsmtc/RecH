@@ -21,7 +21,7 @@ class CreateUsuariosTable extends Migration
             $table->string('apellido',50);
             $table->string('email', 100)->unique();
             $table->string('password', 100);
-            $table->string('foto',100)->nullable();
+            $table->string('foto',25)->nullable();
             $table->string('estado',1)->nullable()->default(1);
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_spanish_ci';

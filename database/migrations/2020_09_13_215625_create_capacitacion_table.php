@@ -14,7 +14,7 @@ class CreateCapacitacionTable extends Migration
             $table->foreign('unidad_id')->references('id')->on('unidades')->onDelete('restrict');
             $table->string('nombre',50);
             $table->string('descripcion',250)->nullable();
-            $table->string('documento',10);
+            $table->string('documento',15);
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_spanish_ci';
             $table->timestamps();

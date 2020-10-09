@@ -17,8 +17,8 @@ class Capacitacion extends Model
 
     public static function setDocumento($documento, $actual = false) //documento (al crear), actual (al editar)
     {
-        $extencion=$documento->getClientOriginalExtension();
         if ($documento) {
+            $extencion=$documento->getClientOriginalExtension();
             if ($actual) {
                 Storage::disk('public')->delete("imagenes/documentos/capacitacion/$actual"); // si es actual borra la anterior
             }

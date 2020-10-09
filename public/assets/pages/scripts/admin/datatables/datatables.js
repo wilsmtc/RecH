@@ -1,6 +1,6 @@
 $(document).ready( function () {
     $('#tabla-data').DataTable({
-       // "serverSide":true,  los datos de la tabla solo estan disponibles del lado del servidor
+        //"bserverSide":true,  //los datos de la tabla solo estan disponibles del lado del servidor
         "responsive":{
             orthogonal:'responsive' //para q se acomode segun el tamaño de la pantalla
         },
@@ -31,6 +31,8 @@ $(document).ready( function () {
                 "copy": "Copiar",
                 "colvis": "Visibilidad"
             }
-        }  
+        }, 
+        "lengthMenu":				[[15, 30, 50, 100, -1], [15, 30, 50, 100, "Todos"]],
+		"iDisplayLength":			15,
     }); 
 } );

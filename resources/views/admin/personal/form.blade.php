@@ -1,14 +1,14 @@
 <div class="form-group">
 	<label for="nombre" class="col-lg-3 control-label requerido">Nombre</label>
 	<div class="col-lg-5">
-		<input type="text" name="nombre" id="nombre" class="form-control" value="{{old('nombre', $personal->nombre ?? '')}}" required placeholder="Nombre" autocomplete="off"/>		
+		<input type="text" name="nombre" id="nombre" class="form-control" value="{{old('nombre', $personal->nombre ?? '')}}" required placeholder="Nombre" autocomplete="off" onkeyup="NombreMayus()"/>		
 	</div>
 </div>
 
 <div class="form-group">
 	<label for="apellido" class="col-lg-3 control-label requerido">Apellidos</label>
 	<div class="col-lg-5">
-		<input type="text" name="apellido" id="apellido" class="form-control" value="{{old('apellido', $personal->apellido ?? '')}}" required placeholder="Apellidos"/>		
+		<input type="text" name="apellido" id="apellido" class="form-control" value="{{old('apellido', $personal->apellido ?? '')}}" required placeholder="Apellidos" onkeyup="ApellidoMayus()"/>		
 	</div>
 </div>
 
@@ -20,17 +20,24 @@
 </div>
 
 <div class="form-group">
-	<label for="item" class="col-lg-3 control-label">Número de Item</label>
-	<div class="col-lg-5">
-		<input type="text" name="item" id="item" class="form-control" value="{{old('item', $personal->item ?? '')}}" minlength="2" maxlength="5" placeholder="12345"/>		
-	</div>
-</div>
-
-<div class="form-group">
 	<label for="celular" class="col-lg-3 control-label">Número de Celular</label>
 	<div class="col-lg-5">
 		<input type="text" name="celular" id="celular" class="form-control" value="{{old('celular', $personal->celular ?? '')}}" minlength="5" placeholder="12345678"/>		
 	</div>
+</div>
+
+<div class="form-group">
+    <label for="contrato_id" class="col-lg-3 control-label requerido">Tipo de Contrato</label>
+    <div class="col-lg-5">
+        <select name="contrato_id" id="contrato_id" class="form-control" required >
+            <option value="">Seleccione su contrato</option>
+            @foreach($contrato as $id => $nombre)
+                <option
+                value="{{$id}}"{{old("contrato_id",$personal->contrato->id ?? "")==$id ? "selected":""}}>{{$nombre}}
+                </option>
+            @endforeach
+        </select>
+    </div>
 </div>
 
 <div class="form-group">
@@ -105,3 +112,25 @@
 
 
 {{-- <option value="{{$id}}">{{$nombre}}</option>     para el select--}}
+<script>
+    var nombre = document.getElementById('nombre');  //instanciamos el elemento input
+        function NombreMayus() {            //función que capitaliza la primera letra              
+        var palabra = nombre.value;                    //almacenamos el valor del input 
+        if(!nombre.value) return;                      //Si el valor es nulo o undefined salimos  
+        var mayuscula = palabra.substring(0,1).toUpperCase(); // almacenamos la mayuscula  
+        if (palabra.length > 0) {                     //si la palabra tiene más de una letra almacenamos las minúsculas
+            var minuscula = palabra.substring(1).toLowerCase();
+        }                                              
+        nombre.value = mayuscula.concat(minuscula);    //escribimos la palabra con la primera letra mayuscula
+    }
+    var apellido = document.getElementById('apellido');  
+    function ApellidoMayus() {                       
+        var palabra = apellido.value;                   
+        if(!apellido.value) return;                 
+        var mayuscula = palabra.substring(0,1).toUpperCase(); 
+        if (palabra.length > 0) {                     
+            var minuscula = palabra.substring(1).toLowerCase();
+        }                                              
+        apellido.value = mayuscula.concat(minuscula);  
+    }
+</script>

@@ -14,7 +14,7 @@ class UnidadController extends Controller
 {
     public function index()
     {
-        $unidades = Unidad::orderBy('id')->get();
+        $unidades = Unidad::orderBy('id','desc')->get();
         return view('admin.unidad.index', compact('unidades'));
     }
 

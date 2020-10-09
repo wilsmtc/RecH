@@ -65,8 +65,8 @@
               </a>
               <ul class="treeview-menu">
                 <li>
-                  <a href="{{ url('invitado') }}" >
-                    <i class="fa fa-eye"></i> <span>Solicitar Información</span>
+                  <a href="{{route('ver_invitado')}}" >
+                    <i class="fa fa-eye"></i> <span>Ver Información</span>
                   </a>
                 </li>
               </ul>

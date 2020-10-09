@@ -10,14 +10,14 @@ Recursos Humanos
         
     </div>
     <div style="text-align: center">
-        <h3><b>Sistema de Administración de Recursos Humanos<b></h3>
+        <h3 style="color: rgb(203, 203, 207)"><b>Sistema de Administración de Recursos Humanos<b></h3>
     </div>
     <div style="text-align: center">
         <img src="/assets/lte/dist/img/compu1.png" height="250px" width="250px">
     </div>
     <div style="text-align: center">
-        <h3><b>Usted a ingresado al sistema como Invitado<b></h3>
-            <h3><b>por lo mismo sus opciones son limitadas <b></h3><br>
+        <h3 style="color: rgb(203, 203, 207)"><b>Usted a ingresado al sistema como Invitado<b></h3>
+            <h3 style="color: rgb(203, 203, 207)"><b>por lo mismo sus opciones son limitadas <b></h3><br>
              
     </div>
 </div>

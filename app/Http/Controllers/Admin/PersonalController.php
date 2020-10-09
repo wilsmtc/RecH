@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ValidacionPersonal;
 use App\Models\Admin\Cargo;
+use App\Models\Admin\Contrato;
 use App\Models\Admin\Personal;
 use App\Models\Admin\Unidad;
 use Barryvdh\DomPDF\Facade as PDF;
@@ -13,18 +14,27 @@ use Illuminate\Support\Facades\Storage;
 
 class PersonalController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $personal = Personal::where('estado',1)-> with('unidad:id,nombre')->orderBy('id')->get();
-        //dd($personal);
-        return view('admin.personal.index', compact('personal'));
+        if ($request){
+            $query= trim($request->get('search'));
+            //$query = ucfirst($query);//combierte la primera letra en mayuscula
+            $personal=Personal::where('nombre', 'LIKE', '%'. $query . '%')->orWhere('apellido', 'LIKE', '%'. $query . '%')->orderBy('id','desc')->paginate(15);
+            return view('admin.personal.index',['personal'=>$personal,'search'=>$query]);      
+        }
+        else{
+          ////$personal = Personal::where('estado',1)-> with('unidad:id,nombre')->orderBy('id')->get();
+            $personal = Personal::where('estado',1)->orderBy('id','desc')->paginate(15);
+            return view('admin.personal.index', compact('personal'));  
+        }       
     }
 
     public function create()
     {
         $unidad = Unidad::orderBy('id')->pluck('nombre', 'id')->toArray();
-        $cargo = Cargo::orderBy('id')->pluck('nombre', 'id')->toArray();
-        return view('admin.personal.crear', compact('unidad', 'cargo'));
+        $cargo = Cargo::orderBy('nombre')->pluck('nombre', 'id')->toArray();
+        $contrato = Contrato::orderBy('nombre')->pluck('nombre', 'id')->toArray();
+        return view('admin.personal.crear', compact('unidad', 'cargo', 'contrato'));
     }
 
     public function store(ValidacionPersonal $request)
@@ -35,6 +45,7 @@ class PersonalController extends Controller
             $request->request->add(['curriculum'=>$documento]);
         //dd($request->all());
         Personal::create($request->all());
+        //llamar a crear usuario, y llenarlo con datos
         return redirect('admin/personal')->with('mensaje','Personal creado con exito');
     }
 
@@ -47,8 +58,9 @@ class PersonalController extends Controller
     {
         $unidad = Unidad::orderBy('id')->pluck('nombre', 'id')->toArray();
         $cargo = Cargo::orderBy('id')->pluck('nombre', 'id')->toArray();
+        $contrato = Contrato::orderBy('nombre')->pluck('nombre', 'id')->toArray();
         $personal = Personal::with('unidad')->findOrFail($id);        
-        return view('admin.personal.editar', compact('personal','unidad','cargo'));
+        return view('admin.personal.editar', compact('personal','unidad','cargo','contrato'));
     }
 
     public function update(ValidacionPersonal $request, $id)
@@ -112,11 +124,20 @@ class PersonalController extends Controller
         $personal->save();
         return redirect('admin/personalret')->with('mensaje', 'Personal retirado con exito');
     }
-    public function indexretirado()
+    public function indexretirado(Request $request)
     {
-        $retirados = Personal::where('estado',0)-> with('unidad:id,nombre')->orderBy('id')->get();
-        //dd($personal);
-        return view('admin.personal.listaretirados', compact('retirados'));
+        if ($request){
+            $query= trim($request->get('search'));
+            $personal=Personal::where([
+                ['estado',0],
+                ['nombre', 'LIKE', '%'. $query . '%'],
+            ])->orderBy('id','desc')->paginate(10);
+            return view('admin.personal.listaretirados',['retirados'=>$personal,'search'=>$query]);      
+        }
+        else{
+            $retirados = Personal::where('estado',0)->orderBy('id','desc')->paginate(10);
+            return view('admin.personal.listaretirados', compact('retirados'));  
+        } 
     }
     public function activar($id)
     {

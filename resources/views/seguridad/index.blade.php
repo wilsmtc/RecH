@@ -35,7 +35,7 @@
         <!-- /.login-logo -->
         <div class="login-box-body" style="background-image:url('/assets/lte/dist/img/fondo1.jpg'); background-size: cover">
             
-            <h4 style="color: rgb(22, 20, 139)"><u><b><p class="login-box-msg">Sistema de Administración de Recursos Humanos</p></b></u></h4>
+            <h4 style="color: rgb(203, 203, 207)"><u><b><p class="login-box-msg">Sistema de Administración de Recursos Humanos</p></b></u></h4>
             <p style="color: white" class="login-box-msg">Inicie sesion</p>
             @if (session('status'))
                 <div class="alert alert-success" role="alert">
@@ -67,8 +67,8 @@
                         <button type="submit" class="btn btn-success btn-block btn-flat">Login</button>
                     </div>              
                     <div class="col-xs-7">
-                        <a href="{{route('inicio')}}" class="btn btn-primary btn-block btn-flat">Acceder como invitado</a>
-                      </div>
+                        <a href="{{route('invitado')}}" class="btn btn-primary btn-block btn-flat">Acceder como invitado</a>
+                    </div>
                     <!-- /.col -->
                     <div class="col-xs-6">
                         @if (Route::has('password.request'))

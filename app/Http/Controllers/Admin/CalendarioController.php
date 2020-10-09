@@ -5,12 +5,15 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Evento;
+use App\Models\Admin\Unidad;
 
 class CalendarioController extends Controller
 {
     public function index()
     {
-        return view('admin.calendario.index');
+        $evento = Evento::orderBy('id')->get();
+        $unidad = Unidad::orderBy('id')->pluck('nombre', 'id')->toArray();
+        return view('admin.calendario.index', compact('unidad'));
     }
     public function create()
     {
@@ -21,22 +24,19 @@ class CalendarioController extends Controller
         $datos=request()->except(['_token','_method']);//en la variable $datos almacena todo lo q se envio en el array excepto lo q es el _token y _method del request
         Evento::insert($datos);
         print_r($datos);//muestra en consola lo q se guardara en la BD
+        
     }
     public function show()
     {
-        //$ev=Evento::all()->count();
-        //if($ev!=0)
-            //for(int i=1,i<=$ev,i++)
-                //$evento=Evento::findOrfail(i);
-                //if($evento->start<fecha_actual){
-                    //$evento->color=red;
-                    //$evento->save();}
-                //if($evento->start==fecha_actual){
-                    //$evento->color=amarillo;
-                    //$evento->save();}
-                //if($evento->start>fecha_actual){
-                    //$evento->color=verde;
-                    //$evento->save();}
+        $evento=Evento::all();
+        $fecha_hoy= date("Y-m-d H:i:s");
+        foreach($evento as $eve){
+            if($eve->start<$fecha_hoy){
+                $aux=Evento::findOrFail($eve->id);
+                $aux->color="#ff0000";
+                $aux->save();
+            }
+        }
         $data['eventos']=Evento::all();
         return response()->json($data['eventos']);
     }

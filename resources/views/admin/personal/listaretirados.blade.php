@@ -4,7 +4,7 @@
 	Personal Retirado
 @endsection
 @section("scripts")
-	<script src="{{asset("assets/pages/scripts/admin/datatables/datatables.js")}}" type="text/javascript"></script>
+	{{-- <script src="{{asset("assets/pages/scripts/admin/datatables/datatables.js")}}" type="text/javascript"></script> --}}
 @endsection
 @section('contenido')
 	<div  class="row">
@@ -16,6 +16,27 @@
 				<div style="text-align: center; background-color:lightblue;" class="box-header whit.border">
 					<h3 class="box-title"><b>Lista de Personal Retirado</b></h3>
 				</div>
+				{{-- busqueda --}}
+				<form class="form-inline ml-3">
+					<div class="input-group">
+					  <input type="search" name="search" class="form-control" placeholder="Buscar por nombre" aria-label="search" value="{{old('search', $search ?? '')}}" autocomplete="off">						
+					  <span class="input-group-btn">							
+							<button type="submit" class="btn btn-flat">
+								<i class="fa fa-search"></i>
+							</button>
+							
+						</span>
+					</div>
+				</form>
+				@if($search)
+					<div class="callout callout-info">
+						<a href="{{route('personalretirado')}}" class="btn btn-info btn-xs tooltipC" title="volver">
+							<i class="fa fa-fw fa-reply-all"></i>																			
+						</a>
+						Los resultados de tu busqueda <b>'{{$search}}'</b> son:	
+					</div>
+				@endif
+				{{-- busqueda --}}
 				<div class="box-body table-responsive no.padding" style="text-align: center; ">
 					<table class="table table-bordered table-hover table-striped" id="tabla-data" style="background-color:mintcream;">
 						<thead>
@@ -50,14 +71,15 @@
                                     <a href="{{route('ver_personal', ['id' => $per->id])}}" class="btn btn-primary btn-xs tooltipC" title="Ver Personal">
 										<i class="fas fa fa-navicon"></i>
 									</a>
-									<a href="{{route('activar_personal', ['id' => $per->id])}}" class="btn btn-danger btn-xs tooltipC" onclick="return confirm('la fecha de ingreso se mantendra ¿Desa continuar?')" title="incorporar personal">
+									{{-- <a href="{{route('activar_personal', ['id' => $per->id])}}" class="btn btn-danger btn-xs tooltipC" onclick="return confirm('la fecha de ingreso se mantendra ¿Desa continuar?')" title="incorporar personal">
 										<i class="fas fa fa-user"></i>
-									</a>
+									</a> --}}
                                 </td>
                             </tr>
                             @endforeach
 						</tbody>
 					</table>
+					{{$retirados->links()}}
 				</div>
 			</div>
 		</div>

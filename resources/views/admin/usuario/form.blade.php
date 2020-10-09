@@ -8,14 +8,14 @@
 <div class="form-group">
 	<label for="nombre" class="col-lg-3 control-label requerido">Nombre</label>
 	<div class="col-lg-5">
-		<input type="text" name="nombre" id="nombre" class="form-control" value="{{old('nombre', $usuario->nombre ?? '')}}" required placeholder="Nombre"/>		
+		<input type="text" name="nombre" id="nombre" class="form-control" value="{{old('nombre', $usuario->nombre ?? '')}}" required placeholder="Nombre" onkeyup="NombreMayus()" autocomplete="off"/>		
 	</div>
 </div>
 
 <div class="form-group">
 	<label for="apellido" class="col-lg-3 control-label requerido">Apellidos</label>
 	<div class="col-lg-5">
-		<input type="text" name="apellido" id="apellido" class="form-control" value="{{old('apellido', $usuario->apellido ?? '')}}" required placeholder="Apellidos"/>		
+		<input type="text" name="apellido" id="apellido" class="form-control" value="{{old('apellido', $usuario->apellido ?? '')}}" required placeholder="Apellidos" onkeyup="ApellidoMayus()" autocomplete="off"/>		
 	</div>
 </div>
 
@@ -101,3 +101,26 @@
         <input type="file" name="foto_up" id="foto" data-initial-preview="{{isset($usuario->foto) ? Storage::url("imagenes/fotos/usuario/$usuario->foto") : "http://www.placehold.it/250x250/EFEFEF/AAAAAA&text=foto+de+usuario"}}" accept="image/*"/>
     </div>
 </div>
+
+<script>
+    var nombre = document.getElementById('nombre');  //instanciamos el elemento input
+        function NombreMayus() {            //función que capitaliza la primera letra              
+        var palabra = nombre.value;                    //almacenamos el valor del input 
+        if(!nombre.value) return;                      //Si el valor es nulo o undefined salimos  
+        var mayuscula = palabra.substring(0,1).toUpperCase(); // almacenamos la mayuscula  
+        if (palabra.length > 0) {                     //si la palabra tiene más de una letra almacenamos las minúsculas
+            var minuscula = palabra.substring(1).toLowerCase();
+        }                                              
+        nombre.value = mayuscula.concat(minuscula);    //escribimos la palabra con la primera letra mayuscula
+    }
+    var apellido = document.getElementById('apellido');  
+    function ApellidoMayus() {                       
+        var palabra = apellido.value;                   
+        if(!apellido.value) return;                 
+        var mayuscula = palabra.substring(0,1).toUpperCase(); 
+        if (palabra.length > 0) {                     
+            var minuscula = palabra.substring(1).toLowerCase();
+        }                                              
+        apellido.value = mayuscula.concat(minuscula);  
+    }
+</script>

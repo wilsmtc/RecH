@@ -4,6 +4,7 @@
 @endsection
 @section("scripts")
 <script src="{{asset("assets/pages/scripts/admin/alert/alert.js")}}" type="text/javascript"></script>
+<script src="{{asset("assets/pages/scripts/admin/datatables/datatables.js")}}" type="text/javascript"></script>
 @endsection
 @section('contenido')
 	<div  class="row">
@@ -14,9 +15,11 @@
 				<div style="text-align: center; background-color:lightblue;" class="box-header whit.border">
 					<h3 class="box-title"><b>Lista de Unidades</b></h3>
 					<div class="box-tools pull-right">
-						<a href="{{route('crear_unidad')}}" class="btn btn-block btn-success btn-sm">
-							<i class="fa fa-fw fa-plus-circle"></i> Crear nueva Unidad
-						</a>
+						@if(Auth::user()->permiso->añadir == 1)
+							<a href="{{route('crear_unidad')}}" class="btn btn-block btn-success btn-sm">
+								<i class="fa fa-fw fa-plus-circle"></i> Crear nueva Unidad
+							</a>	
+						@endif						
 					</div>
 				</div>
 				<div class="box-body">
@@ -41,15 +44,19 @@
 										<a href="{{route('ver_unidad', ['id' => $unid->id])}}" class="btn btn-info btn-xs tooltipC" title="ver componentes">
 											<i class="fas fa fa-th"></i>
 										</a>
-										<a href="{{route('editar_unidad', ['id' => $unid->id])}}" class="btn btn-warning btn-xs tooltipC" title="Editar unidad">
+										@if(Auth::user()->permiso->editar == 1)
+											<a href="{{route('editar_unidad', ['id' => $unid->id])}}" class="btn btn-warning btn-xs tooltipC" title="Editar unidad">
 												<i class="fas fa fa-wrench"></i>
-										</a>									
-										<form action="{{route('eliminar_unidad', ['id' => $unid->id])}}" class="d-inline form-eliminar" method="POST">
-											@csrf @method("delete")
-											<button type="submit" class="btn btn-danger btn-xs eliminar tooltipsC" title="Eliminar unidad">
-												<i class="fa fa-fw fa-close"></i>
-											</button>
-										</form>
+											</a>	
+										@endif
+										@if(Auth::user()->permiso->eliminar == 1)							
+											<form action="{{route('eliminar_unidad', ['id' => $unid->id])}}" class="d-inline form-eliminar" method="POST">
+												@csrf @method("delete")
+												<button type="submit" class="btn btn-danger btn-xs eliminar tooltipsC" title="Eliminar unidad">
+													<i class="fa fa-fw fa-close"></i>
+												</button>
+											</form>	
+										@endif																													
 									</td>
 								</tr>
 							@endforeach

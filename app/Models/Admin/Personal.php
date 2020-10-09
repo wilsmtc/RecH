@@ -10,7 +10,7 @@ use Intervention\Image\Facades\Image;
 class Personal extends Model
 {
     protected $table = "personal";
-    protected $fillable=['nombre','apellido','ci','celular','cargo_id','fecha_ing','unidad_id','foto','genero','curriculum','item','fecha_ret','estado','razon_ret','memorandum_ret'];
+    protected $fillable=['nombre','apellido','ci','celular','cargo_id','fecha_ing','unidad_id','foto','genero','curriculum','contrato_id','fecha_ret','estado','razon_ret','memorandum_ret'];
 
     public function unidad()
     {
@@ -19,6 +19,10 @@ class Personal extends Model
     public function cargo()
     {
         return $this->belongsTo(Cargo::class); //muchos personales pertenecen a un cargo
+    }
+    public function contrato()
+    {
+        return $this->belongsTo(Contrato::class); //muchos personales pertenecen a un tipo de contrato
     }
     public function vacacion(){
         return $this->hasMany(Vacacion::class);

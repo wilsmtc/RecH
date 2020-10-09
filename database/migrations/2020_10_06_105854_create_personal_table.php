@@ -15,12 +15,13 @@ class CreatePersonalTable extends Migration
     {
         Schema::create('personal', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('item',5)->nullable()->unique();
             $table->string('nombre',50);
             $table->string('apellido',50);
             $table->integer('unidad_id')->unsigned();
             $table->foreign('unidad_id')->references('id')->on('unidades')->onDelete('restrict');
             $table->string('ci',15)->unique();
+            $table->integer('contrato_id')->unsigned();
+            $table->foreign('contrato_id')->references('id')->on('contrato')->onDelete('restrict');
             $table->integer('cargo_id')->unsigned();
             $table->foreign('cargo_id')->references('id')->on('cargos')->onDelete('restrict');
             $table->string('celular',15)->nullable()->unique();
