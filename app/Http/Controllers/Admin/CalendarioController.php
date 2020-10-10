@@ -11,9 +11,24 @@ class CalendarioController extends Controller
 {
     public function index()
     {
-        $evento = Evento::orderBy('id')->get();
-        $unidad = Unidad::orderBy('id')->pluck('nombre', 'id')->toArray();
-        return view('admin.calendario.index', compact('unidad'));
+        if(session()->get('usuario')!=null){
+            $evento = Evento::orderBy('id')->get();
+            $unidad = Unidad::orderBy('id')->pluck('nombre', 'id')->toArray();
+            return view('admin.calendario.index', compact('unidad')); 
+        }
+        else{
+            session_start();
+            ob_start();
+            if($_SESSION['id_invitado']==0){
+                Evento::findOrfail(0);  // header("HTTP/1.0 404 Not Found");
+            }
+            else{
+                $evento = Evento::orderBy('id')->get();
+                $unidad = Unidad::orderBy('id')->pluck('nombre', 'id')->toArray();
+                return view('admin.calendario.index', compact('unidad')); 
+            }    
+        }
+        
     }
     public function create()
     {

@@ -67,7 +67,7 @@ class MyHelper {
 
     public static function CantidadEventos_inv(){
         $fecha_hoy= date("Y-m-d H:i:s");
-       // session_start();
+        //session_start();
         //ob_start();
         $id=$_SESSION['id_invitado'];
         $personal=Personal::findOrfail($id);
