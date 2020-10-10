@@ -20,7 +20,7 @@ Roles
                 <div class="box-tools pull-right">
                 @if(Auth::user()->permiso->añadir == 1)
                     <a href="{{route('crear_rol')}}" class="btn btn-block btn-success btn-sm">
-                        <i class="fa fa-fw fa-plus-circle"></i> Crear nuevo rol
+                        <i class="fa fa-fw fa-plus-circle"></i> Crear
                     </a>
                 @endif
                 </div>
