@@ -12,7 +12,7 @@ class PermisoEditar
         if(Auth::guest()){
             return redirect('/');
         }
-        if(Auth::user()->permiso->editar == 1){
+        if(session()->get('rol_editar')==1){
             return $next($request);
         }
         else{

@@ -12,7 +12,7 @@ class PermisoAdd
         if(Auth::guest()){
             return redirect('/');
         }
-        if(Auth::user()->permiso->añadir == 1){
+        if(session()->get('rol_añadir')==1){
             return $next($request);
         }
         else{

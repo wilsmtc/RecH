@@ -107,3 +107,6 @@ class CreateVacacionTable extends Migration
         Schema::dropIfExists('vacacion');
     }
 }
+
+
+php artisan migrate:reset

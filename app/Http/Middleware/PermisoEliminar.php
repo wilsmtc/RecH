@@ -12,7 +12,7 @@ class PermisoEliminar
         if(Auth::guest()){
             return redirect('/');
         }
-        if(Auth::user()->permiso->eliminar == 1){
+        if(session()->get('rol_eliminar')==1){
             return $next($request);
         }
         else{

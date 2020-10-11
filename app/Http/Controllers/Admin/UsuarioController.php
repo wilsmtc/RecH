@@ -29,7 +29,6 @@ class UsuarioController extends Controller
 
     public function store(ValidacionUsuario $request)
     {
-        //$input=$request->all();    dd($input);  //ver ls datos enviados
         if($foto=Usuario::setFoto($request->foto_up))
             $request->request->add(['foto'=>$foto]);
         $usuario = Usuario::create($request->all());
@@ -37,7 +36,7 @@ class UsuarioController extends Controller
         $per = new Permiso($request->all());
         $per->usuario_id=$usuario->id;
         $per->save();
-        return redirect('admin/usuario')->with('mensaje','usuario creado con exito');    
+        return redirect('admin/usuario')->with('mensaje','usuario creado con exito');      
     }
 
     public function ver(Usuario $usuario)

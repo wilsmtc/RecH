@@ -17,9 +17,11 @@ Roles
             <div style="text-align: center;" class="box-header with-border">
                 <h3 class="box-title"><b>Lista de Roles</b></h3>
                 <div class="box-tools pull-right">
-                    <a href="{{route('crear_rol')}}" class="btn btn-block btn-success btn-sm">
-                        <i class="fa fa-fw fa-plus-circle"></i> Crear
-                    </a>
+                    @if(session()->get('rol_añadir')==1)
+                        <a href="{{route('crear_rol')}}" class="btn btn-block btn-success btn-sm">
+                            <i class="fa fa-fw fa-plus-circle"></i> Crear
+                        </a>                 
+                    @endif                    
                 </div>
             </div>
             <div class="box-body">

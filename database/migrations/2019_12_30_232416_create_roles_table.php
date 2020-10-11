@@ -16,6 +16,9 @@ class CreateRolesTable extends Migration
         Schema::create('roles', function (Blueprint $table) {
             $table->increments('id');
             $table->string('tipo', 50)->unique();
+            $table->enum('añadir',['1','0'])->default('0');
+            $table->enum('editar',['1','0'])->default('0');
+            $table->enum('eliminar',['1','0'])->default('0');
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_spanish_ci';
             $table->timestamps();
