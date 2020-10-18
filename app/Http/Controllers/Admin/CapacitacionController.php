@@ -6,8 +6,11 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ValidacionCapacitacion;
 use App\Models\Admin\Capacitacion;
+use App\Models\Admin\Notificacion;
 use App\Models\Admin\Unidad;
+use App\Models\Seguridad\Usuario;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class CapacitacionController extends Controller
 {
@@ -36,7 +39,17 @@ class CapacitacionController extends Controller
         if($documento=Capacitacion::setDocumento($request->documento_up))
             $request->request->add(['documento'=>$documento]);
         //dd($request->all());
-        Capacitacion::create($request->all());
+        $capacitacion=Capacitacion::create($request->all());
+
+        //$usuarios=Usuario::where('id','!=',Auth::id());
+        $usuarios=Usuario::all()->except(Auth::id());
+        foreach($usuarios as $usuario){
+            $notificacion = new Notificacion();
+            $notificacion->capacitacion_id=$capacitacion->id;
+            $notificacion->notificar_id=$usuario->id;
+            $notificacion->autor_id=Auth::id();
+            $notificacion->save();
+        }
         return redirect('admin/capacitacion')->with('mensaje','Capacitación creada con exito');
     }
 
@@ -67,7 +80,8 @@ class CapacitacionController extends Controller
         if ($request->ajax()) {
             $capacitacion = Capacitacion::findOrFail($id);
             if (Capacitacion::destroy($id)) {
-                Storage::disk('public')->delete("imagenes/documentos/capacitacion/$capacitacion->documento");
+                Storage::disk('public')->delete("imagenes/documentos/capacitacion/$capacitacion->documento");               
+                Notificacion::where('capacitacion_id','=',$id)->delete();
                 return response()->json(['mensaje' => 'ok']);
             } else {
                 return response()->json(['mensaje' => 'ng']);
@@ -81,5 +95,12 @@ class CapacitacionController extends Controller
         $capacitacion = Capacitacion::findOrFail($id);
         $file= public_path().'\storage\imagenes\documentos\capacitacion/'.$capacitacion->documento;
         return response()->file($file);
+    }
+    public function estadonotificacion($id)
+    {
+        $notificacion = Notificacion::findOrFail($id);
+        $notificacion->estado=0;
+        $notificacion->update();
+        return redirect('admin/capacitacion');
     }
 }

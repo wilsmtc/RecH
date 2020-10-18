@@ -82,10 +82,13 @@ Calendario
           </div>
         </div>
         <div class="modal-footer">
-          @if(session()->get('usuario')!=null)
-            
-            <button id="btneditar" class="btn btn-warning">Editar</button>
-            <button id="btneliminar" class="btn btn-danger">Eliminar</button>
+          @if(session()->get('usuario')!=null) 
+            @if(Auth::user()->roles[0]->editar == 1)
+              <button id="btneditar" class="btn btn-warning">Editar</button>
+            @endif           
+            @if(Auth::user()->roles[0]->eliminar == 1)
+              <button id="btneliminar" class="btn btn-danger">Eliminar</button>
+            @endif           
           @endif       
           <button id="btncancelar" class="btn btn-default pull-left" data-dismiss="modal">Cerrar</button>
         </div>
@@ -148,9 +151,11 @@ Calendario
         </div>
         <div class="modal-footer">
           @if(session()->get('usuario')!=null)
-            <button id="btncrear" class="btn btn-success">Crear</button>
-          @endif       
-          
+            @if(Auth::user()->roles[0]->añadir == 1)
+              <button id="btncrear" class="btn btn-success">Crear</button>
+            @endif           
+          @endif 
+          <button id="btncancelar" class="btn btn-default pull-left" data-dismiss="modal">Cerrar</button>                
         </div>
       </div>
     </div>

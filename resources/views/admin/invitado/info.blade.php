@@ -98,7 +98,7 @@
                 </div>
                 <div class="" >
                     <div class="panel-heading" style="background-color: rgb(105, 204, 100)">
-                    <h3 class="panel-title" style="text-align: center"><b>Capacitaciones de {{$personal->unidad->nombre}}</b></h3>
+                    <h3 class="panel-title" style="text-align: center"><b>Capacitaciones de "{{$personal->unidad->nombre}}"</b></h3>
                     </div>
                     <div class="panel-body">
                         <table class="table">

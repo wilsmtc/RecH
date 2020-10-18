@@ -5,6 +5,45 @@
     </div>
 </div>
 
+<div class="form-group">
+    <label class="col-lg-3 control-label">Permisos</label>
+    <div class="col-lg-5">
+		<label class="checkbox-inline">
+			<div class="font-weight-bold">
+				<label>
+					<input type="checkbox" name="añadir" id="añadir"
+						@if (isset($data)&&$data->añadir == 1)
+							checked
+						@endif
+					>Agregar
+				</label>
+			</div>
+		</label>
+		<label class="checkbox-inline">
+			<div class="font-weight-bold">
+				<label>
+					<input type="checkbox" name="editar" id="editar"
+						@if (isset($data)&&$data->editar == 1)
+							checked
+						@endif
+					>Editar
+				</label>
+			</div>
+		</label>
+		<label class="checkbox-inline">
+			<div class="font-weight-bold">
+				<label>
+					<input type="checkbox" name="eliminar" id="eliminar"
+						@if (isset($data)&&$data->eliminar == 1)
+							checked
+						@endif
+					>Eliminar
+				</label>
+			</div>
+		</label>  
+	</div>
+</div>
+
 <script>
     var nombre = document.getElementById('tipo');  //instanciamos el elemento input
         function NombreMayus() {            //función que capitaliza la primera letra              

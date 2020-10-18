@@ -1,8 +1,11 @@
 <?php
 
 use App\Models\Admin\Evento;
+use App\Models\Admin\Notificacion;
 use App\Models\Admin\Personal;
 use App\Models\Admin\Vacacion;
+use App\Models\Seguridad\Usuario;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 if (!function_exists('getMenuActivo')) {
@@ -37,7 +40,7 @@ class MyHelper {
     }
     public static function CantidadEventos(){
         $fecha_hoy= date("Y-m-d H:i:s");
-        $eventos = Evento::orderBy('id')->get();
+        $eventos=Evento::orderBy('id')->get();
         $cont=0;
         foreach($eventos as $ev)
             if($ev->start>=$fecha_hoy){
@@ -47,7 +50,9 @@ class MyHelper {
     }
     public static function DetalleEventos(){
         $fecha_hoy= date("Y-m-d H:i:s");
-        $eventos = Evento::where('start','>=',$fecha_hoy)->orderBy('start')->get();
+        $eventos = Evento::where([
+            ['start','>=',$fecha_hoy],
+        ])->orderBy('start')->get();
         return $eventos;                     
     }
     public static function DiasEvento($fecha_evento){
@@ -97,5 +102,26 @@ class MyHelper {
         $id=$_SESSION['id_invitado'];
         $personal=Personal::findOrfail($id);
         return $personal;                     
+    }
+    public static function CantidadNotificaciones(){
+        
+        $notificaciones = Notificacion::where([
+            ['notificar_id','=',Auth::id()],
+            ['estado','=',1],
+        ])->count();
+        return $notificaciones;
+    }
+    public static function DetalleNotificacion(){
+        
+        $notificaciones = Notificacion::where([
+            ['notificar_id','=',Auth::id()],
+            ['estado','=',1],
+        ])->get();
+        return $notificaciones;
+    }
+    public static function FotoNotificacion($id){
+        
+        $usuario = Usuario::findOrfail($id);
+        return $usuario;
     }
 }

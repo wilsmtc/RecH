@@ -6,11 +6,6 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateUnidadTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('unidades', function (Blueprint $table) {
@@ -24,11 +19,6 @@ class CreateUnidadTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('unidades');

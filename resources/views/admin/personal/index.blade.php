@@ -15,7 +15,7 @@
 			<div class="box box-primary">
 				<div style="text-align: center; background-color:lightblue;" class="box-header whit.border">
 					<h3 class="box-title"><b>Lista de Personal Activo</b></h3>
-					@if(Auth::user()->permiso->añadir == 1)	
+					@if(Auth::user()->roles[0]->añadir == 1)	
 						<div class="box-tools pull-right">
 							<a href="{{route('crear_personal')}}" class="btn btn-block btn-success">
 								<i class="fa fa-fw fa-user-plus"></i> Crear Personal
@@ -85,7 +85,7 @@
 										</a>
 									@endif
 									
-									@if(Auth::user()->permiso->añadir == 1)
+									@if(Auth::user()->roles[0]->añadir == 1)
 										@if($per->contrato->vacacion=="si")
 											@if(($dias_g-$dias_t)>0)
 												<a href="{{route('crear_vacacion', ['id' => $per->id])}}" class="btn btn-warning btn-xs tooltipC" title="Descontar Vacación">
@@ -97,7 +97,7 @@
 									<a href="{{route('ver_personal', ['id' => $per->id])}}" class="btn btn-primary btn-xs tooltipC" title="Ver Personal">
 										<i class="fas fa fa-navicon"></i>
 									</a>
-									{{-- @if(Auth::user()->permiso->eliminar == 1)
+									{{-- @if(Auth::user()->roles[0]->eliminar == 1)
 										<form action="{{route('eliminar_personal', ['id' => $per->id])}}" class="d-inline form-eliminar" method="POST" id="form-eliminar">
 											@csrf @method("delete")
 											<button type="submit" class="btn btn-success btn-xs eliminar tooltipsC" title="Retirar Personal">
@@ -105,7 +105,7 @@
 											</button>
 										</form>
 									@endif									 --}}
-									@if(Auth::user()->permiso->eliminar == 1)
+									@if(Auth::user()->roles[0]->eliminar == 1)
 										<a href="{{route('retirar_personal', ['id' => $per->id])}}" class="btn btn-danger btn-xs eliminar tooltipsC" title="Retirar Personal">
 											<i class="fas fa fa-close"></i>
 										</a>

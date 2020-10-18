@@ -9,7 +9,7 @@ php artisan make:model Models/Admin/Usuario
 php artisan make:request ValidacionMenu
 php artisan make:middleware Permisoadd
 dd(session()->all());
-@if(Auth::user()->permiso->añadir == 1)    @endif
+@if(Auth::user()->roles[0]->añadir == 1)    @endif
 @php
 {{-- php code here --}}
 @endphp
@@ -274,3 +274,4 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
+2020_01_18_195115_create_unidad_table

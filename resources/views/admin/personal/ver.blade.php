@@ -19,7 +19,7 @@
                                 </a>
                             @endif
                         </div>
-                        @if(Auth::user()->permiso->editar == 1)
+                        @if(Auth::user()->roles[0]->editar == 1)
                             @if($personal->estado==1)
                                 <div class="box-tools pull-right">
                                     <a href="{{route('editar_personal', ['id' => $personal->id])}}" class="btn btn-block btn-warning btn-sm">

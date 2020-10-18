@@ -26,15 +26,15 @@
                   <span class="label label-warning">{{$cant}}</span>
                 </a>
                 <ul class="dropdown-menu">
-                <li class="footer"><a href="{{route('eventos')}}"><h5><b>{{$cant}} Actividad(es) por Desarrollarse</b></h5></a></li>
-                <li class="header"></li>
+                <li class="header" style="text-align: center"><a href="{{route('eventos')}}">{{$cant}} capacitacion(es) creadas recientemente</a></li>
                   <li>
                     <ul class="menu">
                       <table class="table table-bordered table-hover table-striped" style="background-color:mintcream;">
                         <thead>
                           <tr style="width: 100%">
-                            <th style="text-align: center; width: 60%">Evento</th>
-                            <th style="text-align: center; width: 40%">Comienza</th>
+                            <th style="text-align: center; width: 50%"><h6><b>Evento</b></h6></th>
+                            <th style="text-align: center; width: 20%"><h6><b>Unidad</b></h6></th>
+                            <th style="text-align: center; width: 30%"><h6><b>Comienza</b></h6></th>
                           </tr>
                         </thead>
                         <tbody>
@@ -43,19 +43,20 @@
                           @endphp
                           @foreach($eventos as $ev)
                             <tr>
-                              <td style="text-align: center;">{{$ev->title}}</td>
+                              <td style="text-align: center;"><h6>{{$ev->title}}</h6></td>
+                              <td style="text-align: center;"><h6>{{$ev->unidad->sigla}}</h6></td>
                               @php $dias=MyHelper::DiasEvento($ev->start); @endphp
                               @if($dias==0)
                                 @php $horas=MyHelper::HorasEvento($ev->start); @endphp
                                 @if($horas>0)
-                                  <td style="text-align: center;">En <b>{{$horas}} </b>Horas</td>
+                                  <td style="text-align: center;"><h6>En <b>{{$horas}} </b>Horas</h6></td>
                                 @endif                             
                                 @if($horas==0)
-                                  <td style="text-align: center;">en minutos</td>
+                                  <td style="text-align: center;"><h6>En minutos</h6></td>
                                 @endif
                               @endif
                               @if($dias>0)
-                                <td style="text-align: center;">En <b>{{$dias}}</b> Días</td>
+                                <td style="text-align: center;"><h6>En <b>{{$dias}}</b> Días</h6></td>
                               @endif
                             </tr>
                           @endforeach
@@ -69,6 +70,56 @@
             @endif
           @endif
           <!--fin calculos normales cuando es un usuario del sistema-->
+          <!--inicio calculos normales cuando es un usuario del sistema para notificaciones-->
+          @if(session()->get('usuario')!=null)
+            @php
+              $cant=MyHelper::CantidadNotificaciones(); //obtiene la cantidad de notif con estado 1 de este usuario
+            @endphp
+            @if($cant>0)
+            <li class="dropdown messages-menu">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <i class="fa fa-bell"></i>
+              <span class="label label-danger">{{$cant}}</span>
+              </a>
+              <ul class="dropdown-menu">
+              <li class="header" style="text-align: center">{{$cant}} capacitacion(es) creadas recientemente</li>
+                <li>
+                  <!-- inner menu: contains the actual data -->
+                  <ul class="menu">
+                    @php
+                      $notificaciones=MyHelper::DetalleNotificacion(); //obtiene la cantidad de notif con estado 1 de este usuario
+                    @endphp
+                    @foreach($notificaciones as $noti)
+                      <li><!-- start message -->
+                        <a href="{{route('marcar_notificacion', ['id' => $noti->id])}}" >
+                          <div class="pull-left">
+                            @php
+                              $usuario=MyHelper::FotoNotificacion($noti->autor_id);
+                              $foto=$usuario->foto;
+                            @endphp
+                            @if($foto==null)
+                              <img src="{{asset("assets/$theme/dist/img/compu1.png")}}" class="img-circle" alt="User Image">              
+                            @endif
+                            @if($foto!=null)                             
+                              <img src="{{Storage::url("imagenes/fotos/usuario/$foto")}}" class="img-circle" alt="User Image">                  
+                            @endif                   
+                          </div>
+                          {{$usuario->usuario}}
+                          <h4>
+                            {{$noti->capacitacion->nombre}}
+                          <small><i class="fa fa-clock-o"></i>{{$noti->created_at}}</small>
+                          </h4>
+                          <p>{{$noti->capacitacion->unidad->nombre}}</p>
+                        </a>
+                      </li><!-- end message -->
+                    @endforeach
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            @endif
+          @endif
+          <!--inicio calculos normales cuando es un usuario del sistema para notificaciones-->
           <!--inicio calculos  cuando es un invitado del sistema-->
           @if(session()->get('usuario')==null)
           @php
@@ -158,6 +209,7 @@
                   {{session()->get('apellido_usuario')}}
                   </i>
                   <small><i>{{session()->get('email_usuario')}}</i></small>
+                  <small><i>{{session()->get('rol_tipo')}}</i></small>
                 </p>
               </li>
               <!-- Menu Body -->

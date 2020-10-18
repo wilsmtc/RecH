@@ -15,7 +15,7 @@
 				<div style="text-align: center; background-color:lightblue;" class="box-header whit.border">
 					<h3 class="box-title"><b>Lista de Contratos</b></h3>
 					<div class="box-tools pull-right">
-						@if(Auth::user()->permiso->añadir == 1)
+						@if(Auth::user()->roles[0]->añadir == 1)
 							<a href="{{route('crear_contrato')}}" class="btn btn-block btn-success btn-sm">
 								<i class="fa fa-fw fa-plus-circle"></i> Crear nuevo Contrato
 							</a>
@@ -52,12 +52,12 @@
 									<a href="{{route('ver_contrato', ['id' => $contrato->id])}}" class="btn btn-info btn-xs tooltipC" title="ver componentes">
 										<i class="fas fa fa-th"></i>
 									</a>
-									@if(Auth::user()->permiso->editar == 1)
+									@if(Auth::user()->roles[0]->editar == 1)
 										<a href="{{route('editar_contrato', ['id' => $contrato->id])}}" class="btn btn-warning btn-xs tooltipC" title="Editar contrato">
 												<i class="fas fa fa-wrench"></i>
 										</a>
 									@endif	
-									@if(Auth::user()->permiso->eliminar == 1)								
+									@if(Auth::user()->roles[0]->eliminar == 1)								
 										<form action="{{route('eliminar_contrato', ['id' => $contrato->id])}}" class="d-inline form-eliminar" method="POST">
 											@csrf @method("delete")
 											<button type="submit" class="btn btn-danger btn-xs eliminar tooltipsC" title="Eliminar contrato">

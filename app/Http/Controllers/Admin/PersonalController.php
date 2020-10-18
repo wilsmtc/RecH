@@ -19,8 +19,15 @@ class PersonalController extends Controller
         if ($request){
             $query= trim($request->get('search'));
             //$query = ucfirst($query);//combierte la primera letra en mayuscula
-            $personal=Personal::where('nombre', 'LIKE', '%'. $query . '%')->orWhere('apellido', 'LIKE', '%'. $query . '%')->orderBy('id','desc')->paginate(15);
-            return view('admin.personal.index',['personal'=>$personal,'search'=>$query]);      
+            $personal=Personal::where([
+                ['estado',1],
+                ['nombre', 'LIKE', '%'. $query . '%'],
+            ])->orwhere([
+                ['estado',1],
+                ['apellido', 'LIKE', '%'. $query . '%'],
+            ])
+            ->orderBy('id','desc')->paginate(15);
+            return view('admin.personal.index',['personal'=>$personal,'search'=>$query]);
         }
         else{
           ////$personal = Personal::where('estado',1)-> with('unidad:id,nombre')->orderBy('id')->get();

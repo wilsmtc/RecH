@@ -44,8 +44,21 @@ class RolController extends Controller
             return redirect('admin/rol')->with('mensajeerror', 'no puedes editar el rol de Administrador');
         }
         else{
-            Rol::findOrFail($id)->update($request->all());
-            return redirect('admin/rol')->with('mensaje', 'Rol actualizado con exito');  
+            if($request->añadir == "on" )
+                    $request->request->add(['añadir' => 0]);
+                else
+                    $request->request->add(['añadir' => 1]);
+                if($request->editar == "on")
+                    $request->request->add(['editar' => 0]);   
+                else
+                    $request->request->add(['editar' => 1]); 
+                if($request->eliminar == "on")
+                    $request->request->add(['eliminar' => 0]);   
+                else
+                    $request->request->add(['eliminar' => 1]); 
+                //dd($request->all());
+                Rol::findOrFail($id)->update($request->all());
+                return redirect('admin/rol')->with('mensaje', 'Rol actualizado con exito');
         }
     }
 

@@ -17,7 +17,7 @@
 				<div style="text-align: center; background-color:lightblue;" class="box-header whit.border">
 				<h3 class="box-title"><b>Lista de Usuarios {{$activo}}</b></h3>
 					<div class="box-tools pull-right">
-						@if(Auth::user()->permiso->añadir == 1)
+						@if(Auth::user()->roles[0]->añadir == 1)
 							@if($activo=='Activos')
 								<a href="{{route('crear_usuario')}}" class="btn btn-block btn-success">
 									<i class="fa fa-fw fa-user-plus"></i> Crear Usuario
@@ -70,7 +70,7 @@
 											<i class="fa fa-fw fa-camera-retro"></i>
 										</a>
 										@endif
-										@if(Auth::user()->permiso->editar == 1)
+										@if(Auth::user()->roles[0]->editar == 1)
 											<a href="{{route('editar_usuario', ['id' => $usuario->id])}}" class="btn btn-warning btn-xs tooltipC" title="Editar usuario">
 												<i class="fas fa fa-wrench"></i>
 											</a>
@@ -81,7 +81,7 @@
 												<i class="fa fa-fw fa-close "></i>
 											</button>
 										</form> --}}
-										@if(Auth::user()->permiso->eliminar == 1)
+										@if(Auth::user()->roles[0]->eliminar == 1)
 											@if($usuario->estado==1)
 												<a href="{{route('desactivar_usuario', ['id' => $usuario->id])}}" class="btn btn-success btn-xs tooltipC" 
 													onclick="return confirm('¿Esta seguro de inactivar al usuario?')" title="desactivar usuario" id="usuario_rol">

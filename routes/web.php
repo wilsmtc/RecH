@@ -115,6 +115,7 @@ Route ::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware'=> 'auth
 	Route::put('capacitacion/{id}', 'CapacitacionController@update') ->name('actualizar_capacitacion');
 	Route::delete('capacitacion/{id}', 'CapacitacionController@destroy')->name('eliminar_capacitacion')->middleware('permisoeliminar');
 	Route::get('capacitacion/{id}/capacitacion', 'CapacitacionController@documento')->name('ver_capacitacion');
+	Route::get('capacitacion/{id}/notificacion', 'CapacitacionController@estadonotificacion') ->name('marcar_notificacion');
 });
 
 

@@ -13,26 +13,16 @@ class UsuarioAdministradorSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('usuarios')->insert([
-            'usuario'=>'bayern',
-            'password'=>bcrypt('munich'),
-            'nombre'=>'Wilson',
-            'apellido'=>'Uño',
-            'email'=>'wils.mtc.cmb@gmail.com'
-        ]);
 
         DB::table('roles')->insert([
-            'tipo'=>'Administrador'
+            'tipo'=>'Administrador',
+            'añadir'=>1,
+            'editar'=>1,
+            'eliminar'=>1
         ]);
 
         DB::table('roles')->insert([
             'tipo'=>'Usuario'
-        ]);
-
-        DB::table('usuario_rol')->insert([
-            'rol_id'=>1,
-            'usuario_id'=>1,
-            'estado'=>1 //1=activo    
         ]);
 
         DB::table('unidades')->insert([
@@ -64,6 +54,42 @@ class UsuarioAdministradorSeeder extends Seeder
             'nombre'=>'Jurídica',
             'sigla'=>'JRC',
             'descripcion'=>'asesoria y funciones legales'
+        ]);
+        DB::table('usuarios')->insert([
+            'usuario'=>'bayern',
+            'password'=>bcrypt('munich'),
+            'nombre'=>'Wilson',
+            'apellido'=>'Uño',
+            'email'=>'wils.mtc.cmb@gmail.com'
+        ]);
+        DB::table('usuarios')->insert([
+            'usuario'=>'user2',
+            'password'=>bcrypt('123456'),
+            'nombre'=>'usuario',
+            'apellido'=>'dos',
+            'email'=>'user2.cmb@gmail.com'
+        ]);
+        DB::table('usuarios')->insert([
+            'usuario'=>'user3',
+            'password'=>bcrypt('123456'),
+            'nombre'=>'usuario',
+            'apellido'=>'tres',
+            'email'=>'user3@gmail.com'
+        ]);
+        DB::table('usuario_rol')->insert([
+            'rol_id'=>1,
+            'usuario_id'=>1,
+            'estado'=>1 //1=activo    
+        ]);
+        DB::table('usuario_rol')->insert([
+            'rol_id'=>2,
+            'usuario_id'=>2,
+            'estado'=>1 //1=activo    
+        ]);
+        DB::table('usuario_rol')->insert([
+            'rol_id'=>2,
+            'usuario_id'=>3,
+            'estado'=>1 //1=activo    
         ]);
         DB::table('cargos')->insert(['nombre'=>'Administrador de empresas','descripcion'=>'ninguna']);
         DB::table('cargos')->insert(['nombre'=>'Asesor Comercial','descripcion'=>'ninguna']);
@@ -261,7 +287,7 @@ class UsuarioAdministradorSeeder extends Seeder
         ]);
 
         $faker=Faker::create();
-        for($i=0;$i<5000;$i++){
+        for($i=0;$i<3000;$i++){
             DB::table('personal')->insert([
                 'nombre'=>$faker->firstName,
                 'apellido'=>$faker->lastName,

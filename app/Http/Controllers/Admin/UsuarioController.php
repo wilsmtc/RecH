@@ -8,6 +8,7 @@ use App\Http\Requests\ValidacionUsuario;
 use App\Models\Admin\Permiso;
 use App\Models\seguridad\Usuario;
 use App\Models\Admin\Rol;
+use App\Models\Admin\Unidad;
 use Illuminate\Support\Facades\Storage;
 
 class UsuarioController extends Controller
@@ -22,10 +23,10 @@ class UsuarioController extends Controller
 
     public function create()
     {
-        //dd('estas en crear usuario');
+        
         $rols = Rol::orderBy('id')->pluck('tipo', 'id')->toArray();
-        //dd($rols);
-        return view('admin.usuario.crear', compact('rols'));
+        $unidad = Unidad::orderBy('id')->pluck('nombre', 'id')->toArray();
+        return view('admin.usuario.crear', compact('rols','unidad'));
     }
 
     public function store(ValidacionUsuario $request)
@@ -50,8 +51,9 @@ class UsuarioController extends Controller
     public function edit($id)
     {
         $rols = Rol::orderBy('id')->pluck('tipo', 'id')->toArray();
+        $unidad = Unidad::orderBy('id')->pluck('nombre', 'id')->toArray();
         $usuario = Usuario::with('roles')->findOrFail($id);
-        return view('admin.usuario.editar', compact('usuario', 'rols'));
+        return view('admin.usuario.editar', compact('usuario', 'rols','unidad'));
     }
 
     public function update(ValidacionUsuario $request, $id)
