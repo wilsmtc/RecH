@@ -64,8 +64,15 @@ class RolController extends Controller
 
     public function destroy(Request $request, $id)
     {    
-        if ($request->ajax()) {           
-            if (Rol::destroy($id)) {
+        if ($request->ajax()) { 
+            try {
+                //Eliminar registro
+                Rol::destroy($id);
+                $aux=1;
+            } catch (\Illuminate\Database\QueryException $e) {
+                $aux=0;
+            }          
+            if ($aux==1) {
                 return response()->json(['mensaje' => 'ok']);
             } else {
                 return response()->json(['mensaje' => 'ng']);

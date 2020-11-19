@@ -28,7 +28,7 @@
 <div class="form-group">
     <label for="documento" class="col-lg-3 control-label requerido">Documento</label>
     <div class="col-lg-4">
-        <input type="file" name="documento_up" id="documento" data-initial-preview="{{isset($capacitaciones->documento) ? Storage::url("imagenes/documentos/capacitacion/$capacitacion->documento") : "http://www.placehold.it/250x250/EFEFEF/AAAAAA&text=documento+de+capacitación"}}" accept=".pdf, .docx, .pptx"/>
+        <input type="file" name="documento_up" id="documento" data-initial-preview="{{isset($capacitacion->documento) ? Storage::url("imagenes/documentos/capacitacion/$capacitacion->documento") : "http://www.placehold.it/250x250/EFEFEF/AAAAAA&text=documento+de+capacitación"}}" accept=".pdf, .docx, .pptx"/>
     </div>
 </div>
 

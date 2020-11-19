@@ -4,17 +4,16 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateContratoTable extends Migration
+class CreateComunicadoTable extends Migration
 {
 
     public function up()
     {
-        Schema::create('contrato', function (Blueprint $table) {
+        Schema::create('comunicado', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre',50)->unique();
-            $table->string('vacacion',2);
-            $table->integer('sueldo_min')->nullable()->default(0);
-            $table->integer('sueldo_max')->nullable()->default(0);
+            $table->string('nombre',50);
+            $table->string('tipo',13);
+            $table->string('documento',15);
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_spanish_ci';
             $table->timestamps();
@@ -23,6 +22,6 @@ class CreateContratoTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('contrato');
+        Schema::dropIfExists('comunicado');
     }
 }

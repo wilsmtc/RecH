@@ -56,44 +56,37 @@
               @include("theme.$theme.menu-item", ["item" => $item])<!-- me redirecciona a la vista menu.item -->
           @endforeach
           @if(session()->get('usuario')==null)
-          <li class="treeview">
+            <li class="treeview">
+                <a href="javascript:;"> <!--no tiene url porq es padre-->
+                  <i class="fa fa-user"></i> <span>Invitado</span>
+                  <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                  </span>
+                </a>
+                <ul class="treeview-menu">
+                  <li>
+                    <a href="{{route('ver_invitado')}}" >
+                      <i class="fa fa-eye"></i> <span>Ver Información</span>
+                    </a>
+                  </li>
+                </ul>
+            </li>
+            <li class="treeview">
               <a href="javascript:;"> <!--no tiene url porq es padre-->
-                <i class="fa fa-user"></i> <span>Invitado</span>
+                <i class="fa fa-calendar-plus-o"></i> <span>Capacitación</span>
                 <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
                 </span>
               </a>
               <ul class="treeview-menu">
                 <li>
-                  <a href="{{route('ver_invitado')}}" >
-                    <i class="fa fa-eye"></i> <span>Ver Información</span>
+                  <a href="{{ url('eventos') }}" >
+                    <i class="fa fa-calendar"></i> <span>Calendario de Actividades</span>
                   </a>
                 </li>
               </ul>
-          </li>         
-          @endif
-          <li class="treeview">
-            <a href="javascript:;"> <!--no tiene url porq es padre-->
-              <i class="fa fa-calendar-plus-o"></i> <span>Capacitación</span>
-              <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-            </a>
-            <ul class="treeview-menu">
-              @if(session()->get('usuario')!=null)
-              <li>
-                <a href="{{route('capacitacion')}}" >
-                  <i class="fa fa-bar-chart"></i> <span>Ver Capacitación</span>
-                </a>
-              </li>
-              @endif
-              <li>
-                <a href="{{ url('eventos') }}" >
-                  <i class="fa fa-calendar"></i> <span>Calendario de Actividades</span>
-                </a>
-              </li>
-            </ul>
-          </li>       
+            </li>         
+          @endif       
       </ul>
     </section>
     <!-- /.sidebar -->

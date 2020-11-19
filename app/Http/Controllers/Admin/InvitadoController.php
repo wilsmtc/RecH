@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ValidacionInvitado;
 use App\Models\Admin\Capacitacion;
+use App\Models\Admin\Comunicado;
 use App\Models\Admin\Personal;
 use App\Models\Admin\Vacacion;
 use Illuminate\Support\Facades\DB;
@@ -28,8 +29,9 @@ class InvitadoController extends Controller
         $dias_g=MyHelper::DiasGanados($personal->fecha_ing);
         $dias_t=MyHelper::DiasTomados($personal->id);
         $dias_libres=$dias_g-$dias_t;
-        $capacitacion=Capacitacion::where('unidad_id','=',$personal->unidad_id)->orderBy('id')->get();
-        return view ('admin.invitado.info', compact('personal','dias_libres','capacitacion')); 
+        $capacitacion=Capacitacion::where('unidad_id','=',$personal->unidad_id)->orderBy('id','desc')->get();
+        $comunicados=Comunicado::orderBy('id','desc')->limit(5)->get();
+        return view ('admin.invitado.info', compact('personal','dias_libres','capacitacion','comunicados')); 
     }
 
     public function store(ValidacionInvitado $request)

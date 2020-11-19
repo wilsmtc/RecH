@@ -22,7 +22,7 @@ class ValidacionUsuario extends FormRequest
      * @return array
      */
     public function rules()
-    {
+    {   
         if($this->route('id')){
         return [
                 //editar

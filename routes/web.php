@@ -25,7 +25,8 @@ Route::resource('eventos', 'Admin\CalendarioController');
 Route::get('invitado', 'Admin\InvitadoController@create') ->name('invitado');	
 Route::post('invitado/verificar', 'Admin\InvitadoController@store')->name('verificar');
 Route::get('verinvitado', 'Admin\InvitadoController@verinfo') ->name('ver_invitado');
-Route::get('capacitacion/{id}/capacitacion', 'Admin\CapacitacionController@documento')->name('ver_cap');
+Route::get('capacitacion/{id}/capacitacio', 'Admin\CapacitacionController@documento')->name('ver_cap');
+Route::get('comunicado/{id}/comunicad', 'Admin\ComunicadoController@documento')->name('ver_com');
 Route ::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware'=> 'auth'], function(){
 	Route::get('', 'AdminController@index');
 		Route ::group(['middleware'=> 'permisoadmin'], function(){
@@ -116,6 +117,15 @@ Route ::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware'=> 'auth
 	Route::delete('capacitacion/{id}', 'CapacitacionController@destroy')->name('eliminar_capacitacion')->middleware('permisoeliminar');
 	Route::get('capacitacion/{id}/capacitacion', 'CapacitacionController@documento')->name('ver_capacitacion');
 	Route::get('capacitacion/{id}/notificacion', 'CapacitacionController@estadonotificacion') ->name('marcar_notificacion');
+						//rutas de comunicado
+	Route::get('comunicado', 'ComunicadoController@index') ->name('comunicado');
+	Route::get('comunicado/crear', 'ComunicadoController@create') ->name('crear_comunicado')->middleware('permisocrear');
+	Route::post('comunicado', 'ComunicadoController@store')->name('guardar_comunicado');
+	Route::get('comunicado/{id}/editar', 'ComunicadoController@edit') ->name('editar_comunicado')->middleware('permisoeditar');
+	Route::put('comunicado/{id}', 'ComunicadoController@update') ->name('actualizar_comunicado');
+	Route::delete('comunicado/{id}', 'ComunicadoController@destroy')->name('eliminar_comunicado')->middleware('permisoeliminar');
+	Route::get('comunicado/{id}/comunicado', 'ComunicadoController@documento')->name('ver_comunicado');
+	Route::get('comunicado/{id}/notificacion', 'ComunicadoController@estadonotificacion') ->name('marcar_notificacion_comunicado');
 });
 
 

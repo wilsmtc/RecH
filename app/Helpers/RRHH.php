@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Admin\Evento;
+use App\Models\Admin\Noticomunicado;
 use App\Models\Admin\Notificacion;
 use App\Models\Admin\Personal;
 use App\Models\Admin\Vacacion;
@@ -123,5 +124,81 @@ class MyHelper {
         
         $usuario = Usuario::findOrfail($id);
         return $usuario;
+    }
+    public static function CantidadNotificacionesComunicados(){
+        
+        $notificaciones = Noticomunicado::where([
+            ['notificar_id','=',Auth::id()],
+            ['estado','=',1],
+        ])->count();
+        return $notificaciones;
+    }
+    public static function DetalleNotificacionComunicados(){
+        
+        $notificaciones = Noticomunicado::where([
+            ['notificar_id','=',Auth::id()],
+            ['estado','=',1],
+        ])->get();
+        return $notificaciones;
+    }
+
+    public static function sueldo($id){
+        $personal=Personal::findOrfail($id);
+        $date=$personal->fecha_ing;
+        $sueldo=$personal->contrato->sueldo_min;
+        $fecha_ing =  new \DateTime($date);
+        if($personal->estado==1){
+           $fecha_actual = new \DateTime(); 
+        }
+        else{
+            $retiro=$personal->fecha_ret;
+            $fecha_actual = new \DateTime($retiro);
+        }
+        $diferencia = $fecha_actual->diff($fecha_ing);
+        $dias = ( $diferencia->y * 365 ) +($diferencia->m * 30)+ $diferencia->d;
+        $meses = ( $diferencia->y * 12 ) + $diferencia->m;
+        $total=0;
+        if($dias <= 30){
+            $total=($sueldo/30)*$dias;
+            return $total;
+        }elseif($meses>=1){  
+            $total=$meses*$sueldo;
+            return $total;         
+        }       
+    }
+    public static function meses_trabajados($id){
+        $personal=Personal::findOrfail($id);
+        $date=$personal->fecha_ing;
+        $fecha_ing =  new \DateTime($date);
+        if($personal->estado==1){
+            $fecha_actual = new \DateTime();    
+        }
+        else{
+            $retiro=$personal->fecha_ret;
+            $fecha_actual = new \DateTime($retiro);
+        }
+        $diferencia = $fecha_actual->diff($fecha_ing);
+        $meses = ( $diferencia->y * 12 ) + $diferencia->m;
+        if($meses>=1){  
+            return $meses;         
+        }
+        else{
+            return 0;
+        }       
+    }
+    public static function dias_trabajados($id){
+        $personal=Personal::findOrfail($id);
+        $date=$personal->fecha_ing;
+        $fecha_ing =  new \DateTime($date);
+        if($personal->estado==1){
+            $fecha_actual = new \DateTime();          
+        }
+        else{
+            $retiro=$personal->fecha_ret;
+            $fecha_actual = new \DateTime($retiro);
+        }       
+        $diferencia = $fecha_actual->diff($fecha_ing);
+        $dias = ( $diferencia->y * 365 ) +($diferencia->m * 30)+ $diferencia->d;
+        return $dias;                
     }
 }

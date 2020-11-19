@@ -26,7 +26,7 @@
                   <span class="label label-warning">{{$cant}}</span>
                 </a>
                 <ul class="dropdown-menu">
-                <li class="header" style="text-align: center"><a href="{{route('eventos')}}">{{$cant}} capacitacion(es) creadas recientemente</a></li>
+                <li class="header" style="text-align: center"><a href="{{route('eventos')}}">{{$cant}} Activida(es) por desarrollarse</a></li>
                   <li>
                     <ul class="menu">
                       <table class="table table-bordered table-hover table-striped" style="background-color:mintcream;">
@@ -74,49 +74,93 @@
           @if(session()->get('usuario')!=null)
             @php
               $cant=MyHelper::CantidadNotificaciones(); //obtiene la cantidad de notif con estado 1 de este usuario
+              $cant_comunicados=MyHelper::CantidadNotificacionesComunicados();
             @endphp
             @if($cant>0)
-            <li class="dropdown messages-menu">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <i class="fa fa-bell"></i>
-              <span class="label label-danger">{{$cant}}</span>
-              </a>
-              <ul class="dropdown-menu">
-              <li class="header" style="text-align: center">{{$cant}} capacitacion(es) creadas recientemente</li>
-                <li>
-                  <!-- inner menu: contains the actual data -->
-                  <ul class="menu">
-                    @php
-                      $notificaciones=MyHelper::DetalleNotificacion(); //obtiene la cantidad de notif con estado 1 de este usuario
-                    @endphp
-                    @foreach($notificaciones as $noti)
-                      <li><!-- start message -->
-                        <a href="{{route('marcar_notificacion', ['id' => $noti->id])}}" >
-                          <div class="pull-left">
-                            @php
-                              $usuario=MyHelper::FotoNotificacion($noti->autor_id);
-                              $foto=$usuario->foto;
-                            @endphp
-                            @if($foto==null)
-                              <img src="{{asset("assets/$theme/dist/img/compu1.png")}}" class="img-circle" alt="User Image">              
-                            @endif
-                            @if($foto!=null)                             
-                              <img src="{{Storage::url("imagenes/fotos/usuario/$foto")}}" class="img-circle" alt="User Image">                  
-                            @endif                   
-                          </div>
-                          {{$usuario->usuario}}
-                          <h4>
-                            {{$noti->capacitacion->nombre}}
-                          <small><i class="fa fa-clock-o"></i>{{$noti->created_at}}</small>
-                          </h4>
-                          <p>{{$noti->capacitacion->unidad->nombre}}</p>
-                        </a>
-                      </li><!-- end message -->
-                    @endforeach
-                  </ul>
-                </li>
-              </ul>
-            </li>
+              <li class="dropdown messages-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <i class="fa fa-bell"></i>
+                <span class="label label-danger">{{$cant}}</span>
+                </a>
+                <ul class="dropdown-menu">
+                <li class="header" style="text-align: center">{{$cant}} capacitacion(es) creadas recientemente</li>
+                  <li>
+                    <!-- inner menu: contains the actual data -->
+                    <ul class="menu">
+                      @php
+                        $notificaciones=MyHelper::DetalleNotificacion(); //obtiene la cantidad de notif con estado 1 de este usuario
+                      @endphp
+                      @foreach($notificaciones as $noti)
+                        <li><!-- start message -->
+                          <a href="{{route('marcar_notificacion', ['id' => $noti->id])}}" >
+                            <div class="pull-left">
+                              @php
+                                $usuario=MyHelper::FotoNotificacion($noti->autor_id);
+                                $foto=$usuario->foto;
+                              @endphp
+                              @if($foto==null)
+                                <img src="{{asset("assets/$theme/dist/img/compu1.png")}}" class="img-circle" alt="User Image">              
+                              @endif
+                              @if($foto!=null)                             
+                                <img src="{{Storage::url("imagenes/fotos/usuario/$foto")}}" class="img-circle" alt="User Image">                  
+                              @endif                   
+                            </div>
+                            {{$usuario->usuario}}, creó:
+                            <h4>
+                              {{$noti->capacitacion->nombre}}
+                            <small><i class="fa fa-clock-o"></i>{{$noti->created_at}}</small>
+                            </h4>
+                            <p>{{$noti->capacitacion->unidad->nombre}}</p>
+                          </a>
+                        </li><!-- end message -->
+                      @endforeach
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            @endif
+            @if($cant_comunicados>0)
+              <li class="dropdown messages-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <i class="fa fa-file"></i>
+                <span class="label label-danger">{{$cant_comunicados}}</span>
+                </a>
+                <ul class="dropdown-menu">
+                <li class="header" style="text-align: center">{{$cant_comunicados}} comunicado(s) creados recientemente</li>
+                  <li>
+                    <!-- inner menu: contains the actual data -->
+                    <ul class="menu">
+                      @php
+                        $notificaciones=MyHelper::DetalleNotificacionComunicados(); //obtiene la cantidad de notif con estado 1 de este usuario
+                      @endphp
+                      @foreach($notificaciones as $noti)
+                        <li><!-- start message -->
+                          <a href="{{route('marcar_notificacion_comunicado', ['id' => $noti->id])}}" >
+                            <div class="pull-left">
+                              @php
+                                $usuario=MyHelper::FotoNotificacion($noti->autor_id);
+                                $foto=$usuario->foto;
+                              @endphp
+                              @if($foto==null)
+                                <img src="{{asset("assets/$theme/dist/img/compu1.png")}}" class="img-circle" alt="User Image">              
+                              @endif
+                              @if($foto!=null)                             
+                                <img src="{{Storage::url("imagenes/fotos/usuario/$foto")}}" class="img-circle" alt="User Image">                  
+                              @endif                   
+                            </div>
+                            {{$usuario->usuario}}, creó:
+                            <h4>
+                              {{$noti->comunicado->nombre}}
+                            <small><i class="fa fa-clock-o"></i>{{$noti->created_at}}</small>
+                            </h4>
+                            <p>{{$noti->comunicado->tipo}}</p>
+                          </a>
+                        </li><!-- end message -->
+                      @endforeach
+                    </ul>
+                  </li>
+                </ul>
+              </li>
             @endif
           @endif
           <!--inicio calculos normales cuando es un usuario del sistema para notificaciones-->

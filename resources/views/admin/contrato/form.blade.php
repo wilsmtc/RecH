@@ -16,6 +16,13 @@
     </div>
 </div>
 
+<div class="form-group">
+	<label for="contrato" class="col-lg-3 control-label requerido">Sueldo</label>
+	<div class="col-lg-5">
+		<input type="number" min="0" name="sueldo_min" id="sueldo_min"  class="form-control" value="{{old('sueldo_min', $contrato->sueldo_min ?? '')}}" autocomplete="off"/>		
+	</div>
+</div>
+
 <script>
     var nombre = document.getElementById('nombre');  //instanciamos el elemento input
         function NombreMayus() {            //función que capitaliza la primera letra              

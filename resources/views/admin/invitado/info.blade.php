@@ -145,6 +145,35 @@
                         </table>
                     </div>
                 </div>
+                <div class="" >
+                    <div class="panel-heading" style="background-color: rgb(225, 228, 44)">
+                    <h3 class="panel-title" style="text-align: center"><b>Ultimos Comunicados</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th style="text-align: center; width: 70%">Nombre</th>
+                                <th style="text-align: center; width: 20%">tipo</th>
+                                <th style="text-align: center; width: 10%">Opción</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach ($comunicados as $comunicado)
+                                <tr>
+                                    <td style="text-align: center;">{{$comunicado->nombre}}</td>
+                                    <td style="text-align: center;">{{$comunicado->tipo}}</td>
+                                    <td style="text-align: center;">
+										<a href="{{route('ver_com', ['id' => $comunicado->id])}}" target="_blank" class="ver-capacitacion btn btn-success btn-xs tooltipC" title="ver capacitaciomunicado" id="ver-capacitaciomunicado">																
+											<i class="fa fa-fw  fa-cloud-download"></i>																															
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
             </div>
         </div>

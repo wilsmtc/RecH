@@ -64,7 +64,7 @@
                                 <div class="col-md-9">
                                 <i><p>{{$personal->contrato->nombre}}</p></i>
                                 </div>
-                            </div>
+                            </div>                          
                             <div class="row">
                                 <div class="col-md-3" style="text-align: right">
                                     <p><b>Celular:</b></p>
@@ -121,12 +121,46 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-3" style="text-align: right">
+                                    <p><b>Salario:</b></p>
+                                </div>
+                                <div class="col-md-9">
+                                <i><p>{{$personal->contrato->sueldo_min}} Bs.</p></i>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3" style="text-align: right">
+                                    <p><b>Tiempo de trabajo:</b></p>
+                                </div>
+                                <div class="col-md-9">
+                                    @php
+                                        $dias=MyHelper::dias_trabajados($personal->id)
+                                    @endphp
+                                    @if($dias<=30)
+                                        <i><p>{{$aux=MyHelper::dias_trabajados($personal->id)}} Dias</p></i>
+                                    @endif
+                                    @if($dias>30)
+                                        <i><p>{{$aux=MyHelper::meses_trabajados($personal->id)}} Meses</p></i>
+                                    @endif                               
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3" style="text-align: right">
                                     <p><b>Unidad:</b></p>
                                 </div>
                                 <div class="col-md-9">
                                     <i><p>{{$personal->unidad->nombre}}</p></i><br>
                                 </div>
                             </div>
+
+                            
+                            {{-- <div class="row">
+                                <div class="col-md-3" style="text-align: right">
+                                    <p><b>Total Ganado:</b></p>
+                                </div>
+                                <div class="col-md-9">
+                                <i><p>{{$sueldo=MyHelper::sueldo($personal->id)}} Bs.</p></i>
+                                </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>

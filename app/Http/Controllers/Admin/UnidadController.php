@@ -56,8 +56,15 @@ class UnidadController extends Controller
 
     public function destroy(Request $request, $id)
     {     
-        if ($request->ajax()) {    
-            if(Unidad::destroy($id)){                
+        if ($request->ajax()) { 
+            try {
+                //Eliminar registro
+                Unidad::destroy($id);
+                $aux=1;
+            } catch (\Illuminate\Database\QueryException $e) {
+                $aux=0;
+            }    
+            if($aux==1){                
                 return response()->json(['mensaje' => 'ok']);                                  
             } else {
                 return response()->json(['mensaje' => 'ng']);

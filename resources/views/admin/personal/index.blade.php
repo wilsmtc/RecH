@@ -48,8 +48,9 @@
 					<table class="table table-bordered table-hover table-striped" id="tabla-data" style="background-color:mintcream;">
 						<thead>
 							<tr style="width: 100%">
+								<th style="text-align: center; width: 3%">N°</th>
                     			<th style="text-align: center; width: 17%">Nombre</th>
-                    			<th style="text-align: center; width: 25%">Apellidos</th>
+                    			<th style="text-align: center; width: 22%">Apellidos</th>
 								<th style="text-align: center; width: 27%">Unidad</th>
 								<th style="text-align: center; width: 5%"><h6><b>Días Ganados</b></h6></th>
 								<th style="text-align: center; width: 5%"><h6><b>Días Tomados</b></h6></th>
@@ -58,8 +59,9 @@
 							</tr>
 						</thead>
 						<tbody>
-                            @foreach($personal as $per)
+                            @foreach($personal as $index => $per)
                             <tr>
+								<td style="text-align: center;">{{$index+1}}</td>
                                 <td style="text-align: center;">{{$per->nombre}}</td>
                                 <td style="text-align: center;">{{$per->apellido}}</td>
 								<td style="text-align: center;">{{$per->unidad->nombre}}</td>

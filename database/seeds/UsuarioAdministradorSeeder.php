@@ -56,8 +56,8 @@ class UsuarioAdministradorSeeder extends Seeder
             'descripcion'=>'asesoria y funciones legales'
         ]);
         DB::table('usuarios')->insert([
-            'usuario'=>'bayern',
-            'password'=>bcrypt('munich'),
+            'usuario'=>'admin',
+            'password'=>bcrypt('123456'),
             'nombre'=>'Wilson',
             'apellido'=>'Uño',
             'email'=>'wils.mtc.cmb@gmail.com'
@@ -224,6 +224,36 @@ class UsuarioAdministradorSeeder extends Seeder
             'orden'=>2,
             'icono'=>'fa-file-text'
         ]);
+
+        DB::table('menu')->insert([
+            'menu_id'=>0,
+            'nombre'=>'Capacitación',
+            'url'=>'admin/capacitacion/#',
+            'orden'=>6,
+            'icono'=>'fa fa-calendar-plus-o'
+        ]);
+        DB::table('menu')->insert([
+            'menu_id'=>16,
+            'nombre'=>'Ver Capacitación',
+            'url'=>'admin/capacitacion',
+            'orden'=>1,
+            'icono'=>'fa fa-bar-chart'
+        ]);
+        DB::table('menu')->insert([
+            'menu_id'=>16,
+            'nombre'=>'Ver Comuncados',
+            'url'=>'admin/comunicado',
+            'orden'=>2,
+            'icono'=>'fa fa-file'
+        ]);
+        DB::table('menu')->insert([
+            'menu_id'=>16,
+            'nombre'=>'Calendario de Actividades',
+            'url'=>'eventos',
+            'orden'=>3,
+            'icono'=>'fa fa-calendar'
+        ]);
+
         DB::table('menu_rol')->insert(['rol_id'=>1,'menu_id'=>1]);
         DB::table('menu_rol')->insert(['rol_id'=>1,'menu_id'=>2]);
         DB::table('menu_rol')->insert(['rol_id'=>1,'menu_id'=>3]);
@@ -239,7 +269,10 @@ class UsuarioAdministradorSeeder extends Seeder
         DB::table('menu_rol')->insert(['rol_id'=>1,'menu_id'=>13]);
         DB::table('menu_rol')->insert(['rol_id'=>1,'menu_id'=>14]);
         DB::table('menu_rol')->insert(['rol_id'=>1,'menu_id'=>15]);
-
+        DB::table('menu_rol')->insert(['rol_id'=>1,'menu_id'=>16]);
+        DB::table('menu_rol')->insert(['rol_id'=>1,'menu_id'=>17]);
+        DB::table('menu_rol')->insert(['rol_id'=>1,'menu_id'=>18]);
+        DB::table('menu_rol')->insert(['rol_id'=>1,'menu_id'=>19]);
         DB::table('eventos')->insert([
             'unidad_id'=>1,
             'title'=>'Informe General',
@@ -287,7 +320,7 @@ class UsuarioAdministradorSeeder extends Seeder
         ]);
 
         $faker=Faker::create();
-        for($i=0;$i<3000;$i++){
+        for($i=0;$i<1000;$i++){
             DB::table('personal')->insert([
                 'nombre'=>$faker->firstName,
                 'apellido'=>$faker->lastName,

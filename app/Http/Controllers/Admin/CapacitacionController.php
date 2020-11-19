@@ -72,6 +72,14 @@ class CapacitacionController extends Controller
         if ($documento = Capacitacion::setDocumento($request->documento_up, $capacitacion->documento))
             $request->request->add(['documento' => $documento]);
         $capacitacion->update($request->all());
+        
+        // $notificaciones=Notificacion::where('capacitacion_id','=',$id);
+        // foreach($notificaciones as $noti){
+        //     $idcap=$noti->id;
+        //     $notificacion = Notificacion::findOrfail($idcap);
+        //     $notificacion->estado=1;
+        //     $notificacion->save();
+        // }
         return redirect('admin/capacitacion')->with('mensaje', 'Datos actualizados con exito');
     }
 
